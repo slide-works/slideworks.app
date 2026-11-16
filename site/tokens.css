@@ -1,0 +1,58 @@
+/* SlideWorks design tokens for the website. Cobalt palette from SW-1 D4 / SW-2 D2.
+   Placeholder until SW-2 ships the real palette files; keep in sync with design/tokens/tokens.css. */
+:root {
+  --color-bg: #f4f5f7;
+  --color-surface: #ffffff;
+  --color-surface-2: #eceef3;
+  --color-border: #dcdfe7;
+  --color-text: #161b2e;
+  --color-muted: #59607a;
+  --color-accent: #2f5bea;
+  --color-accent-fg: #ffffff;
+  --color-accent-soft: #e6ecfd;
+  --color-accent-deep: #1e3a8a;
+  --grad-a: #2f5bea;
+  --grad-b: #1e3a8a;
+  --mark-fg: #ffffff;
+
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, monospace;
+  --radius: 12px;
+  --radius-sm: 8px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #0f1424;
+    --color-surface: #171d31;
+    --color-surface-2: #20283f;
+    --color-border: #2c3552;
+    --color-text: #eef1fa;
+    --color-muted: #a3abc6;
+    --color-accent: #7f9cff;
+    --color-accent-fg: #0b1433;
+    --color-accent-soft: #1d2a5c;
+    --color-accent-deep: #c3d0ff;
+    --grad-a: #7f9cff;
+    --grad-b: #4f74f5;
+    --mark-fg: #0b1433;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --color-bg: #0f1424;
+  --color-surface: #171d31;
+  --color-surface-2: #20283f;
+  --color-border: #2c3552;
+  --color-text: #eef1fa;
+  --color-muted: #a3abc6;
+  --color-accent: #7f9cff;
+  --color-accent-fg: #0b1433;
+  --color-accent-soft: #1d2a5c;
+  --color-accent-deep: #c3d0ff;
+  --grad-a: #7f9cff;
+  --grad-b: #4f74f5;
+  --mark-fg: #0b1433;
+  color-scheme: dark;
+}
