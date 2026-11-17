@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SlideWorks · Web slide decks that agents build</title>
-<meta name="description" content="SlideWorks is an open-source web slide app. Agents build decks over MCP from ready-made building blocks, and anyone presents them from a URL on a laptop or a phone.">
+<meta name="description" content="SlideWorks is an open-source web slide app. Agents build decks over MCP from ready-made building blocks, anyone presents them from a URL, and the room joins from a QR code to answer live polls.">
 <meta name="theme-color" content="#f4f5f7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0f1424" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://slideworks.app/">
@@ -75,6 +75,7 @@
       <a href="#blocks">Blocks</a>
       <a href="#looks">Looks</a>
       <a href="#present">Presenting</a>
+      <a href="#audience">Audience</a>
       <a href="#roadmap">Roadmap</a>
       <a href="https://docs.slideworks.app">Docs</a>
     </nav>
@@ -94,7 +95,7 @@
     <div class="wrap">
       <p class="eyebrow"><span class="dot-live"></span>Open source · In development</p>
       <h1>Slide decks that <span class="grad">agents build</span> and anyone presents from a link.</h1>
-      <p class="lede">Your agent builds the deck over MCP from ready-made blocks such as titles, comparisons, tables, charts and timelines. It writes no HTML. You open the deck by URL, share it, and present it in the browser on a laptop or a phone.</p>
+      <p class="lede">Your agent builds the deck over MCP from ready-made blocks such as titles, comparisons, tables, charts and timelines. It writes no HTML. You open the deck by URL, share it, and present it in the browser on a laptop or a phone. The room joins from a QR code and answers live polls.</p>
       <div class="cta">
         <a class="btn btn-primary btn-lg" href="https://github.com/slide-works/slideworks"><svg><use href="#i-gh"/></svg><span>Follow on GitHub</span></a>
         <a class="btn btn-ghost btn-lg" href="#how">See how it works</a>
@@ -147,7 +148,7 @@
         <article class="card">
           <svg><use href="#i-people"/></svg>
           <h3>Bring the audience in</h3>
-          <p>In a later release, people join with a QR code and answer live polls, word clouds and Q&amp;A from their phones while you control the deck from yours.</p>
+          <p>People join with a QR code or a six-digit code, with no app and no account. Their phones follow the slides and answer live polls. Q&amp;A and reactions are designed and come next.</p>
         </article>
       </div>
     </div>
@@ -191,7 +192,7 @@
 
       <div class="tools-cloud">
         <span class="tools-label">MCP tools</span>
-        <code>create_deck</code><code>list_layouts</code><code>add_slide</code><code>update_slide</code><code>move_slide</code><code>delete_slide</code><code>set_notes</code><code>upload_image</code><code>set_sharing</code><code>set_look</code><code>list_templates</code><code>list_palettes</code><code>preview_deck</code><code>get_deck_url</code>
+        <code>create_deck</code><code>list_layouts</code><code>list_blocks</code><code>add_slide</code><code>update_slide</code><code>move_slide</code><code>delete_slide</code><code>set_notes</code><code>upload_image</code><code>set_sharing</code><code>set_look</code><code>list_templates</code><code>list_palettes</code><code>set_talk_length</code><code>update_poll</code><code>add_poll_option</code><code>open_poll</code><code>close_poll</code><code>get_poll_results</code><code>preview_deck</code><code>list_decks</code><code>get_deck</code><code>get_deck_url</code>
       </div>
     </div>
   </section>
@@ -202,7 +203,7 @@
       <div class="sec-head">
         <p class="kick">Building blocks</p>
         <h2>17 blocks an agent fills, <span class="grad">with no HTML</span></h2>
-        <p class="sec-lede">A slide is a layout plus typed slots. The 16-slide deck below uses every block. Each headline is one sentence. Content slides are light, and the title, dividers and close are dark. A part tracker runs across the top. Under each slide are the slots an agent fills.</p>
+        <p class="sec-lede">A slide is a layout plus typed slots. The 16-slide deck below uses every block. Each headline is one sentence. Content slides are light, and the title, dividers and close are dark. A part tracker runs across the top. Under each slide are the slots an agent fills. Two more layouts, <code>join</code> and <code>poll</code>, are for a live room, and you can see them <a href="#audience">further down</a>.</p>
       </div>
       <div class="gallery" id="gallery"></div>
     </div>
@@ -303,7 +304,7 @@
   <section id="present" class="night">
     <div class="wrap">
       <div class="sec-head">
-        <p class="kick"><span class="pill later">Designed · next up</span></p>
+        <p class="kick"><span class="pill ok"><span class="d"></span>Built</span></p>
         <h2>A presenter view, <span class="grad">and your phone as the remote</span></h2>
         <p class="sec-lede">The presenter window is dark, so it doesn't light up your face from the lectern. The current slide is largest, the next one sits beside your notes, and the timer turns amber with five minutes left. Scan a QR code and your phone controls the same talk. To try it, click into the window and press the left and right arrow keys or B, or tap Next on the phone.</p>
       </div>
@@ -364,9 +365,9 @@
   <section id="audience">
     <div class="wrap">
       <div class="sec-head">
-        <p class="kick"><span class="pill later">Designed · coming after</span></p>
+        <p class="kick"><span class="pill ok"><span class="d"></span>Built</span></p>
         <h2>The room joins in <span class="grad">ten seconds</span></h2>
-        <p class="sec-lede">Point the camera at the QR code and tap the link. The page joins as it loads, so there is no app, account, name field or join button. Phones follow the slides by themselves, and polls, word clouds and Q&amp;A appear on the phone when the presenter reaches them.</p>
+        <p class="sec-lede">Point the camera at the QR code and tap the link, or type the six-digit code. The page joins as it loads, so there is no app, account, name field or join button. Phones follow the slides by themselves, and a poll appears on the phone when the presenter reaches it.</p>
       </div>
 
       <ol class="journey4">
@@ -394,7 +395,7 @@
             <div class="aud-head"><span class="aud-logo">S</span><div><b>Ship smaller</b><small>Sam Rivera</small></div><span class="pr-chip"><i></i>Live</span></div>
             <div class="aud-slide"><div class="frame" data-slide="bullets"></div></div>
             <div class="aud-prog"><span>Slide 3</span><i><b style="width:19%"></b></i><span>16</span></div>
-            <div class="aud-wait"><span class="dots3"><i></i><i></i><i></i></span><b>Nothing to answer yet</b><span>Polls and questions appear here when the presenter gets to them. Keep this page open.</span></div>
+            <div class="aud-wait"><span class="dots3"><i></i><i></i><i></i></span><b>Nothing to answer yet</b><span>Polls appear here when the presenter gets to them. Keep this page open.</span></div>
             <div class="aud-foot"><span>Guest · no account</span><span>Privacy</span></div>
           </div></div>
           <p class="when">from then</p><h3>Follow along</h3><p>The current slide, kept in step with the presenter. People at the back can read it.</p>
@@ -418,6 +419,149 @@
           <p class="when">on an interactive slide</p><h3>Something to do</h3><p>A poll appears when the presenter reaches it, and the slide comes back afterwards. Tap an answer.</p>
         </li>
       </ol>
+
+      <div class="screens2">
+        <figure>
+          <div class="frame" data-live="join"></div>
+          <figcaption><b>The join slide.</b> An agent adds it with <code>add_slide</code> and the <code>join</code> layout. The code and the QR code come from the live session, so nobody types them into the deck. People who arrive before you go live wait in a lobby.</figcaption>
+        </figure>
+        <figure>
+          <div class="frame" data-slide="compare" data-joinbar></div>
+          <figcaption><b>The join bar.</b> A deck setting puts a small QR code and the code on every slide while the deck is live, so latecomers can still join.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ POLLS -->
+  <section id="polls" class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kick"><span class="pill ok"><span class="d"></span>Built</span></p>
+        <h2>Ask the room, <span class="grad">and watch the bars move</span></h2>
+        <p class="sec-lede">A poll is a slide, and an agent adds it with <code>add_slide</code> like any other. When you reach it, the phones swap the slide for the question, and the bars on the big screen grow as answers arrive. To try it, tap an option on the phone, then close the poll, show the answer or start a new round.</p>
+      </div>
+
+      <div class="present-wrap">
+        <div class="presenter livewin" aria-label="Presenter window with the poll panel">
+          <div class="pr-top">
+            <b>Ship smaller</b>
+            <span class="pr-chip live"><i></i>Live <span class="mono">482 913</span> · 41 joined</span>
+            <span class="sp"></span>
+            <span class="pr-clock"><b>12:40</b></span>
+          </div>
+          <div class="pr-body">
+            <div class="pr-now">
+              <div class="pr-label"><span>On the big screen now</span><span>poll</span></div>
+              <div class="pr-cur"><div class="frame" data-live="poll" id="pollScreen"></div></div>
+              <div class="pr-label"><span>Notes</span><span></span></div>
+              <div class="pr-notes"><b>Give it twenty seconds.</b> Read the two biggest bars out loud, then show the answer.</div>
+            </div>
+            <div class="pr-side">
+              <div class="pr-label"><span>Poll</span><span>pick one · results live</span></div>
+              <div class="pp" aria-live="polite">
+                <div class="pp-head"><span class="pp-state" id="ppState">Open</span><span id="ppRound">round 1</span></div>
+                <div class="pp-n"><b id="ppN">0</b><span>answers</span><span class="rate" id="ppRate"></span></div>
+                <ul class="pp-rows" id="ppRows"></ul>
+                <p class="pp-note" id="ppNote"></p>
+                <div class="pp-btns">
+                  <button type="button" class="pbtn danger" data-poll="close">Close poll</button>
+                  <button type="button" class="pbtn primary" data-poll="answer" hidden>Show the answer</button>
+                  <button type="button" class="pbtn" data-poll="round" hidden>New round</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phone aud guest" aria-label="A guest's phone">
+          <div class="phone-screen aud-in">
+            <div class="aud-status">9:41</div>
+            <div class="aud-head"><span class="aud-logo">S</span><div><b>Ship smaller</b><small>Sam Rivera</small></div><span class="pr-chip"><i></i>Live</span></div>
+            <div class="poll gp">
+              <span class="gp-kick">Poll · pick one</span>
+              <b>Which change gets its first review fastest?</b>
+              <div class="gp-opts" id="gpOpts" role="group" aria-label="Options"></div>
+              <div class="gp-msg" id="gpMsg" aria-live="polite"></div>
+            </div>
+            <div class="aud-foot"><span>Private · Sam sees totals only</span><span>Privacy</span></div>
+            <div class="aud-url"><svg><use href="#i-lock"/></svg>slideworks.live/482913</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-row">
+        <div><svg><use href="#i-people"/></svg><h3>Pick one, or pick up to a few</h3><p>A poll has 2 to 8 options. A tap sends a pick-one answer, and tapping another option changes it. Any poll can mark a correct answer, which you show after closing. There are no scores.</p></div>
+        <div><svg><use href="#i-lock"/></svg><h3>Private answers</h3><p>Guests have no name and no account. You see the totals and never who picked what. Each poll shows its results to the room live, after a guest has answered, or after it closes.</p></div>
+        <div><svg><use href="#i-agent"/></svg><h3>Agents write polls and read the results</h3><p>An agent sets a poll up with <code>update_poll</code> and reads each round back with <code>get_poll_results</code>: answers, guests joined, the response rate and the count per option.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ Q&A -->
+  <section id="qa">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kick"><span class="pill later">Designed · next up</span></p>
+        <h2>Questions from the room, <span class="grad">and five reactions</span></h2>
+        <p class="sec-lede">The guest page gets a second tab, Questions, where anyone can ask and upvote for the whole session, and a row of five reactions under the slide. A question reaches the big screen only when you show it. To try it, upvote or ask on the phone, tap a reaction on its Slide tab, and press Show on screen in the presenter's panel.</p>
+      </div>
+
+      <div class="present-wrap">
+        <div class="presenter livewin" aria-label="Presenter window with the Questions panel">
+          <div class="pr-top">
+            <b>Ship smaller</b>
+            <span class="pr-chip live"><i></i>Live <span class="mono">482 913</span> · 41 joined</span>
+            <span class="sp"></span>
+            <span class="pr-clock"><b>31:05</b></span>
+          </div>
+          <div class="pr-body">
+            <div class="pr-now">
+              <div class="pr-label"><span>On the big screen now</span><span>14 / 16</span></div>
+              <div class="pr-cur"><div class="frame" id="qaScreen"></div></div>
+              <div class="pr-label"><span>Notes</span><span></span></div>
+              <div class="pr-notes"><b>These are the only three.</b> Take one question here if the panel shows a clear leader.</div>
+            </div>
+            <div class="pr-side">
+              <div class="pr-label"><span>Questions</span><span>top first</span></div>
+              <div class="pp">
+                <div class="qp-tabs"><span class="on" id="qpOpen">Open 4</span><span id="qpDone">Answered 0</span><span>Hidden 0</span></div>
+                <ul class="qp-list" id="qpList"></ul>
+                <div class="qp-foot"><span>Questions open · names allowed</span><span id="qpRx">No reactions yet</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phone aud guest" aria-label="A guest's phone">
+          <div class="phone-screen aud-in">
+            <div class="aud-status">9:41</div>
+            <div class="aud-head"><span class="aud-logo">S</span><div><b>Ship smaller</b><small>Sam Rivera</small></div><span class="pr-chip"><i></i>Live</span></div>
+            <div class="g-pane" id="gPaneSlide" hidden>
+              <div class="aud-slide"><div class="frame" data-slide="rules"></div></div>
+              <div class="aud-wait"><b>Nothing to answer yet</b><span>Polls appear here when the presenter gets to them.</span></div>
+              <div class="rx-row" id="rxRow" role="group" aria-label="Reactions"></div>
+            </div>
+            <div class="g-pane" id="gPaneQs">
+              <div class="gq-card">
+                <div class="gq-h"><b>Questions</b><span id="gqCount">4 open</span></div>
+                <ul class="gq-list" id="gqList"></ul>
+                <form class="gq-ask" id="gqAsk"><input type="text" maxlength="200" placeholder="Ask a question" aria-label="Your question"><button type="submit">Ask</button></form>
+              </div>
+            </div>
+            <div class="g-tabs" role="tablist" aria-label="Guest page">
+              <button type="button" role="tab" data-qa="tab" data-id="slide" aria-selected="false">Slide</button>
+              <button type="button" role="tab" data-qa="tab" data-id="qs" aria-selected="true">Questions<span class="n" id="gTabN">4</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-row">
+        <div><svg><use href="#i-shield"/></svg><h3>You decide what goes on screen</h3><p>A question shows on the phones at once, and you can hide it. A deck setting makes new questions wait for your approval first. Show on screen puts one question over the slide, and a Q&amp;A slide lists the top five.</p></div>
+        <div><svg><use href="#i-people"/></svg><h3>Anonymous unless they say so</h3><p>A question has no name by default. A guest can add one to a single question, and a deck setting can turn names off.</p></div>
+        <div><svg><use href="#i-blocks"/></svg><h3>Built on the poll model</h3><p>Q&amp;A is a poll where the room adds the options and an upvote is an answer, so it reuses the live channel, the load test and the results tools that polls already have.</p></div>
+      </div>
     </div>
   </section>
 
@@ -432,17 +576,21 @@
       <div class="roadmap">
         <div class="rm-col">
           <h3><span class="pill ok"><span class="d"></span>Built</span></h3>
-          <article><code>SW-1</code><b>Foundation</b><p>Deck library, deck page, sharing, the player, the 17 blocks and the MCP server.</p></article>
+          <article><code>SW-1</code><b>Foundation</b><p>Deck library, deck page, sharing, the player, the building blocks and the MCP server.</p></article>
           <article><code>SW-2</code><b>Templates and palettes</b><p>Talk, workshop and update templates. Cobalt, Ember, Plum and Midnight. Share cards.</p></article>
+          <article><code>SW-4</code><b>Presenter view and phone remote</b><p>Current and next slide, notes, timer, overview, blackout, skipping deep dives, and your phone as the remote.</p></article>
+          <article><code>SW-5</code><b>Audience join</b><p>A QR code and a six-digit code. Guests follow the slides with no app and no account.</p></article>
+          <article><code>SW-6</code><b>Live polls</b><p>A poll slide the room answers from their phones, with live bars, rounds and an optional correct answer.</p></article>
         </div>
         <div class="rm-col">
           <h3><span class="pill later"><span class="d"></span>Designed</span></h3>
-          <article><code>SW-4</code><b>Presenter view and phone remote</b><p>Current and next slide, notes, timer, blackout, skipping deep dives, and your phone as the remote.</p></article>
-          <article><code>SW-5</code><b>Audience join</b><p>A QR code and a six-digit code. Guests follow the slides with no app and no account.</p></article>
+          <article><code>SW-9</code><b>Audience Q&amp;A and reactions</b><p>A Questions tab to ask and upvote, a presenter panel to show a question on screen, and five reactions.</p></article>
         </div>
         <div class="rm-col">
           <h3><span class="pill grey"><span class="d"></span>Planned</span></h3>
-          <article><code>SW-6+</code><b>Live audience activities</b><p>Polls, word clouds and Q&amp;A, answered from phones in the room.</p></article>
+          <article><code>SW-8</code><b>Word clouds and open text</b><p>Free-text answers from the room, with a profanity filter.</p></article>
+          <article><code>SW-10</code><b>Scales and ranking</b><p>Scales, ranking and 100 points, on the same poll model.</p></article>
+          <article><code>SW-11</code><b>Quizzes</b><p>Nicknames, scores and leaderboards.</p></article>
           <article><code>SW-15</code><b>Sanzo Wada palettes</b><p>All 348 classic colour combinations, mapped to roles with contrast fixes.</p></article>
           <article><code>SW-50</code><b>Your own templates</b><p>Upload a template, or import one from an existing HTML deck.</p></article>
         </div>
@@ -681,6 +829,28 @@ docker compose up -d</pre>
     <h2>Pick one story.<br>Ship half of it by Friday.</h2>
     <div class="callout">Then tell us what you learned at the next demo.</div>
     <div class="byline">Sam Rivera · Product Engineering</div>
+  </div>
+</template>
+
+<!-- Live-room slides: the join and poll layouts, from the SW-5 and SW-6 mockups. site.js fills the QR code and the poll rows. -->
+<template id="live">
+  <div class="sw dark join" data-live="join">
+    <div class="jqr" data-qr></div>
+    <div>
+      <div class="kicker">Join on your phone</div>
+      <p class="jcode">482 913</p>
+      <p class="jurl">slideworks.live</p>
+      <p class="jcount">41 joined</p>
+    </div>
+  </div>
+  <div class="sw poll-slide" data-live="poll">
+    <div class="joinpill">slideworks.live · <b>482 913</b></div>
+    <div class="kicker">Poll · pick one</div>
+    <h2 class="h">Which change gets its first review fastest?</h2>
+    <div class="bd">
+      <div class="prows" data-poll-rows></div>
+      <div class="pfoot"><span class="pstate" data-poll-state>Open</span><span><b data-poll-n>0</b> answers</span></div>
+    </div>
   </div>
 </template>
 

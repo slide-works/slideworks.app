@@ -2,11 +2,11 @@
 
 The landing page for **SlideWorks**, the open-source web slide app: agents build decks over MCP from ready-made building blocks, and anyone presents them from a URL. The app itself lives in [`slide-works/slideworks`](https://github.com/slide-works/slideworks); the documentation lives in [`slide-works/docs`](https://github.com/slide-works/docs).
 
-The page is built from the design mockups in [`slide-works/slideworks/design`](https://github.com/slide-works/slideworks/tree/main/design). Every slide, app screen and phone on it is live HTML, not a screenshot: one sample deck ("Ship smaller", all 17 blocks) is rendered with the mockups' own slide CSS, so it follows the visitor's light or dark theme and stays sharp at any size.
+The page is built from the design mockups in [`slide-works/slideworks/design`](https://github.com/slide-works/slideworks/tree/main/design). Every slide, app screen and phone on it is live HTML, not a screenshot: one sample deck ("Ship smaller", all 17 blocks) plus the live-room slides (join and poll) is rendered with the mockups' own slide CSS, so it follows the visitor's light or dark theme and stays sharp at any size.
 
 | Folder | What it is |
 |---|---|
-| [`site/`](site/) | The website. Plain HTML, CSS and JS with no build step: `index.html` (the page, plus the sample deck in a `<template>`), `site.css` (the page), `slides.css` (the slide engine and the four palettes), `site.js` (the player, the agent session, the gallery, the palette picker, the presenter and the poll), `tokens.css`, `og-image.png`, `favicon.svg`, `robots.txt` and `sitemap.xml`. |
+| [`site/`](site/) | The website. Plain HTML, CSS and JS with no build step: `index.html` (the page, plus the sample deck in a `<template>`), `site.css` (the page), `slides.css` (the slide engine and the four palettes), `site.js` (the player, the agent session, the gallery, the palette picker, the presenter, the live poll and the Q&A), `tokens.css`, `og-image.png`, `favicon.svg`, `robots.txt` and `sitemap.xml`. |
 | [`design/`](design/) | Reference assets: the placeholder mark, the design tokens and the social card. See [`design/README.md`](design/README.md). |
 
 ## Run it locally
@@ -32,9 +32,10 @@ npx wrangler pages deploy site --project-name slideworks --branch main
 ## Editing the page
 
 - Colours, fonts and radii come from `site/tokens.css`, a copy of `design/tokens/tokens.css`. Change the page's look there or in `site.css`, not with one-off hex values.
-- Slides come from the `<template id="deck">` in `index.html`. Each slide is a layout with its slots as markup, ported from the SW-1 and SW-2 mockups; `site.js` adds the part tracker, footer and progress bar, and clones a slide into any `.frame`. Colours come from the palette tokens in `slides.css`, so a slide never sets its own.
+- Slides come from the `<template id="deck">` in `index.html`. Each slide is a layout with its slots as markup, ported from the SW-1 and SW-2 mockups; `site.js` adds the part tracker, footer and progress bar, and clones a slide into any `.frame`. The join and poll slides (SW-5 and SW-6) are in `<template id="live">`, and a frame asks for one with `data-live`. A slide's class must not match a class in `site.css`: the poll slide is `poll-slide` because `.poll` is the phone's poll card. Colours come from the palette tokens in `slides.css`, so a slide never sets its own.
 - App screens (the decks library, the deck page) use the site tokens, so they follow the visitor's theme. The presenter window and the phones are always dark, as the real ones are.
-- Sections for Features that are designed but not built say so (SW-4 presenter view, SW-5 audience join). Move a Feature on the roadmap when it ships.
+- Each section for a Feature carries a Built or Designed pill. Today SW-4 (presenter view), SW-5 (audience join) and SW-6 (live polls) are built, and SW-9 (Q&A and reactions) is designed. When a Feature ships, change its pill and move it on the roadmap.
+- The live poll and the Q&A are simulations in `site.js`: the rest of the room answers, upvotes and reacts on a timer while the section is on screen, and not at all with reduced motion.
 - If you add a screenshot instead of live HTML, it needs a light and a dark version.
 - The social card is `design/social/og-card.html`. Screenshot it at 1200×630 into `site/og-image.png` after changing it.
 - Keep the site free of organisation-specific names: SlideWorks is open source and generic.
