@@ -8,6 +8,7 @@
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const sleep = ms => new Promise(r => setTimeout(r, ms));
+  const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
   /* ---------------------------------------------------------------- theme */
   $('#themeBtn').addEventListener('click', () => {
@@ -46,11 +47,16 @@
   const ro = new ResizeObserver(entries => {
     for (const e of entries) e.target.style.setProperty('--s', e.contentRect.width / 1920);
   });
-  function mount(frame, i, step) {
-    const s = slides[i].cloneNode(true);
-    if (step !== undefined) s.querySelectorAll('.f').forEach((f, k) => f.classList.toggle('on', k < step));
+  function mountEl(frame, el) {
+    const s = el.cloneNode(true);
     frame.replaceChildren(s);
     if (!frame.dataset.ro) { ro.observe(frame); frame.dataset.ro = '1'; }
+    return s;
+  }
+  function mount(frame, i, step) {
+    const s = mountEl(frame, slides[i]);
+    if (step !== undefined) s.querySelectorAll('.f').forEach((f, k) => f.classList.toggle('on', k < step));
+    return s;
   }
   function newFrame(i) {
     const f = document.createElement('div');
@@ -108,8 +114,30 @@
     setPaused(paused);
   }
 
+  /* ---------------------------------------------------------------- live-room slides: join and poll */
+  // A QR-like pattern (decorative): three finder squares and seeded modules.
+  const QR = (() => {
+    const n = 25;
+    let seed = 482913;
+    const rnd = () => (seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648;
+    const finder = (x, y) => `<rect x="${x}" y="${y}" width="7" height="7"/><rect x="${x + 1}" y="${y + 1}" width="5" height="5" fill="#fff"/><rect x="${x + 2}" y="${y + 2}" width="3" height="3"/>`;
+    const inFinder = (x, y) => (x < 8 && y < 8) || (x > n - 9 && y < 8) || (x < 8 && y > n - 9);
+    let cells = '';
+    for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) if (!inFinder(x, y) && rnd() > .52) cells += `<rect x="${x}" y="${y}" width="1" height="1"/>`;
+    return `<svg viewBox="0 0 ${n} ${n}" shape-rendering="crispEdges" aria-hidden="true"><g fill="#0b1020">${finder(0, 0)}${finder(n - 7, 0)}${finder(0, n - 7)}${cells}</g></svg>`;
+  })();
+  const live = {};
+  [...$('#live').content.children].forEach(el => {
+    el.querySelectorAll('[data-qr]').forEach(q => q.innerHTML = QR);
+    live[el.dataset.live] = el;
+  });
+  $$('[data-qr]').forEach(q => q.innerHTML = QR);
+  $$('[data-live]').forEach(f => mountEl(f, live[f.dataset.live]));
+
   /* ---------------------------------------------------------------- mounts by layout */
   $$('[data-slide]').forEach(f => mount(f, byLayout(f.dataset.slide)));
+  // The join bar: a small QR code and the code on a content slide while the deck is live.
+  $$('[data-joinbar] .sw').forEach(s => s.insertAdjacentHTML('beforeend', `<div class="joinbar"><div class="jbq">${QR}</div><div><span>slideworks.live</span><b>482 913</b></div></div>`));
   $$('[data-mini]').forEach(f => mount(f, +f.dataset.mini));
 
   /* ---------------------------------------------------------------- gallery + lightbox */
@@ -189,7 +217,7 @@
     const SCRIPT = [
       L.c(`# brief: "20-minute offsite talk on shipping smaller, in four parts"`),
       L.call('list_layouts()'),
-      L.ok('17 layouts: title, divider, bullets, big-number, gantt, quote, practice, compare, two-column, table, chart … (each with its slot schema)'),
+      L.ok('18 layouts: title, divider, bullets, big-number, gantt, quote, practice, compare, table, chart … join, poll (each with its slot schema)'),
       L.call(`create_deck({ title: ${s('"Ship smaller"')}, template: ${s('"talk"')}, palette: ${s('"cobalt"')},\n    parts: [${s('"The cost"')}, ${s('"Slice it"')}, ${s('"Ship it"')}, ${s('"Make it stick"')}] })`),
       L.ok('deck 7Kq2 · private · /d/7Kq2/ship-smaller', () => { title.textContent = DECK; count.textContent = '0 slides'; log('<b>Claude</b> via MCP · created the deck'); }),
       L.call(`add_slide({ layout: ${s('"title"')}, title: ${s('"Ship smaller"')}, stamp: ${s('"draft"')}, … })`),
@@ -333,18 +361,8 @@
     }).observe(pr);
   }
 
-  /* ---------------------------------------------------------------- audience: QR + poll */
+  /* ---------------------------------------------------------------- audience: the journey's poll */
   {
-    // A QR-like pattern (decorative): three finder squares and seeded modules.
-    const n = 25;
-    let seed = 482913;
-    const rnd = () => (seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648;
-    const finder = (x, y) => `<rect x="${x}" y="${y}" width="7" height="7"/><rect x="${x + 1}" y="${y + 1}" width="5" height="5" fill="#fff"/><rect x="${x + 2}" y="${y + 2}" width="3" height="3"/>`;
-    const inFinder = (x, y) => (x < 8 && y < 8) || (x > n - 9 && y < 8) || (x < 8 && y > n - 9);
-    let cells = '';
-    for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) if (!inFinder(x, y) && rnd() > .52) cells += `<rect x="${x}" y="${y}" width="1" height="1"/>`;
-    $$('[data-qr]').forEach(q => q.innerHTML = `<svg viewBox="0 0 ${n} ${n}" shape-rendering="crispEdges" aria-hidden="true"><g fill="#0b1020">${finder(0, 0)}${finder(n - 7, 0)}${finder(0, n - 7)}${cells}</g></svg>`);
-
     const opts = $('#pollOpts');
     $$('button', opts).forEach(b => {
       b.innerHTML = `<span>${b.textContent}</span><span class="pc"></span>`;
@@ -361,6 +379,200 @@
     });
   }
 
+  /* ---------------------------------------------------------------- live poll: big screen, presenter panel, guest phone */
+  {
+    const sec = $('#polls');
+    const OPTS = ['Under 200 lines', '200 to 500 lines', '500 to 1,000 lines', 'Size makes no difference'];
+    const RIGHT = 0, JOINED = 41, WEIGHTS = [.55, .23, .13, .09];
+    const slide = $('#pollScreen .sw');
+    $('[data-poll-rows]', slide).innerHTML = OPTS.map(o => `<div class="prow"><span class="l">${o}</span><span class="trk"><i></i></span><span class="pct">0%</span></div>`).join('');
+    const pRows = $('#ppRows'), gOpts = $('#gpOpts'), gMsg = $('#gpMsg');
+    pRows.innerHTML = OPTS.map(o => `<li><span>${o}</span><i><b></b></i><em>0</em></li>`).join('');
+    gOpts.innerHTML = OPTS.map((o, i) => `<button type="button" data-i="${i}"><span class="rad"></span><span>${o}</span><span class="pc"></span></button>`).join('');
+    let counts, mine, open, shown, round = 1, timer = 0, visible = false;
+    const total = () => counts.reduce((a, b) => a + b, 0);
+
+    function draw() {
+      const n = total();
+      const pct = counts.map(c => n ? Math.round(c / n * 100) : 0);
+      // the big screen
+      slide.classList.toggle('closed', !open);
+      slide.classList.toggle('answer', shown);
+      $$('.prow', slide).forEach((r, i) => {
+        r.classList.toggle('right', i === RIGHT);
+        $('i', r).style.width = pct[i] + '%';
+        $('.pct', r).textContent = pct[i] + '%';
+      });
+      $('[data-poll-state]', slide).textContent = open ? 'Open' : 'Closed';
+      $('[data-poll-n]', slide).textContent = n;
+      // the presenter's panel
+      const st = $('#ppState');
+      st.textContent = open ? 'Open' : 'Closed';
+      st.classList.toggle('closed', !open);
+      $('#ppRound').textContent = 'round ' + round;
+      $('#ppN').textContent = n;
+      $('#ppRate').textContent = `${Math.round(n / JOINED * 100)}% of ${JOINED} joined`;
+      $$('li', pRows).forEach((li, i) => {
+        li.classList.toggle('right', shown && i === RIGHT);
+        $('b', li).style.width = pct[i] + '%';
+        $('em', li).textContent = counts[i];
+      });
+      $('#ppNote').textContent = shown ? 'The answer is marked on the big screen and on every phone.'
+        : open ? 'The room sees these results as they arrive.'
+        : 'Closed. The big screen shows the final result.';
+      $('[data-poll="close"]', sec).hidden = !open;
+      $('[data-poll="answer"]', sec).hidden = open || shown;
+      $('[data-poll="round"]', sec).hidden = open;
+      // the guest's phone: no results before its owner has answered
+      const results = mine !== null || !open;
+      gOpts.classList.toggle('closed', !open);
+      gOpts.classList.toggle('answer', shown);
+      $$('button', gOpts).forEach((b, i) => {
+        b.classList.toggle('mine', i === mine);
+        b.classList.toggle('right', shown && i === RIGHT);
+        b.setAttribute('aria-pressed', i === mine);
+        b.style.setProperty('--w', results ? pct[i] + '%' : '0%');
+        $('.pc', b).textContent = results ? pct[i] + '%' : '';
+      });
+      gMsg.innerHTML = shown
+          ? (mine === RIGHT ? '<b>You got it</b>' : mine === null ? '<b class="plain">Poll closed</b>' : '<b class="miss">Not this time</b>') + `<span>The answer is ${OPTS[RIGHT]}.</span>`
+        : !open ? `<b class="plain">Poll closed</b><span>${n} answers.${mine === null ? '' : ' Yours is marked.'}</span>`
+        : mine === null ? '<span>Tap an option to answer. Nobody sees who picked what.</span>'
+        : `<b>✓ Answer sent</b><span>${n} answers so far. Tap another option to change it.</span>`;
+    }
+    // The rest of the room answers while the poll is open and on screen.
+    function schedule() {
+      clearTimeout(timer);
+      const others = total() - (mine === null ? 0 : 1);
+      if (!open || !visible || reduced || others >= JOINED - 3) return;
+      timer = setTimeout(() => {
+        let r = Math.random(), k = 0;
+        while (k < WEIGHTS.length - 1 && r > WEIGHTS[k]) r -= WEIGHTS[k++];
+        counts[k]++;
+        draw();
+        schedule();
+      }, 500 + Math.random() * 900);
+    }
+    function start(seeded) {
+      counts = seeded ? (reduced ? [19, 8, 5, 3] : [6, 2, 2, 1]) : (reduced ? [18, 9, 6, 3] : [0, 0, 0, 0]);
+      mine = null; open = true; shown = false;
+      draw();
+      schedule();
+    }
+    gOpts.addEventListener('click', e => {
+      const b = e.target.closest('button');
+      if (!b || !open) return;
+      const i = +b.dataset.i;
+      if (i === mine) return;
+      if (mine !== null) counts[mine]--;
+      counts[i]++;
+      mine = i;
+      draw();
+    });
+    $$('[data-poll]', sec).forEach(b => b.addEventListener('click', () => {
+      const a = b.dataset.poll;
+      if (a === 'close') { open = false; clearTimeout(timer); draw(); $('[data-poll="answer"]', sec).focus(); }
+      else if (a === 'answer') { shown = true; draw(); $('[data-poll="round"]', sec).focus(); }
+      else { round++; start(false); $('[data-poll="close"]', sec).focus(); }
+    }));
+    start(true);
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; schedule(); }, { threshold: .2 }).observe(slide.parentElement);
+  }
+
+  /* ---------------------------------------------------------------- Q&A and reactions (SW-9, designed) */
+  {
+    const sec = $('#qa');
+    const RX = ['👍', '❤️', '😂', '😮', '👏'];
+    let qs = [
+      { id: 1, text: 'How do you split a database migration into small changes?', votes: 14, who: 'Anonymous', ago: '6 min' },
+      { id: 2, text: 'What do you do when a small change still needs a big review?', votes: 9, who: 'Priya', ago: '5 min' },
+      { id: 3, text: 'Does trunk-based development work with a release train?', votes: 7, who: 'Anonymous', ago: '4 min' },
+      { id: 4, text: 'How small is too small?', votes: 5, who: 'Anonymous', ago: '2 min' },
+    ];
+    let nextId = 5, onScreen = null, answered = 0, reactions = 0, visible = false, timer = 0;
+    const mineUp = new Set();
+    const slide = mount($('#qaScreen'), byLayout('rules'));
+    const qpList = $('#qpList'), gqList = $('#gqList');
+    $('#rxRow').innerHTML = RX.map((e, i) => `<button type="button" data-qa="rx" data-id="${i}" aria-label="React with ${e}">${e}</button>`).join('');
+
+    function draw() {
+      const act = document.activeElement;
+      const key = act && sec.contains(act) && act.dataset.qa ? [act.dataset.qa, act.dataset.id] : null;
+      const list = qs.slice().sort((a, b) => b.votes - a.votes || a.id - b.id);
+      const shown = qs.find(q => q.id === onScreen);
+      // the big screen: one question as a card over the slide
+      const old = $('.qcard', slide);
+      if (old) old.remove();
+      slide.classList.toggle('asked', !!shown);
+      if (shown) slide.insertAdjacentHTML('beforeend', `<div class="qcard"><div class="qk"><span>Question from the room</span><span class="v">▲ ${shown.votes}</span><span class="who">${esc(shown.who)}</span></div><p>${esc(shown.text)}</p></div>`);
+      // the presenter's panel: the top three
+      qpList.innerHTML = list.slice(0, 3).map(q => {
+        const on = q.id === onScreen;
+        return `<li class="${on ? 'on' : ''}"><span class="qv">${q.votes}</span><div><p>${esc(q.text)}</p><small>${esc(q.who)} · ${q.ago}${on ? ' · <b>On screen now</b>' : ''}</small>
+          <div class="pp-btns"><button type="button" class="pbtn sm${on ? '' : ' primary'}" data-qa="show" data-id="${q.id}">${on ? 'Take off screen' : 'Show on screen'}</button><button type="button" class="pbtn sm" data-qa="done" data-id="${q.id}">Answered</button></div></div></li>`;
+      }).join('') || '<li><span class="none">No open questions. New ones appear here as the room asks.</span></li>';
+      $('#qpOpen').textContent = 'Open ' + qs.length;
+      $('#qpDone').textContent = 'Answered ' + answered;
+      $('#qpRx').textContent = reactions ? `${reactions} reaction${reactions === 1 ? '' : 's'}` : 'No reactions yet';
+      // the guest's phone
+      gqList.innerHTML = list.map(q => `<li><button type="button" class="gq-up" data-qa="up" data-id="${q.id}" aria-pressed="${mineUp.has(q.id)}" aria-label="Upvote, ${q.votes} so far">${q.votes}</button><div>${esc(q.text)}<small>${esc(q.who)} · ${q.ago}</small>${q.id === onScreen ? '<span class="gq-tag">On screen now</span>' : ''}</div></li>`).join('')
+        || '<li><div>No questions yet. Ask the first one.</div></li>';
+      $('#gqCount').textContent = qs.length + ' open';
+      $('#gTabN').textContent = qs.length;
+      if (key) { const again = $(`[data-qa="${key[0]}"][data-id="${key[1]}"]`, sec); if (again) again.focus(); }
+    }
+    function react(e) {
+      const s = document.createElement('span');
+      s.className = 'rx';
+      s.textContent = e;
+      s.style.right = (60 + Math.random() * 170) + 'px';
+      slide.append(s);
+      setTimeout(() => s.remove(), 2600);
+      reactions++;
+      $('#qpRx').textContent = `${reactions} reaction${reactions === 1 ? '' : 's'}`;
+    }
+    sec.addEventListener('click', e => {
+      const b = e.target.closest('[data-qa]');
+      if (!b) return;
+      const a = b.dataset.qa, id = +b.dataset.id;
+      if (a === 'rx') return react(RX[id]);
+      if (a === 'tab') {
+        const qsTab = b.dataset.id === 'qs';
+        $('#gPaneQs').hidden = !qsTab;
+        $('#gPaneSlide').hidden = qsTab;
+        $$('.g-tabs button', sec).forEach(t => t.setAttribute('aria-selected', t === b));
+        return;
+      }
+      const q = qs.find(x => x.id === id);
+      if (!q) return;
+      if (a === 'show') onScreen = onScreen === id ? null : id;
+      else if (a === 'done') { qs = qs.filter(x => x !== q); answered++; if (onScreen === id) onScreen = null; }
+      else if (a === 'up') { if (mineUp.delete(id)) q.votes--; else { mineUp.add(id); q.votes++; } }
+      draw();
+    });
+    $('#gqAsk').addEventListener('submit', e => {
+      e.preventDefault();
+      const input = $('input', e.currentTarget);
+      const text = input.value.trim();
+      if (!text) return;
+      qs.push({ id: nextId++, text, votes: 0, who: 'Anonymous', ago: 'just now' });
+      input.value = '';
+      draw();
+    });
+    draw();
+    // The rest of the room upvotes and reacts while the section is on screen.
+    function schedule() {
+      clearTimeout(timer);
+      if (!visible || reduced) return;
+      timer = setTimeout(() => {
+        if (Math.random() < .6 || !qs.length) react(RX[Math.floor(Math.random() * RX.length)]);
+        else { qs[Math.floor(Math.random() * Math.min(3, qs.length))].votes++; draw(); }
+        schedule();
+      }, 1400 + Math.random() * 1600);
+    }
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; schedule(); }, { threshold: .2 }).observe(slide.parentElement);
+  }
+
   /* ---------------------------------------------------------------- copy buttons */
   $$('[data-copy], [data-copy-from]').forEach(b => b.addEventListener('click', async () => {
     const text = b.dataset.copy || $('#' + b.dataset.copyFrom).textContent.replace(/^#.*\n/m, '');
@@ -375,7 +587,7 @@
 
   /* ---------------------------------------------------------------- reveal on scroll */
   {
-    const els = $$('.sec-head, .steps3, .session, .pal-picker, .pal-stage, .templates, .app, .feature-row, .present-wrap, .journey4, .roadmap, .start-grid, .pillars .cards');
+    const els = $$('.sec-head, .steps3, .session, .pal-picker, .pal-stage, .templates, .app, .feature-row, .present-wrap, .journey4, .screens2, .roadmap, .start-grid, .pillars .cards');
     els.forEach(el => el.classList.add('rv'));
     const io = new IntersectionObserver(entries => entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }

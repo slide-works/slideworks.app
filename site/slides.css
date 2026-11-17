@@ -227,3 +227,45 @@
 @media (prefers-reduced-motion: reduce) {
   .sw .f { transition: none; }
 }
+
+/* ---------- live-room layouts (SW-5 join, SW-6 poll) and SW-9 overlays ---------- */
+.sw.join { flex-direction: row; align-items: center; gap: 120px; padding: 0 170px; }
+.sw.join .jqr { width: 640px; height: 640px; flex: none; background: #fff; border-radius: 40px; padding: 52px; }
+.sw.join p { margin: 0; }
+.sw.join .jcode { font: 800 216px/1 var(--t-head); letter-spacing: -.03em; white-space: nowrap; }
+.sw.join .jurl { font: 500 58px/1 "IBM Plex Mono", ui-monospace, monospace; color: var(--t-night-2); margin-top: 34px; }
+.sw.join .jcount { display: flex; align-items: center; gap: 18px; margin-top: 44px; font: 700 40px/1 var(--t-body); color: #4ade80; }
+.sw.join .jcount::before { content: ""; width: 18px; height: 18px; border-radius: 50%; background: currentColor; }
+
+.sw .joinpill { position: absolute; right: 120px; top: 56px; padding: 14px 26px; border-radius: 999px; background: var(--t-night); color: var(--t-night-2); font: 500 22px/1 "IBM Plex Mono", ui-monospace, monospace; }
+.sw .joinpill b { color: var(--t-night-ink); }
+.sw .joinbar { position: absolute; right: 56px; bottom: 56px; z-index: 4; display: flex; align-items: center; gap: 22px; padding: 18px 30px 18px 18px; border-radius: 22px; background: var(--t-night); color: var(--t-night-ink); box-shadow: 0 20px 50px rgba(0, 0, 0, .3); }
+.sw .joinbar .jbq { width: 112px; height: 112px; background: #fff; border-radius: 10px; padding: 9px; }
+.sw .joinbar span { display: block; font: 500 22px/1 "IBM Plex Mono", ui-monospace, monospace; color: var(--t-night-2); }
+.sw .joinbar b { display: block; margin-top: 12px; font: 800 40px/1 var(--t-head); letter-spacing: .01em; }
+
+.sw.poll-slide .bd { margin-top: 70px; }
+.sw.poll-slide .prows { display: grid; gap: 30px; }
+.sw.poll-slide .prow { display: grid; grid-template-columns: 520px minmax(0, 1fr) 150px; gap: 44px; align-items: center; transition: opacity .4s ease; }
+.sw.poll-slide .prow .l { font: 700 38px/1.2 var(--t-body); }
+.sw.poll-slide .trk { height: 88px; border-radius: 14px; background: var(--t-tint); overflow: hidden; }
+.sw.poll-slide .trk i { display: block; height: 100%; width: 0; border-radius: 14px; background: var(--t-acc); transition: width .6s cubic-bezier(.2, .8, .2, 1), background-color .4s ease; }
+.sw.poll-slide .pct { font: 800 48px/1 var(--t-head); text-align: right; font-variant-numeric: tabular-nums; }
+.sw.poll-slide .pfoot { margin-top: auto; display: flex; align-items: baseline; gap: 30px; font: 500 26px/1 var(--t-body); color: var(--t-muted); }
+.sw.poll-slide .pfoot b { font: 800 42px/1 var(--t-head); color: var(--t-ink); margin-right: 6px; }
+.sw.poll-slide .pstate { display: flex; align-items: center; gap: 12px; font-weight: 700; color: var(--t-ok); }
+.sw.poll-slide .pstate::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: currentColor; }
+.sw.poll-slide.closed .pstate { color: var(--t-ink); }
+.sw.poll-slide.answer .prow:not(.right) { opacity: .45; }
+.sw.poll-slide.answer .prow.right .trk i { background: var(--t-ok); }
+.sw.poll-slide.answer .prow.right .l::before { content: "✓ "; color: var(--t-ok); }
+
+.sw.asked::after { content: ""; position: absolute; inset: 0; z-index: 4; pointer-events: none; background: linear-gradient(rgba(11, 16, 32, 0) 25%, rgba(11, 16, 32, .4)); }
+.sw .qcard { position: absolute; left: 120px; right: 120px; bottom: 96px; z-index: 5; padding: 40px 52px 48px; border-radius: 28px; background: var(--t-night); color: var(--t-night-ink); box-shadow: 0 30px 80px rgba(0, 0, 0, .4); }
+.sw .qcard .qk { display: flex; align-items: center; gap: 22px; font: 700 20px/1 var(--t-body); letter-spacing: .16em; text-transform: uppercase; color: var(--t-acc-glow); }
+.sw .qcard .qk .v { letter-spacing: 0; padding: 8px 14px; border-radius: 999px; background: rgba(255, 255, 255, .14); color: #fff; }
+.sw .qcard .qk .who { margin-left: auto; letter-spacing: 0; text-transform: none; font-weight: 500; font-size: 24px; color: var(--t-night-2); }
+.sw .qcard p { margin: 22px 0 0; font: 800 58px/1.12 var(--t-head); letter-spacing: -.02em; overflow-wrap: anywhere; }
+.sw .rx { position: absolute; bottom: 110px; z-index: 6; font-size: 96px; line-height: 1; pointer-events: none; animation: rx-up 2.5s ease-out forwards; }
+@keyframes rx-up { from { transform: translateY(0) scale(.6); opacity: 0; } 15% { transform: translateY(-120px) scale(1); opacity: 1; } 75% { opacity: 1; } to { transform: translateY(-820px) scale(1); opacity: 0; } }
+.sw.join .kicker { font-size: 30px; margin-bottom: 30px; }
