@@ -14,10 +14,18 @@
   --grad-a: #2f5bea;
   --grad-b: #1e3a8a;
   --mark-fg: #ffffff;
+  --color-ok: #18794e;
+  --color-ok-soft: #e3f4ea;
+  --color-bad: #c0362c;
+  --color-bad-soft: #fbe7e5;
+  --color-later: #6d4ae6;
+  --color-later-soft: #efeafe;
+  --shadow-lg: 0 1px 2px rgb(16 24 40 / .06), 0 12px 32px -12px rgb(16 24 40 / .22);
+  --shadow-xl: 0 1px 2px rgb(16 24 40 / .06), 0 30px 70px -24px rgb(16 24 40 / .32);
 
   --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-display: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-  --font-mono: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, monospace;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, monospace;
   --radius: 12px;
   --radius-sm: 8px;
   color-scheme: light;
@@ -37,6 +45,14 @@
     --grad-a: #7f9cff;
     --grad-b: #4f74f5;
     --mark-fg: #0b1433;
+    --color-ok: #4ade80;
+    --color-ok-soft: #10301d;
+    --color-bad: #f87171;
+    --color-bad-soft: #3b1518;
+    --color-later: #c4b5fd;
+    --color-later-soft: #2a2152;
+    --shadow-lg: 0 1px 2px rgb(0 0 0 / .3), 0 14px 36px -12px rgb(0 0 0 / .6);
+    --shadow-xl: 0 1px 2px rgb(0 0 0 / .3), 0 30px 70px -24px rgb(0 0 0 / .7);
     color-scheme: dark;
   }
 }
@@ -54,5 +70,13 @@
   --grad-a: #7f9cff;
   --grad-b: #4f74f5;
   --mark-fg: #0b1433;
+  --color-ok: #4ade80;
+  --color-ok-soft: #10301d;
+  --color-bad: #f87171;
+  --color-bad-soft: #3b1518;
+  --color-later: #c4b5fd;
+  --color-later-soft: #2a2152;
+  --shadow-lg: 0 1px 2px rgb(0 0 0 / .3), 0 14px 36px -12px rgb(0 0 0 / .6);
+  --shadow-xl: 0 1px 2px rgb(0 0 0 / .3), 0 30px 70px -24px rgb(0 0 0 / .7);
   color-scheme: dark;
 }

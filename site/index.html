@@ -13,16 +13,21 @@
 <meta property="og:url" content="https://slideworks.app/">
 <meta property="og:title" content="SlideWorks · Web slide decks that agents build">
 <meta property="og:description" content="Agents build decks over MCP. Anyone presents them from a URL.">
-<!-- TODO(SW-105): og-image.png (1200×630) once the design has a social card. -->
+<meta property="og:image" content="https://slideworks.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
 <link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="slides.css">
 <link rel="stylesheet" href="site.css">
 <script>
   // Apply a saved theme before first paint so the page doesn't flash.
   try { const t = localStorage.getItem('sw-theme'); if (t) document.documentElement.dataset.theme = t; } catch {}
 </script>
+<script src="site.js" defer></script>
 </head>
 <body>
 
@@ -36,15 +41,41 @@
     <symbol id="i-agent" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4m-3 0h6"/><circle cx="9" cy="14" r="1" fill="currentColor"/><circle cx="15" cy="14" r="1" fill="currentColor"/></g></symbol>
     <symbol id="i-link" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></g></symbol>
     <symbol id="i-people" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18.5 14.2A6.5 6.5 0 0 1 21.5 20"/></g></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4.5v15l13-7.5z"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></g></symbol>
+    <symbol id="i-notes" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M9 8.5h6M9 12.5h6M9 16.5h3"/></g></symbol>
+    <symbol id="i-skip" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h12M12 7l5 5-5 5"/><path d="M20 5v14"/></g></symbol>
+    <symbol id="i-black" viewBox="0 0 24 24"><rect x="3.5" y="6" width="17" height="12" rx="2" fill="currentColor"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></g></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2"/><path d="M15.5 8.5V5.5a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3"/></g></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></g></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></g></symbol>
+    <symbol id="i-palette" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 2-2s-1-1.6-1-2.6c0-1.2 1-2 2.2-2H17a4 4 0 0 0 4-4c0-4.2-4-7.4-9-7.4Z"/><circle cx="7.5" cy="11" r="1.2" fill="currentColor"/><circle cx="10.5" cy="7" r="1.2" fill="currentColor"/><circle cx="15.5" cy="7.5" r="1.2" fill="currentColor"/></g></symbol>
+    <symbol id="i-blocks" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7.5" height="7" rx="1.5"/><rect x="13" y="13.5" width="7.5" height="7" rx="1.5"/></g></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3 5 6v5.5c0 4.4 3 8.2 7 9.5 4-1.3 7-5.1 7-9.5V6z"/><path d="m9 12 2.2 2.2L15.5 10" stroke-linecap="round"/></g></symbol>
+    <symbol id="i-history" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12a8.5 8.5 0 1 0 2.5-6"/><path d="M3.5 4v4h4M12 7.5V12l3 2"/></g></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><g fill="currentColor"><rect x="6.5" y="5" width="4" height="14" rx="1"/><rect x="13.5" y="5" width="4" height="14" rx="1"/></g></symbol>
+    <symbol id="i-replay" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4.5h4.5"/></g></symbol>
+    <symbol id="i-server" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3.5" y="4" width="17" height="7" rx="2"/><rect x="3.5" y="13" width="17" height="7" rx="2"/><path d="M7.5 7.5h.01M7.5 16.5h.01"/></g></symbol>
   </defs>
 </svg>
+
+<a class="skip" href="#main">Skip to content</a>
 
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="/"><svg class="mark" viewBox="0 0 26 26" aria-hidden="true"><use href="#i-mark"/></svg>SlideWorks</a>
-    <nav class="nav-links">
-      <a href="#what">What it does</a>
-      <a href="#status">Status</a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#how">How it works</a>
+      <a href="#blocks">Blocks</a>
+      <a href="#looks">Looks</a>
+      <a href="#present">Presenting</a>
+      <a href="#roadmap">Roadmap</a>
       <a href="https://docs.slideworks.app">Docs</a>
     </nav>
     <div class="nav-spacer"></div>
@@ -55,24 +86,53 @@
   </div>
 </header>
 
-<main>
+<main id="main">
+
+  <!-- ============================================================ HERO -->
   <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
     <div class="wrap">
-      <p class="eyebrow">Open source · In development</p>
+      <p class="eyebrow"><span class="dot-live"></span>Open source · In development</p>
       <h1>Slide decks that <span class="grad">agents build</span> and anyone presents from a link.</h1>
       <p class="lede">Your agent builds the deck over MCP from ready-made blocks: titles, comparisons, tables, charts and timelines, with no HTML. You open it by URL, share it, and present it in the browser on a laptop or a phone.</p>
       <div class="cta">
-        <a class="btn btn-primary" href="https://github.com/slide-works/slideworks"><svg><use href="#i-gh"/></svg><span>Follow on GitHub</span></a>
-        <a class="btn btn-ghost" href="https://docs.slideworks.app">Read the docs</a>
+        <a class="btn btn-primary btn-lg" href="https://github.com/slide-works/slideworks"><svg><use href="#i-gh"/></svg><span>Follow on GitHub</span></a>
+        <a class="btn btn-ghost btn-lg" href="#how">See how it works</a>
       </div>
-      <!-- TODO(SW-105): hero screenshot pair (light + dark) once SW-1 ships the player. -->
-      <div class="shot-placeholder" role="img" aria-label="Screenshot coming soon">Screenshot coming with the first release</div>
+      <ul class="works-with" aria-label="Works with">
+        <li>Claude Code</li><li>Claude Desktop</li><li>claude.ai</li><li>Cursor</li><li>VS Code</li>
+      </ul>
+    </div>
+
+    <div class="wrap wide">
+      <div class="stage" id="heroStage">
+        <figure class="browser player" id="heroPlayer" tabindex="0" aria-label="Sample deck player. Use the left and right arrow keys to move through the slides.">
+          <div class="browser-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url"><b>slides.example.com</b>/d/7Kq2/ship-smaller<b class="hash" data-hash>#1</b></span></div>
+          <div class="player-stage stepped"><div class="frame" data-player-frame></div></div>
+          <div class="pctl">
+            <button type="button" data-p="prev" aria-label="Previous"><svg><use href="#i-left"/></svg></button>
+            <button type="button" data-p="next" aria-label="Next"><svg><use href="#i-right"/></svg></button>
+            <button type="button" data-p="auto" aria-label="Pause the autoplay" class="auto"><svg class="when-playing"><use href="#i-pause"/></svg><svg class="when-paused"><use href="#i-play"/></svg></button>
+            <span class="count" data-count>1 / 16</span>
+            <span class="steps" data-steps></span>
+            <span class="bar"><i data-bar></i></span>
+          </div>
+        </figure>
+        <div class="phone hero-phone" aria-hidden="true">
+          <div class="phone-screen">
+            <div class="phone-url">slides.example.com/d/7Kq2<span data-hash>#1</span></div>
+            <div class="phone-canvas stepped"><div class="frame" data-player-frame></div></div>
+            <div class="pctl mini"><span class="count" data-count>1 / 16</span><span class="bar"><i data-bar></i></span></div>
+          </div>
+        </div>
+        <p class="stage-cap">A live sample deck, rendered by the same blocks an agent fills. Click it and use the arrow keys.</p>
+      </div>
     </div>
   </section>
 
-  <section id="what" class="band">
+  <!-- ============================================================ PILLARS -->
+  <section class="pillars">
     <div class="wrap">
-      <h2>What it does</h2>
       <div class="cards">
         <article class="card">
           <svg><use href="#i-agent"/></svg>
@@ -93,11 +153,333 @@
     </div>
   </section>
 
-  <section id="status">
-    <div class="wrap narrow">
-      <h2>Status</h2>
-      <p>SlideWorks is being built in the open. The first release covers the deck library, the 17 building blocks, sharing and the player. Templates and palettes come next, then the audience features.</p>
-      <!-- TODO(SW-105): roadmap list, mirrored from the SW backlog. -->
+  <!-- ============================================================ HOW -->
+  <section id="how" class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kick">How it works</p>
+        <h2>From a brief to a deck, <span class="grad">one tool call at a time</span></h2>
+        <p class="sec-lede">The agent writes no HTML. It reads the layout catalogue, then sends each slide as a layout and its slots. The server checks every slot against the layout's schema and rejects a slide it can't render, naming the field that broke, so the agent can fix it and try again.</p>
+      </div>
+
+      <ol class="steps3">
+        <li><span class="n">1</span><div><b>Connect your agent</b><span>Point it at <code>/mcp</code>. It registers itself, and you approve it in the browser.</span></div></li>
+        <li><span class="n">2</span><div><b>Give it a brief</b><span>"A 20-minute offsite talk on shipping smaller." It picks a template and palette and builds the slides.</span></div></li>
+        <li><span class="n">3</span><div><b>Open the link</b><span>Review it on the deck page, tweak the notes, share it, and present.</span></div></li>
+      </ol>
+
+      <div class="session" id="session">
+        <div class="term" role="img" aria-label="An agent's MCP session: it lists the layouts, creates a deck, adds slides, fixes a slide the server rejected, shares the deck and gets its link.">
+          <div class="term-bar"><span class="dots"><i></i><i></i><i></i></span><span>agent · slideworks MCP</span><button type="button" class="term-replay" id="termReplay" aria-label="Replay the session"><svg><use href="#i-replay"/></svg>Replay</button></div>
+          <pre id="termOut"></pre>
+        </div>
+        <div class="session-side">
+          <div class="browser deckpage">
+            <div class="browser-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url"><b>slides.example.com</b>/decks/7Kq2</span></div>
+            <div class="deckpage-body">
+              <div class="deckpage-head"><b id="dpTitle">Waiting for the agent…</b><span class="pill grey" id="dpCount">0 slides</span><span class="pill acc" id="dpShare" hidden><svg><use href="#i-link"/></svg>Link</span></div>
+              <div class="dp-main">
+                <div class="frame dp-frame" id="dpFrame"><div class="dp-empty">The deck appears here as the agent builds it</div></div>
+                <div class="reject" id="dpReject" hidden><svg><use href="#i-x"/></svg><div><b>Slide rejected</b><span><code>right</code> is required for <code>compare</code>: <code>{ tag, title, items[] }</code></span></div></div>
+              </div>
+              <div class="dp-thumbs" id="dpThumbs"></div>
+              <ul class="dp-feed" id="dpFeed"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tools-cloud">
+        <span class="tools-label">MCP tools</span>
+        <code>create_deck</code><code>list_layouts</code><code>add_slide</code><code>update_slide</code><code>move_slide</code><code>delete_slide</code><code>set_notes</code><code>upload_image</code><code>set_sharing</code><code>set_look</code><code>list_templates</code><code>list_palettes</code><code>preview_deck</code><code>get_deck_url</code>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ BLOCKS -->
+  <section id="blocks">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kick">Building blocks</p>
+        <h2>17 blocks. <span class="grad">Zero HTML.</span></h2>
+        <p class="sec-lede">A slide is a layout plus typed slots. Here is every block in one 16-slide deck: one sentence per headline, light content slides with cards, dark slides for the title, dividers and close, and a part tracker across the top. Under each slide are the slots an agent fills.</p>
+      </div>
+      <div class="gallery" id="gallery"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ LOOKS -->
+  <section id="looks" class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kick">Templates and palettes</p>
+        <h2>A template and a palette. <span class="grad">That's the whole look.</span></h2>
+        <p class="sec-lede">The template holds the structure, the type and the shape. The palette holds every colour. A slide never stores a colour or a font, so the same deck looks right in any palette. Every built-in palette passes a contrast check, and the build fails if a pair drops below its bar.</p>
+      </div>
+
+      <div class="pal-picker" role="radiogroup" aria-label="Palette">
+        <label class="pal-opt"><input type="radio" name="pal" value="cobalt" checked><span class="sw4"><i style="background:#f7f8fa"></i><i style="background:#2f5bea"></i><i style="background:#16a34a"></i><i style="background:#dc2626"></i><i style="background:#0b1020"></i></span><b>Cobalt</b><span>The default. Light ledger, cobalt accent.</span></label>
+        <label class="pal-opt"><input type="radio" name="pal" value="ember"><span class="sw4"><i style="background:#faf7f2"></i><i style="background:#c2410c"></i><i style="background:#15803d"></i><i style="background:#b91c1c"></i><i style="background:#1c1412"></i></span><b>Ember</b><span>Warm paper, burnt orange.</span></label>
+        <label class="pal-opt"><input type="radio" name="pal" value="plum"><span class="sw4"><i style="background:#f8f7fb"></i><i style="background:#6d28d9"></i><i style="background:#15803d"></i><i style="background:#b91c1c"></i><i style="background:#120d22"></i></span><b>Plum</b><span>Violet accent.</span></label>
+        <label class="pal-opt"><input type="radio" name="pal" value="midnight"><span class="sw4"><i style="background:#0e1424"></i><i style="background:#7b95ff"></i><i style="background:#4ade80"></i><i style="background:#f87171"></i><i style="background:#05070d"></i></span><b>Midnight</b><span>Dark content slides for a dark stage.</span></label>
+      </div>
+
+      <div class="pal-stage" id="palStage" data-pal="cobalt">
+        <div class="ps-main"><div class="frame" data-slide="practice"></div></div>
+        <div class="ps-side">
+          <div class="frame" data-slide="title"></div>
+          <div class="frame" data-slide="chart"></div>
+        </div>
+      </div>
+
+      <div class="templates">
+        <article class="tpl">
+          <header><h3>Talk</h3><code>talk</code><span class="pill grey">default</span></header>
+          <p>A talk to a room: a story in parts, with one point per slide.</p>
+          <ol><li>Title, with the one-line promise</li><li>3–5 parts, each opening with a divider</li><li>2–4 slides per part, one point each</li><li>Close on the single ask</li></ol>
+        </article>
+        <article class="tpl">
+          <header><h3>Workshop</h3><code>workshop</code><span class="pill grey">deep dives on</span></header>
+          <p>A talk plus exercises the room does. Exercises are deep dives you can skip when you run late.</p>
+          <ol><li>Title</li><li>Per part: a divider, then one practice slide per idea</li><li>Exercises as deep dives at the end of their part</li><li>Close with the first step for Monday</li></ol>
+        </article>
+        <article class="tpl">
+          <header><h3>Update</h3><code>update</code><span class="pill grey">no parts</span></header>
+          <p>A status or metrics report. Numbers first, then what is next.</p>
+          <ol><li>Title, with the headline number</li><li>The 1–3 numbers that moved, each explained</li><li>What is late or blocked, and why</li><li>Next steps with owners</li></ol>
+        </article>
+      </div>
+      <p class="aside-note"><svg><use href="#i-palette"/></svg>Later: all 348 Sanzo Wada colour combinations as palettes, and your own templates, uploaded or imported from an HTML deck.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ LIBRARY -->
+  <section id="library">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kick">The app</p>
+        <h2>Every deck in one ledger, <span class="grad">and who changed it</span></h2>
+        <p class="sec-lede">A table, not a wall of thumbnails, so forty decks stay easy to scan. The Last change column says whether an agent or a person made it, and the deck page's activity log shows who changed what, when, and through which tool.</p>
+      </div>
+
+      <div class="browser app" aria-label="The decks library">
+        <div class="browser-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url"><b>slides.example.com</b>/decks</span></div>
+        <div class="app-top">
+          <span class="logo"><svg viewBox="0 0 26 26" aria-hidden="true"><use href="#i-mark"/></svg>SlideWorks</span>
+          <nav><a class="on">Decks</a><a>Connect an agent</a></nav>
+          <span class="sp"></span>
+          <span class="search">Search decks</span>
+          <span class="avatar">SR</span>
+        </div>
+        <div class="app-body">
+          <div class="connect"><svg><use href="#i-link"/></svg><span><b>Connect an agent:</b> add this MCP server, then ask it to "make a deck about …"</span><code>https://slides.example.com/mcp</code><button type="button" class="abtn" data-copy="https://slides.example.com/mcp">Copy</button></div>
+          <div class="app-h"><h3>Decks <span class="pill grey">7</span></h3><span class="sp"></span><span class="abtn">Filter: all</span><span class="abtn primary">+ New deck</span></div>
+          <div class="table-wrap">
+            <table class="ledger">
+              <thead><tr><th></th><th>Deck</th><th class="r">Slides</th><th>Last change</th><th>Sharing</th><th class="r">Updated</th><th></th></tr></thead>
+              <tbody>
+                <tr><td><span class="frame mini" data-mini="0"></span></td><td class="t">Ship smaller<small>Team offsite · draft</small></td><td class="num">16</td><td class="who"><span class="agent">Claude</span> via MCP · added slide 16</td><td><span class="pill acc">Link</span></td><td class="num">2 min ago</td><td class="act"><span class="abtn"><svg><use href="#i-play"/></svg>Present</span></td></tr>
+                <tr><td><span class="frame mini" data-mini="1"></span></td><td class="t">Q4 platform review<small>Leadership update</small></td><td class="num">22</td><td class="who">You · moved slide 7</td><td><span class="pill ok">3 viewers</span></td><td class="num">1 h ago</td><td class="act"><span class="abtn"><svg><use href="#i-play"/></svg>Present</span></td></tr>
+                <tr><td><span class="frame mini" data-mini="6"></span></td><td class="t">Onboarding: week one<small>For new joiners</small></td><td class="num">12</td><td class="who"><span class="agent">Cursor</span> via MCP · updated notes</td><td><span class="pill grey">Private</span></td><td class="num">Yesterday</td><td class="act"><span class="abtn"><svg><use href="#i-play"/></svg>Present</span></td></tr>
+                <tr><td><span class="frame mini" data-mini="2"></span></td><td class="t">Incident review: checkout outage<small>Blameless write-up</small></td><td class="num">9</td><td class="who"><span class="agent">Claude</span> via MCP · created</td><td><span class="pill ok">5 viewers</span></td><td class="num">12 Nov</td><td class="act"><span class="abtn"><svg><use href="#i-play"/></svg>Present</span></td></tr>
+                <tr><td><span class="frame mini" data-mini="8"></span></td><td class="t">Design crit: mobile nav</td><td class="num">8</td><td class="who">You · uploaded 2 images</td><td><span class="pill grey">Private</span></td><td class="num">9 Nov</td><td class="act"><span class="abtn"><svg><use href="#i-play"/></svg>Present</span></td></tr>
+                <tr><td><span class="frame mini" data-mini="11"></span></td><td class="t">Lead time, Jul–Oct<small>Metrics</small></td><td class="num">6</td><td class="who"><span class="agent">Codex</span> via MCP · updated slide 3</td><td><span class="pill acc">Link</span></td><td class="num">4 Nov</td><td class="act"><span class="abtn"><svg><use href="#i-play"/></svg>Present</span></td></tr>
+                <tr><td><span class="frame mini" data-mini="12"></span></td><td class="t">Hiring loop refresh</td><td class="num">14</td><td class="who">You · deleted slide 4</td><td><span class="pill grey">Private</span></td><td class="num">28 Oct</td><td class="act"><span class="abtn"><svg><use href="#i-play"/></svg>Present</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-row">
+        <div><svg><use href="#i-lock"/></svg><h3>Private until you share</h3><p>Keep a deck private, share it with anyone who has the link, or name the people who can view it. Agents get the same control through <code>set_sharing</code>.</p></div>
+        <div><svg><use href="#i-history"/></svg><h3>An activity log on every deck</h3><p>Every change is logged with who made it and through which tool, so you can see what your agent did while you were away.</p></div>
+        <div><svg><use href="#i-shield"/></svg><h3>Checked before it's saved</h3><p>Every slot is validated against its layout's schema. A slide the player can't render never reaches the deck.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ PRESENT -->
+  <section id="present" class="night">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kick"><span class="pill later">Designed · next up</span></p>
+        <h2>A presenter view, <span class="grad">and your phone as the remote</span></h2>
+        <p class="sec-lede">The presenter window is dark, so it doesn't light up your face from the lectern. The current slide is largest, the next one waits beside your notes, and the timer turns amber with five minutes left. Scan a QR code and your phone drives the same talk. Try it: click into the window and use ← → and B, or tap Next on the phone.</p>
+      </div>
+
+      <div class="present-wrap">
+        <div class="presenter" id="presenter" tabindex="0" aria-label="Presenter window. Use the left and right arrow keys, and B to black out the screen.">
+          <div class="pr-top">
+            <b>Ship smaller</b><span class="pr-part" data-pr-part>Slice it</span>
+            <span class="sp"></span>
+            <span class="pr-clock"><b data-pr-clock>12:42</b><small><span data-pr-left>17:18</span> left of 30:00</small></span>
+            <span class="pr-chip"><i></i>Audience · Display 2</span>
+            <span class="pr-chip"><i></i>Sam's phone</span>
+          </div>
+          <div class="pr-body">
+            <div class="pr-now">
+              <div class="pr-label"><span>Now</span><span data-pr-count>8 / 16</span></div>
+              <div class="pr-cur"><div class="frame" data-pr-now></div><div class="pr-black" data-pr-black hidden>Screen blacked out · B to bring it back</div></div>
+              <div class="pctl pr-ctl">
+                <button type="button" data-pr="prev" aria-label="Previous slide"><svg><use href="#i-left"/></svg></button>
+                <button type="button" data-pr="next" aria-label="Next slide"><svg><use href="#i-right"/></svg></button>
+                <span class="bar"><i data-pr-bar></i></span>
+              </div>
+            </div>
+            <div class="pr-side">
+              <div class="pr-label"><span>Next</span><span data-pr-next-no>slide 9</span></div>
+              <div class="frame" data-pr-next></div>
+              <div class="pr-label"><span>Notes</span><span>A− A+</span></div>
+              <div class="pr-notes" data-pr-notes></div>
+            </div>
+          </div>
+          <div class="pr-bar">
+            <span class="kbtn"><svg><use href="#i-grid"/></svg>Overview<kbd>O</kbd></span>
+            <span class="kbtn on"><svg><use href="#i-notes"/></svg>Notes<kbd>N</kbd></span>
+            <span class="kbtn"><svg><use href="#i-skip"/></svg>Skip deep dives<kbd>D</kbd></span>
+            <button type="button" class="kbtn" data-pr="black"><svg><use href="#i-black"/></svg>Blackout<kbd>B</kbd></button>
+            <span class="sp"></span>
+            <span class="kbtn hl"><svg><use href="#i-phone"/></svg>Phone connected</span>
+          </div>
+        </div>
+
+        <div class="phone remote" aria-label="Phone remote">
+          <div class="phone-screen">
+            <div class="rm-top"><b>Ship smaller</b><span class="pr-chip"><i></i>Live</span></div>
+            <div class="rm-cur"><div class="frame" data-pr-now></div></div>
+            <div class="rm-next"><span>Next</span><div class="frame" data-pr-next></div></div>
+            <div class="rm-notes" data-pr-notes></div>
+            <div class="rm-ctl">
+              <button type="button" data-pr="prev" aria-label="Previous slide"><svg><use href="#i-left"/></svg></button>
+              <button type="button" class="rm-next-btn" data-pr="next">Next<svg><use href="#i-right"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ AUDIENCE -->
+  <section id="audience">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kick"><span class="pill later">Designed · coming after</span></p>
+        <h2>The room joins in <span class="grad">ten seconds</span></h2>
+        <p class="sec-lede">Camera, then the browser, then you're in. No app, no account, no name field and no join button: the page joins on load. Phones follow the slides by themselves, and polls, word clouds and Q&amp;A take over the card when the presenter reaches them.</p>
+      </div>
+
+      <ol class="journey4">
+        <li>
+          <div class="phone aud"><div class="phone-screen cam">
+            <div class="cam-view"><div class="cam-slide"><div class="qr" data-qr></div><div class="cam-lines"><i></i><i></i><i></i></div></div><span class="cam-chip"><svg><use href="#i-globe"/></svg>slideworks.live</span></div>
+            <div class="cam-shutter"><span>Photo</span><i></i></div>
+          </div></div>
+          <p class="when">0 s</p><h3>Point the camera</h3><p>The native camera spots the QR code on the join slide. Tap the chip. That is the only tap.</p>
+        </li>
+        <li>
+          <div class="phone aud"><div class="phone-screen aud-in">
+            <div class="aud-status">9:41</div>
+            <div class="in-check"><svg><use href="#i-check"/></svg></div>
+            <b class="in-h">You're in</b>
+            <p class="in-p">Ship smaller<br>with Sam Rivera and <b>23</b> others</p>
+            <p class="in-small">No app, no account.<br>This page follows the slides by itself.</p>
+            <div class="aud-url"><svg><use href="#i-lock"/></svg>slideworks.live/482913</div>
+          </div></div>
+          <p class="when">~2 s</p><h3>You're in</h3><p>The page joins on load, confirms it with a tick, and says who else is here.</p>
+        </li>
+        <li>
+          <div class="phone aud"><div class="phone-screen aud-in">
+            <div class="aud-status">9:41</div>
+            <div class="aud-head"><span class="aud-logo">S</span><div><b>Ship smaller</b><small>Sam Rivera</small></div><span class="pr-chip"><i></i>Live</span></div>
+            <div class="aud-slide"><div class="frame" data-slide="bullets"></div></div>
+            <div class="aud-prog"><span>Slide 3</span><i><b style="width:19%"></b></i><span>16</span></div>
+            <div class="aud-wait"><span class="dots3"><i></i><i></i><i></i></span><b>Nothing to answer yet</b><span>Polls and questions appear here when the presenter gets to them. Keep this page open.</span></div>
+            <div class="aud-foot"><span>Guest · no account</span><span>Privacy</span></div>
+          </div></div>
+          <p class="when">from then</p><h3>Follow along</h3><p>The current slide, kept in step with the presenter. People at the back can read it.</p>
+        </li>
+        <li>
+          <div class="phone aud"><div class="phone-screen aud-in">
+            <div class="aud-status">9:41</div>
+            <div class="aud-head"><span class="aud-logo">S</span><div><b>Ship smaller</b><small>Sam Rivera</small></div><span class="pr-chip"><i></i>Live</span></div>
+            <div class="poll">
+              <span class="pill later">Poll</span>
+              <b>How big was your last merge request?</b>
+              <div class="poll-opts" id="pollOpts">
+                <button type="button" data-v="38">Under 50 lines</button>
+                <button type="button" data-v="31">50 to 200 lines</button>
+                <button type="button" data-v="19">200 to 1,000 lines</button>
+                <button type="button" data-v="12">Don't ask</button>
+              </div>
+            </div>
+            <div class="aud-foot"><span>Guest · no account</span><span>Privacy</span></div>
+          </div></div>
+          <p class="when">on an interactive slide</p><h3>Something to do</h3><p>A poll takes over the card when the presenter reaches it, then hands back to the slide. Tap an answer.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============================================================ ROADMAP -->
+  <section id="roadmap" class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kick">Roadmap</p>
+        <h2>Built in the open, <span class="grad">one slice at a time</span></h2>
+        <p class="sec-lede">Every Feature starts as reviewed mockups with its design questions answered, then ships in small pieces. The mockups on this page come straight from those designs.</p>
+      </div>
+      <div class="roadmap">
+        <div class="rm-col">
+          <h3><span class="pill ok"><span class="d"></span>Built</span></h3>
+          <article><code>SW-1</code><b>Foundation</b><p>Deck library, deck page, sharing, the player, the 17 blocks and the MCP server.</p></article>
+          <article><code>SW-2</code><b>Templates and palettes</b><p>Talk, workshop and update templates. Cobalt, Ember, Plum and Midnight. Share cards.</p></article>
+        </div>
+        <div class="rm-col">
+          <h3><span class="pill later"><span class="d"></span>Designed</span></h3>
+          <article><code>SW-4</code><b>Presenter view and phone remote</b><p>Current and next slide, notes, timer, blackout, skipping deep dives, and your phone as the remote.</p></article>
+          <article><code>SW-5</code><b>Audience join</b><p>A QR code and a six-digit code. Guests follow the slides with no app and no account.</p></article>
+        </div>
+        <div class="rm-col">
+          <h3><span class="pill grey"><span class="d"></span>Planned</span></h3>
+          <article><code>SW-6+</code><b>Live audience activities</b><p>Polls, word clouds and Q&amp;A, answered from phones in the room.</p></article>
+          <article><code>SW-15</code><b>Sanzo Wada palettes</b><p>All 348 classic colour combinations, mapped to roles with contrast fixes.</p></article>
+          <article><code>SW-50</code><b>Your own templates</b><p>Upload a template, or import one from an existing HTML deck.</p></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ START -->
+  <section id="start" class="start">
+    <div class="wrap">
+      <div class="start-grid">
+        <div>
+          <p class="kick">Self-hosted and MIT licensed</p>
+          <h2>Run it yourself. <span class="grad">Your decks stay yours.</span></h2>
+          <p class="sec-lede">One container: ASP.NET Core and a React player, with SQLite for storage. Put it behind your TLS proxy, sign in with Google, and connect any MCP client to it.</p>
+          <div class="cta left">
+            <a class="btn btn-primary btn-lg" href="https://github.com/slide-works/slideworks"><svg><use href="#i-gh"/></svg><span>Star on GitHub</span></a>
+            <a class="btn btn-ghost btn-lg" href="https://docs.slideworks.app">Read the docs</a>
+          </div>
+        </div>
+        <div class="snips">
+          <div class="snip">
+            <div class="snip-h"><svg><use href="#i-server"/></svg>Run the container<button type="button" class="copy" data-copy-from="snipRun" aria-label="Copy"><svg><use href="#i-copy"/></svg></button></div>
+            <pre id="snipRun"><span class="c"># set SLIDEWORKS_PUBLIC_URL and the sign-in keys in .env</span>
+docker compose up -d</pre>
+          </div>
+          <div class="snip">
+            <div class="snip-h"><svg><use href="#i-agent"/></svg>Connect an agent<button type="button" class="copy" data-copy-from="snipMcp" aria-label="Copy"><svg><use href="#i-copy"/></svg></button></div>
+            <pre id="snipMcp">claude mcp add --transport http slideworks \
+  https://slides.example.com/mcp</pre>
+          </div>
+          <div class="snip">
+            <div class="snip-h"><svg><use href="#i-blocks"/></svg>Then ask</div>
+            <pre class="ask">"Make a 20-minute deck on shipping smaller, in four parts."</pre>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </main>
@@ -105,21 +487,202 @@
 <footer class="foot">
   <div class="wrap">
     <span class="brand small"><svg class="mark" viewBox="0 0 26 26" aria-hidden="true"><use href="#i-mark"/></svg>SlideWorks</span>
-    <nav>
+    <nav aria-label="Footer">
       <a href="https://docs.slideworks.app">Docs</a>
       <a href="https://github.com/slide-works/slideworks">GitHub</a>
+      <a href="https://github.com/slide-works/slideworks/tree/main/design">Designs</a>
       <span>MIT licensed</span>
     </nav>
   </div>
 </footer>
 
-<script>
-  document.getElementById('themeBtn').addEventListener('click', () => {
-    const root = document.documentElement;
-    const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-    root.dataset.theme = dark ? 'light' : 'dark';
-    try { localStorage.setItem('sw-theme', root.dataset.theme); } catch {}
-  });
-</script>
+<dialog class="lightbox" id="lightbox" aria-label="Slide preview">
+  <div class="lb-frame"><div class="frame" id="lbFrame"></div></div>
+  <div class="lb-meta">
+    <button type="button" data-lb="prev" aria-label="Previous slide"><svg><use href="#i-left"/></svg></button>
+    <div class="lb-cap" id="lbCap"></div>
+    <button type="button" data-lb="next" aria-label="Next slide"><svg><use href="#i-right"/></svg></button>
+    <button type="button" data-lb="close" aria-label="Close"><svg><use href="#i-x"/></svg></button>
+  </div>
+</dialog>
+
+<!-- The sample deck: "Ship smaller", 16 slides covering all 17 blocks. Ported from the SW-1 and SW-2 mockups.
+     site.js clones these into every frame and adds the part tracker, footer and progress bar. -->
+<template id="deck">
+  <div class="sw dark title" data-layout="title" data-slots="kicker · title · subtitle · tagline · byline · stamp" data-notes="Say: one sentence on why this matters to this room. Keep it under 30 seconds.">
+    <div class="stamp">Draft</div>
+    <div class="dots"><i></i><i></i><i></i></div>
+    <div class="kicker">Team offsite · 2026</div>
+    <h1>Ship smaller</h1>
+    <p class="t-sub">Why small batches beat big plans, and how to start on Monday</p>
+    <p class="t-tag">One change a day beats one launch a quarter.</p>
+    <div class="byline">Sam Rivera <i></i> Product Engineering</div>
+  </div>
+  <div class="sw dark divider" data-layout="divider" data-slots="number · title · sub · journey (from deck parts)" data-notes="Transition. Say: here's what last year cost us.">
+    <div class="num">01</div>
+    <h2>Big batches hide the risk</h2>
+    <p class="sub">Why the quarter-long launch keeps slipping.</p>
+    <div class="journey"><div class="on"><b>The cost</b><span>Slides 3–6</span></div><div><b>Slice it</b><span>Slides 8–11</span></div><div><b>Ship it</b><span>Slides 12–13</span></div><div><b>Make it stick</b><span>Slides 14–16</span></div></div>
+  </div>
+  <div class="sw" data-layout="bullets" data-part="0" data-slots="kicker · headline · items[lead, text] · reveal" data-notes="Reveal one at a time. Pause on the last one and ask who has seen it.">
+    <div class="kicker">The pattern</div>
+    <h2 class="h">Every slip we had last year <em>started as a big batch</em></h2>
+    <div class="bd"><ul class="bl">
+      <li class="f"><b>Risk shows up late.</b> The first real customer sees it in week ten.</li>
+      <li class="f"><b>Merges get scary.</b> Long branches collide, so people stop merging.</li>
+      <li class="f"><b>Feedback arrives as a verdict,</b> not a nudge. By then it is too late to change course cheaply.</li>
+      <li class="f"><b>Nobody can say how far along we are,</b> because nothing is done until everything is.</li>
+    </ul></div>
+  </div>
+  <div class="sw" data-layout="big-number" data-part="0" data-slots="kicker · headline · value · unit · statement · context · source" data-notes="Let the number sit. Then: that's a quarter of the year before anyone outside the team sees the work.">
+    <div class="kicker">Last year, measured</div>
+    <h2 class="h">It took us <em>eleven weeks</em> to get a change in front of a customer</h2>
+    <div class="bd"><div class="bign">
+      <div class="n">11<small> wks</small></div>
+      <div><p>Median from first commit to the first customer using it.</p><p>Eight of our 12 launches waited on one last piece of work that had nothing to do with the rest.</p></div>
+    </div><div class="src">Source: delivery data Jan–Oct, 12 launches.</div></div>
+  </div>
+  <div class="sw" data-layout="gantt" data-part="0" data-slots="kicker · headline · columns · rows[label, from, to, state] · marker" data-notes="Point at sprint 6. Everything is green until it isn't.">
+    <div class="kicker">What it looked like</div>
+    <h2 class="h">One milestone each looks fair. <em>Nothing reaches customers until sprint 6.</em></h2>
+    <div class="bd"><div class="gantt">
+      <span></span><span class="hd">Sprint 1</span><span class="hd">Sprint 2</span><span class="hd">Sprint 3</span><span class="hd">Sprint 4</span><span class="hd">Sprint 5</span><span class="hd">Sprint 6</span>
+      <span class="lab">Checkout API</span><span class="bar done" style="grid-column:2/4">Done</span><span style="grid-column:4/8"></span>
+      <span class="lab">Web checkout</span><span style="grid-column:2/3"></span><span class="bar done" style="grid-column:3/5">Done</span><span style="grid-column:5/8"></span>
+      <span class="lab">Mobile checkout</span><span style="grid-column:2/4"></span><span class="bar slip" style="grid-column:4/7">Slips</span><span></span>
+      <span class="lab">Payments partner</span><span style="grid-column:2/5"></span><span class="bar stop" style="grid-column:5/7">Stopped</span><span></span>
+      <span class="lab">Customers see it</span><span style="grid-column:2/7"></span><span class="ship">▲ Ship</span>
+    </div></div>
+  </div>
+  <div class="sw" data-layout="quote" data-part="0" data-slots="kicker · quote · cite" data-notes="Read it slowly. Don't add to it.">
+    <div class="kicker">From the retro</div>
+    <blockquote class="quote">“We stopped asking ‘is it done?’ and started asking ‘is it out?’ The second question is much harder to fudge.”<cite>Team lead, payments squad</cite></blockquote>
+  </div>
+  <div class="sw dark divider" data-layout="divider" data-slots="number · title · sub · journey (from deck parts)" data-notes="Transition. Say: so how small is small?">
+    <div class="num">02</div>
+    <h2>Slice it thin</h2>
+    <p class="sub">How to cut work so each piece reaches a customer.</p>
+    <div class="journey"><div class="past"><b>The cost</b><span>Slides 3–6</span></div><div class="on"><b>Slice it</b><span>Slides 8–11</span></div><div><b>Ship it</b><span>Slides 12–13</span></div><div><b>Make it stick</b><span>Slides 14–16</span></div></div>
+    <div class="dd-list">Deep dives <span>Story map exercise</span><span>Splitting clinic</span></div>
+  </div>
+  <div class="sw" data-layout="practice" data-part="1" data-slots="kicker · headline · do[lead, text] · comes_back[] · avoid[] · callout{tone, text}" data-notes="Ask the room for last month's biggest story and slice it live on the whiteboard. Get three slices before moving on. Skip the third Do item if you're short of time.">
+    <div class="kicker">Slice it</div>
+    <h2 class="h">Slice by what a customer can do, not by layer</h2>
+    <div class="bd"><div class="practice">
+      <div>
+        <div class="col-h">Do</div>
+        <div class="it"><b>Start from one user action</b> and build every layer it needs, thinly.</div>
+        <div class="it"><b>Hard-code the second case.</b> Generalise when the third one arrives.</div>
+        <div class="it"><b>Ship behind a flag</b> to one team first, then widen.</div>
+        <div class="it"><b>Write the demo sentence first:</b> "Now a customer can …"</div>
+      </div>
+      <div>
+        <div class="col-h ok">What comes back</div>
+        <div class="it ok">Feedback in days, not quarters.</div>
+        <div class="it ok">A merge that's small enough to review in one sitting.</div>
+        <div class="col-h bad" style="margin-top:26px">Avoid</div>
+        <div class="it bad">"API first, UI later." That's two batches, not two slices.</div>
+        <div class="callout bad" style="margin-top:22px">If a slice can't be demoed to a customer, it isn't a slice yet.</div>
+      </div>
+    </div></div>
+  </div>
+  <div class="sw" data-layout="compare" data-part="1" data-slots="kicker · headline · left{tag, title, items} · right{tag, title, items}" data-notes="Left is what we did on checkout. Right is what the search team did the same quarter.">
+    <div class="kicker">Same feature, two ways</div>
+    <h2 class="h">The difference is when the customer gets to answer</h2>
+    <div class="bd"><div class="cmp">
+      <div class="panel"><div class="tag">Failure mode</div><h3>Slice by layer</h3><ul><li>Database, then API, then UI</li><li>Nothing to show for five sprints</li><li>The first customer feedback rewrites the API</li></ul></div>
+      <div class="panel good"><div class="tag">Success mode</div><h3>Slice by customer action</h3><ul><li>"Save a card", then "pay with a saved card"</li><li>Something to demo every week</li><li>Feedback changes week 2, not week 10</li></ul></div>
+    </div></div>
+  </div>
+  <div class="sw" data-layout="two-column" data-part="1" data-slots="kicker · headline · left: bullets · right: image{id, caption}" data-notes="Show the map. One row is one release.">
+    <div class="kicker">The tool</div>
+    <h2 class="h">A story map shows the thinnest release</h2>
+    <div class="bd"><div class="two">
+      <ul class="bl"><li><b>Across:</b> the steps a customer takes</li><li><b>Down:</b> richer versions of each step</li><li><b>Top row:</b> the first release. It covers every step, done simply.</li></ul>
+      <figure><div class="img"><svg viewBox="0 0 860 470" width="100%" aria-hidden="true"><rect width="860" height="470" fill="#fbfcfe"/>
+        <g font-family="Inter, sans-serif" font-size="20" font-weight="600" fill="#1b2230">
+        <rect x="30" y="30" width="180" height="70" rx="8" fill="#1e3a8a"/><text x="120" y="72" text-anchor="middle" fill="#fff">Browse</text>
+        <rect x="236" y="30" width="180" height="70" rx="8" fill="#1e3a8a"/><text x="326" y="72" text-anchor="middle" fill="#fff">Add to cart</text>
+        <rect x="442" y="30" width="180" height="70" rx="8" fill="#1e3a8a"/><text x="532" y="72" text-anchor="middle" fill="#fff">Pay</text>
+        <rect x="648" y="30" width="180" height="70" rx="8" fill="#1e3a8a"/><text x="738" y="72" text-anchor="middle" fill="#fff">Track</text>
+        <rect x="20" y="124" width="820" height="98" rx="10" fill="#e4eafd"/>
+        <rect x="30" y="138" width="180" height="70" rx="8" fill="#fff2a8"/><text x="120" y="180" text-anchor="middle" font-weight="500">List view</text>
+        <rect x="236" y="138" width="180" height="70" rx="8" fill="#fff2a8"/><text x="326" y="180" text-anchor="middle" font-weight="500">One item</text>
+        <rect x="442" y="138" width="180" height="70" rx="8" fill="#fff2a8"/><text x="532" y="180" text-anchor="middle" font-weight="500">Card only</text>
+        <rect x="648" y="138" width="180" height="70" rx="8" fill="#fff2a8"/><text x="738" y="180" text-anchor="middle" font-weight="500">Email</text>
+        <rect x="30" y="246" width="180" height="70" rx="8" fill="#fff8d6"/><text x="120" y="288" text-anchor="middle" font-weight="500" fill="#5b6474">Filters</text>
+        <rect x="236" y="246" width="180" height="70" rx="8" fill="#fff8d6"/><text x="326" y="288" text-anchor="middle" font-weight="500" fill="#5b6474">Many items</text>
+        <rect x="442" y="246" width="180" height="70" rx="8" fill="#fff8d6"/><text x="532" y="288" text-anchor="middle" font-weight="500" fill="#5b6474">Saved cards</text>
+        <rect x="648" y="246" width="180" height="70" rx="8" fill="#fff8d6"/><text x="738" y="288" text-anchor="middle" font-weight="500" fill="#5b6474">Live map</text>
+        <rect x="30" y="340" width="180" height="70" rx="8" fill="#fff8d6"/><text x="120" y="382" text-anchor="middle" font-weight="500" fill="#5b6474">Search</text>
+        <rect x="442" y="340" width="180" height="70" rx="8" fill="#fff8d6"/><text x="532" y="382" text-anchor="middle" font-weight="500" fill="#5b6474">Wallets</text>
+        <text x="830" y="444" text-anchor="end" font-size="16" font-weight="700" fill="#2f5bea" letter-spacing="2">RELEASE 1 = BLUE BAND</text></g></svg></div>
+        <figcaption>story-map.png, uploaded by the agent with <code>upload_image</code></figcaption></figure>
+    </div></div>
+  </div>
+  <div class="sw" data-layout="table" data-part="1" data-slots="kicker · headline · columns · rows · highlight_row · badges in cells" data-notes="The highlighted row is the target. Don't read every cell.">
+    <div class="kicker">Sizing</div>
+    <h2 class="h">Aim for slices a pair can ship <em>inside a week</em></h2>
+    <div class="bd"><table class="st">
+      <thead><tr><th>Slice size</th><th>Review time</th><th>Rollback</th><th>Customer feedback</th><th>Verdict</th></tr></thead>
+      <tbody>
+        <tr><td>One quarter</td><td class="n">Days</td><td>Painful</td><td>Week 10+</td><td><span class="badge bad">Avoid</span></td></tr>
+        <tr><td>One sprint</td><td class="n">Hours</td><td>Possible</td><td>Week 2–3</td><td><span class="badge warn">OK</span></td></tr>
+        <tr class="hl"><td><b>2–4 days</b></td><td class="n">Under an hour</td><td>Flip a flag</td><td>Same week</td><td><span class="badge ok">Target</span></td></tr>
+        <tr><td>Under a day</td><td class="n">Minutes</td><td>Flip a flag</td><td>Same week</td><td><span class="badge acc">Great</span></td></tr>
+      </tbody></table></div>
+  </div>
+  <div class="sw" data-layout="chart" data-part="2" data-slots="kicker · headline · chart{type: bar|line, series, unit} · takeaway" data-notes="The dip in August is the flag rollout.">
+    <div class="kicker">Ship it</div>
+    <h2 class="h">Lead time fell as the slices got smaller</h2>
+    <div class="bd"><div class="chart">
+      <svg viewBox="0 0 1100 560" width="100%" height="100%" aria-hidden="true">
+        <g class="c-grid" stroke-width="2"><line x1="80" y1="40" x2="1080" y2="40"/><line x1="80" y1="190" x2="1080" y2="190"/><line x1="80" y1="340" x2="1080" y2="340"/><line x1="80" y1="490" x2="1080" y2="490"/></g>
+        <g class="c-lab" font-size="22" text-anchor="end"><text x="64" y="48">12 wk</text><text x="64" y="198">8</text><text x="64" y="348">4</text><text x="64" y="498">0</text></g>
+        <g class="c-old"><rect x="120" y="77" width="110" height="413" rx="6"/><rect x="280" y="115" width="110" height="375" rx="6"/><rect x="440" y="190" width="110" height="300" rx="6"/></g>
+        <g class="c-new"><rect x="600" y="302" width="110" height="188" rx="6"/><rect x="760" y="377" width="110" height="113" rx="6"/><rect x="920" y="415" width="110" height="75" rx="6"/></g>
+        <g class="c-lab" font-size="22" text-anchor="middle"><text x="175" y="530">May</text><text x="335" y="530">Jun</text><text x="495" y="530">Jul</text><text x="655" y="530">Aug</text><text x="815" y="530">Sep</text><text x="975" y="530">Oct</text></g>
+        <g class="c-val" font-size="24" font-weight="700" text-anchor="middle"><text x="175" y="64">11</text><text x="335" y="102">10</text><text x="495" y="177">8</text><text x="655" y="289">5</text><text x="815" y="364">3</text><text x="975" y="402">2</text></g>
+        <line class="c-mark" x1="575" y1="30" x2="575" y2="490" stroke-dasharray="6 8" stroke-width="2"/><text class="c-val" x="588" y="62" font-size="20" font-weight="700">Flags on</text>
+      </svg>
+      <aside><div class="callout">Weeks from first commit to the first customer. The median fell from 11 to 2.</div></aside>
+    </div></div>
+  </div>
+  <div class="sw" data-layout="numbered-cards" data-part="2" data-slots="kicker · headline · cards[title, text] (2–4)" data-notes="Hand these out as the self-check. Ask pairs to pick one story and run it through.">
+    <div class="kicker">Before you split a story</div>
+    <h2 class="h">Four questions, in this order</h2>
+    <div class="bd"><div class="ncards">
+      <div class="ncard"><div class="no">1</div><h4>Who notices?</h4><p>Name the person who would see the change on day one.</p></div>
+      <div class="ncard"><div class="no">2</div><h4>What's the thinnest version?</h4><p>Hard-code anything that isn't the point.</p></div>
+      <div class="ncard"><div class="no">3</div><h4>Can it hide behind a flag?</h4><p>If not, what would have to change so it can?</p></div>
+      <div class="ncard"><div class="no">4</div><h4>What would we learn?</h4><p>If the answer is "nothing", pick another slice.</p></div>
+    </div></div>
+  </div>
+  <div class="sw" data-layout="rules" data-part="3" data-slots="kicker · headline · rules[title, text] (2–4)" data-notes="These are the only three. Resist adding a fourth.">
+    <div class="kicker">Make it stick</div>
+    <h2 class="h">Three rules for the first month</h2>
+    <div class="bd"><div class="rules">
+      <div class="rule"><div class="no">1</div><div><h4>Merge to main every day</h4><p>Unfinished work goes behind a flag, not on a branch.</p></div></div>
+      <div class="rule"><div class="no">2</div><div><h4>Demo something every Friday</h4><p>To a customer if you can, and to the team if you can't.</p></div></div>
+      <div class="rule"><div class="no">3</div><div><h4>Split any story older than a week</h4><p>Ship what's done, and make the rest a new story.</p></div></div>
+    </div></div>
+  </div>
+  <div class="sw" data-layout="cards" data-part="3" data-slots="kicker · headline · cards[badge, title, text, chips[]] (2–4)" data-notes="Each role has one new habit. Ask each role to pick theirs.">
+    <div class="kicker">Who does what</div>
+    <h2 class="h">Everyone changes one habit</h2>
+    <div class="bd"><div class="cards3">
+      <div class="rcard"><span class="badge acc">Product</span><h4>Write the demo sentence</h4><p>Every story starts with "Now a customer can …".</p><div class="chips"><span class="chip">story map</span><span class="chip">flag plan</span></div></div>
+      <div class="rcard"><span class="badge ok">Engineering</span><h4>Merge daily, behind flags</h4><p>Small pull requests that can be reviewed in one sitting.</p><div class="chips"><span class="chip">trunk</span><span class="chip">flags</span><span class="chip">pairing</span></div></div>
+      <div class="rcard"><span class="badge warn">Design</span><h4>Design the thin version too</h4><p>Release 1 needs a design, not only the final vision.</p><div class="chips"><span class="chip">release 1 mock</span></div></div>
+    </div></div>
+  </div>
+  <div class="sw dark close" data-layout="close" data-slots="headline · callout · byline" data-notes="End on the ask. Then questions.">
+    <div class="kicker">One thing for Monday</div>
+    <h2>Pick one story.<br>Ship half of it by Friday.</h2>
+    <div class="callout">Then tell us what you learned at the next demo.</div>
+    <div class="byline">Sam Rivera · Product Engineering</div>
+  </div>
+</template>
+
 </body>
 </html>

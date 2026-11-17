@@ -7,7 +7,8 @@ These are placeholders (SW-105). The palette is **Cobalt**, the default from SW-
 | Path | What it is |
 |---|---|
 | `brand/favicon.svg` | The mark, switching between light and dark with the visitor's theme. |
-| `tokens/tokens.css` | Website tokens: colour, fonts and radii, light and dark. `site/tokens.css` is a copy. |
+| `tokens/tokens.css` | Website tokens: colour, fonts, radii and shadows, light and dark. `site/tokens.css` is a copy. |
+| `social/og-card.html` | The 1200×630 social card. `social/og-image.png` and `site/og-image.png` are its screenshot. |
 
 ## Palette: Cobalt
 
@@ -26,5 +27,4 @@ The brand gradient for the mark and highlighted headline words is `#2f5bea → #
 ## To do
 
 - A real mark, logo lockups and a 512×512 avatar for the GitHub org.
-- `social/og-card.html` and `og-image.png` (1200×630).
-- Light and dark screenshots of the deck library, deck page and player once SW-1 ships.
+- Replace the live mock-ups on the page with the shipped screens where they differ, once the first release is out.

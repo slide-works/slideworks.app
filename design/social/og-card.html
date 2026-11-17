@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SlideWorks social card</title>
+<!-- The 1200x630 social card for slideworks.app. Screenshot this page at 1200x630 to make site/og-image.png.
+     Styled after the SW-2 share card: a dark slide with the palette glow, accent bar and mini slide stack. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap">
+<style>
+  html, body { margin: 0; }
+  .card {
+    width: 1200px; height: 630px; box-sizing: border-box; padding: 64px 72px; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; color: #fff; font-family: Inter, sans-serif;
+    background: radial-gradient(760px 520px at 96% 118%, rgba(47, 91, 234, .62), transparent 62%), radial-gradient(600px 420px at -6% -12%, rgba(125, 150, 255, .14), transparent 60%), #0b1020;
+  }
+  .card::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 10px; background: #2f5bea; }
+  .brand { display: flex; align-items: center; gap: 14px; font: 800 30px/1 "Plus Jakarta Sans", sans-serif; letter-spacing: -.02em; }
+  .brand svg { width: 46px; height: 46px; }
+  .k { margin-top: 70px; font: 700 20px/1 Inter, sans-serif; letter-spacing: .18em; text-transform: uppercase; color: #a5b8ff; }
+  h1 { margin: 22px 0 0; font: 800 84px/1 "Plus Jakarta Sans", sans-serif; letter-spacing: -.045em; max-width: 720px; }
+  h1 em { font-style: normal; background: linear-gradient(120deg, #a5b8ff, #6d8bff 60%, #c3d0ff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  p { margin: 24px 0 0; font: 400 28px/1.35 Inter, sans-serif; color: #cbd5e1; max-width: 640px; }
+  .ft { margin-top: auto; font: 500 22px/1 Inter, sans-serif; color: #8c97ad; }
+  .ft b { color: #fff; font-weight: 600; }
+  .stack { position: absolute; right: -40px; top: 150px; width: 470px; height: 330px; }
+  .sl { position: absolute; width: 400px; aspect-ratio: 16 / 9; border-radius: 10px; box-shadow: 0 30px 60px rgba(0, 0, 0, .5); overflow: hidden; }
+  .sl.a { right: 0; top: 0; transform: rotate(7deg); background: #f7f8fa; box-shadow: 0 30px 60px rgba(0, 0, 0, .5), inset 0 5px 0 #2f5bea; }
+  .sl.b { right: 40px; top: 60px; transform: rotate(-2deg); background: #f7f8fa; box-shadow: 0 30px 60px rgba(0, 0, 0, .5), inset 0 5px 0 #2f5bea; padding: 34px 30px; box-sizing: border-box; }
+  .sl.c { right: 90px; top: 130px; transform: rotate(-9deg); background: radial-gradient(260px 180px at 90% 110%, rgba(47, 91, 234, .55), transparent 62%), #0b1020; border: 1px solid #263152; padding: 40px 30px; box-sizing: border-box; }
+  .sl.b i { display: block; height: 10px; border-radius: 5px; background: #1e3a8a; width: 70%; margin-bottom: 18px; }
+  .sl.b .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .sl.b .row span { height: 86px; border-radius: 8px; background: #fff; box-shadow: 0 4px 12px rgba(15, 23, 42, .12); border-top: 5px solid #dc2626; }
+  .sl.b .row span + span { border-top-color: #16a34a; }
+  .sl.c .dots { display: flex; gap: 6px; margin-bottom: 14px; }
+  .sl.c .dots i { width: 8px; height: 8px; border-radius: 50%; background: #a5b8ff; }
+  .sl.c b { display: block; font: 800 44px/1 "Plus Jakarta Sans", sans-serif; letter-spacing: -.04em; }
+  .sl.c small { display: block; margin-top: 10px; font: 600 15px/1.2 "Plus Jakarta Sans", sans-serif; color: #cbd5e1; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="brand">
+    <svg viewBox="0 0 26 26" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7f9cff"/><stop offset="1" stop-color="#4f74f5"/></linearGradient></defs><rect width="26" height="26" rx="7" fill="url(#g)"/><rect x="8" y="6" width="13" height="9" rx="1.6" fill="#0b1433" opacity=".5"/><rect x="5" y="9.5" width="13" height="9" rx="1.6" fill="#0b1433"/></svg>
+    SlideWorks
+  </div>
+  <div class="k">Open source · MCP</div>
+  <h1>Slide decks that <em>agents build</em></h1>
+  <p>Agents build decks over MCP. Anyone presents them from a URL.</p>
+  <div class="ft"><b>slideworks.app</b> · MIT licensed</div>
+  <div class="stack" aria-hidden="true">
+    <div class="sl a"></div>
+    <div class="sl b"><i></i><div class="row"><span></span><span></span></div></div>
+    <div class="sl c"><div class="dots"><i></i><i></i><i></i></div><b>Ship smaller</b><small>Why small batches beat big plans</small></div>
+  </div>
+</div>
+</body>
+</html>
