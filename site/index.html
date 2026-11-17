@@ -94,7 +94,7 @@
     <div class="wrap">
       <p class="eyebrow"><span class="dot-live"></span>Open source · In development</p>
       <h1>Slide decks that <span class="grad">agents build</span> and anyone presents from a link.</h1>
-      <p class="lede">Your agent builds the deck over MCP from ready-made blocks: titles, comparisons, tables, charts and timelines, with no HTML. You open it by URL, share it, and present it in the browser on a laptop or a phone.</p>
+      <p class="lede">Your agent builds the deck over MCP from ready-made blocks such as titles, comparisons, tables, charts and timelines. It writes no HTML. You open the deck by URL, share it, and present it in the browser on a laptop or a phone.</p>
       <div class="cta">
         <a class="btn btn-primary btn-lg" href="https://github.com/slide-works/slideworks"><svg><use href="#i-gh"/></svg><span>Follow on GitHub</span></a>
         <a class="btn btn-ghost btn-lg" href="#how">See how it works</a>
@@ -125,7 +125,7 @@
             <div class="pctl mini"><span class="count" data-count>1 / 16</span><span class="bar"><i data-bar></i></span></div>
           </div>
         </div>
-        <p class="stage-cap">A live sample deck, rendered by the same blocks an agent fills. Click it and use the arrow keys.</p>
+        <p class="stage-cap">This sample deck is live and uses the same blocks an agent fills. Click it and use the arrow keys.</p>
       </div>
     </div>
   </section>
@@ -147,7 +147,7 @@
         <article class="card">
           <svg><use href="#i-people"/></svg>
           <h3>Bring the audience in</h3>
-          <p>Coming later: people join with a QR code and answer live polls, word clouds and Q&amp;A from their phones while you drive the deck from yours.</p>
+          <p>In a later release, people join with a QR code and answer live polls, word clouds and Q&amp;A from their phones while you control the deck from yours.</p>
         </article>
       </div>
     </div>
@@ -159,7 +159,7 @@
       <div class="sec-head">
         <p class="kick">How it works</p>
         <h2>From a brief to a deck, <span class="grad">one tool call at a time</span></h2>
-        <p class="sec-lede">The agent writes no HTML. It reads the layout catalogue, then sends each slide as a layout and its slots. The server checks every slot against the layout's schema and rejects a slide it can't render, naming the field that broke, so the agent can fix it and try again.</p>
+        <p class="sec-lede">The agent writes no HTML. It reads the layout catalogue, then sends each slide as a layout and its slots. The server checks every slot against the layout's schema. It rejects a slide it can't render and names the field that broke, so the agent can fix the slide and send it again.</p>
       </div>
 
       <ol class="steps3">
@@ -201,8 +201,8 @@
     <div class="wrap">
       <div class="sec-head">
         <p class="kick">Building blocks</p>
-        <h2>17 blocks. <span class="grad">Zero HTML.</span></h2>
-        <p class="sec-lede">A slide is a layout plus typed slots. Here is every block in one 16-slide deck: one sentence per headline, light content slides with cards, dark slides for the title, dividers and close, and a part tracker across the top. Under each slide are the slots an agent fills.</p>
+        <h2>17 blocks an agent fills, <span class="grad">with no HTML</span></h2>
+        <p class="sec-lede">A slide is a layout plus typed slots. The 16-slide deck below uses every block. Each headline is one sentence. Content slides are light, and the title, dividers and close are dark. A part tracker runs across the top. Under each slide are the slots an agent fills.</p>
       </div>
       <div class="gallery" id="gallery"></div>
     </div>
@@ -213,8 +213,8 @@
     <div class="wrap">
       <div class="sec-head">
         <p class="kick">Templates and palettes</p>
-        <h2>A template and a palette. <span class="grad">That's the whole look.</span></h2>
-        <p class="sec-lede">The template holds the structure, the type and the shape. The palette holds every colour. A slide never stores a colour or a font, so the same deck looks right in any palette. Every built-in palette passes a contrast check, and the build fails if a pair drops below its bar.</p>
+        <h2>A template and a palette <span class="grad">set the whole look</span></h2>
+        <p class="sec-lede">The template holds the structure, the type and the shape. The palette holds every colour. A slide never stores a colour or a font, so you can change the palette without editing a slide. Every built-in palette passes a contrast check, and the build fails if a colour pair drops below its minimum contrast.</p>
       </div>
 
       <div class="pal-picker" role="radiogroup" aria-label="Palette">
@@ -235,7 +235,7 @@
       <div class="templates">
         <article class="tpl">
           <header><h3>Talk</h3><code>talk</code><span class="pill grey">default</span></header>
-          <p>A talk to a room: a story in parts, with one point per slide.</p>
+          <p>A talk to a room, told as a story in parts with one point per slide.</p>
           <ol><li>Title, with the one-line promise</li><li>3–5 parts, each opening with a divider</li><li>2–4 slides per part, one point each</li><li>Close on the single ask</li></ol>
         </article>
         <article class="tpl">
@@ -249,7 +249,7 @@
           <ol><li>Title, with the headline number</li><li>The 1–3 numbers that moved, each explained</li><li>What is late or blocked, and why</li><li>Next steps with owners</li></ol>
         </article>
       </div>
-      <p class="aside-note"><svg><use href="#i-palette"/></svg>Later: all 348 Sanzo Wada colour combinations as palettes, and your own templates, uploaded or imported from an HTML deck.</p>
+      <p class="aside-note"><svg><use href="#i-palette"/></svg>Later, all 348 Sanzo Wada colour combinations will be palettes, and you will be able to upload your own template or import one from an HTML deck.</p>
     </div>
   </section>
 
@@ -258,8 +258,8 @@
     <div class="wrap">
       <div class="sec-head">
         <p class="kick">The app</p>
-        <h2>Every deck in one ledger, <span class="grad">and who changed it</span></h2>
-        <p class="sec-lede">A table, not a wall of thumbnails, so forty decks stay easy to scan. The Last change column says whether an agent or a person made it, and the deck page's activity log shows who changed what, when, and through which tool.</p>
+        <h2>Every deck in one table, <span class="grad">and who changed it</span></h2>
+        <p class="sec-lede">The library is a table instead of a grid of thumbnails, so you can scan forty decks on one screen. The Last change column says whether an agent or a person made it, and the deck page's activity log shows who changed what, when, and through which tool.</p>
       </div>
 
       <div class="browser app" aria-label="The decks library">
@@ -293,8 +293,8 @@
 
       <div class="feature-row">
         <div><svg><use href="#i-lock"/></svg><h3>Private until you share</h3><p>Keep a deck private, share it with anyone who has the link, or name the people who can view it. Agents get the same control through <code>set_sharing</code>.</p></div>
-        <div><svg><use href="#i-history"/></svg><h3>An activity log on every deck</h3><p>Every change is logged with who made it and through which tool, so you can see what your agent did while you were away.</p></div>
-        <div><svg><use href="#i-shield"/></svg><h3>Checked before it's saved</h3><p>Every slot is validated against its layout's schema. A slide the player can't render never reaches the deck.</p></div>
+        <div><svg><use href="#i-history"/></svg><h3>An activity log on every deck</h3><p>The log records every change, who made it and through which tool, so you can see what your agent did while you were away.</p></div>
+        <div><svg><use href="#i-shield"/></svg><h3>Checked before it's saved</h3><p>The server validates every slot against its layout's schema. A slide the player can't render never reaches the deck.</p></div>
       </div>
     </div>
   </section>
@@ -305,7 +305,7 @@
       <div class="sec-head">
         <p class="kick"><span class="pill later">Designed · next up</span></p>
         <h2>A presenter view, <span class="grad">and your phone as the remote</span></h2>
-        <p class="sec-lede">The presenter window is dark, so it doesn't light up your face from the lectern. The current slide is largest, the next one waits beside your notes, and the timer turns amber with five minutes left. Scan a QR code and your phone drives the same talk. Try it: click into the window and use ← → and B, or tap Next on the phone.</p>
+        <p class="sec-lede">The presenter window is dark, so it doesn't light up your face from the lectern. The current slide is largest, the next one sits beside your notes, and the timer turns amber with five minutes left. Scan a QR code and your phone controls the same talk. To try it, click into the window and press the left and right arrow keys or B, or tap Next on the phone.</p>
       </div>
 
       <div class="present-wrap">
@@ -366,7 +366,7 @@
       <div class="sec-head">
         <p class="kick"><span class="pill later">Designed · coming after</span></p>
         <h2>The room joins in <span class="grad">ten seconds</span></h2>
-        <p class="sec-lede">Camera, then the browser, then you're in. No app, no account, no name field and no join button: the page joins on load. Phones follow the slides by themselves, and polls, word clouds and Q&amp;A take over the card when the presenter reaches them.</p>
+        <p class="sec-lede">Point the camera at the QR code and tap the link. The page joins as it loads, so there is no app, account, name field or join button. Phones follow the slides by themselves, and polls, word clouds and Q&amp;A appear on the phone when the presenter reaches them.</p>
       </div>
 
       <ol class="journey4">
@@ -375,7 +375,7 @@
             <div class="cam-view"><div class="cam-slide"><div class="qr" data-qr></div><div class="cam-lines"><i></i><i></i><i></i></div></div><span class="cam-chip"><svg><use href="#i-globe"/></svg>slideworks.live</span></div>
             <div class="cam-shutter"><span>Photo</span><i></i></div>
           </div></div>
-          <p class="when">0 s</p><h3>Point the camera</h3><p>The native camera spots the QR code on the join slide. Tap the chip. That is the only tap.</p>
+          <p class="when">0 s</p><h3>Point the camera</h3><p>The phone's camera reads the QR code on the join slide. Tap the chip. That is the only tap.</p>
         </li>
         <li>
           <div class="phone aud"><div class="phone-screen aud-in">
@@ -415,7 +415,7 @@
             </div>
             <div class="aud-foot"><span>Guest · no account</span><span>Privacy</span></div>
           </div></div>
-          <p class="when">on an interactive slide</p><h3>Something to do</h3><p>A poll takes over the card when the presenter reaches it, then hands back to the slide. Tap an answer.</p>
+          <p class="when">on an interactive slide</p><h3>Something to do</h3><p>A poll appears when the presenter reaches it, and the slide comes back afterwards. Tap an answer.</p>
         </li>
       </ol>
     </div>
@@ -426,8 +426,8 @@
     <div class="wrap">
       <div class="sec-head">
         <p class="kick">Roadmap</p>
-        <h2>Built in the open, <span class="grad">one slice at a time</span></h2>
-        <p class="sec-lede">Every Feature starts as reviewed mockups with its design questions answered, then ships in small pieces. The mockups on this page come straight from those designs.</p>
+        <h2>Built in the open, <span class="grad">in small slices</span></h2>
+        <p class="sec-lede">Every feature starts as reviewed mockups with its design questions answered, then ships in small pieces. The mockups on this page come from those designs.</p>
       </div>
       <div class="roadmap">
         <div class="rm-col">
@@ -456,8 +456,8 @@
       <div class="start-grid">
         <div>
           <p class="kick">Self-hosted and MIT licensed</p>
-          <h2>Run it yourself. <span class="grad">Your decks stay yours.</span></h2>
-          <p class="sec-lede">One container: ASP.NET Core and a React player, with SQLite for storage. Put it behind your TLS proxy, sign in with Google, and connect any MCP client to it.</p>
+          <h2>Run it yourself. <span class="grad">Your decks stay on your server.</span></h2>
+          <p class="sec-lede">SlideWorks is one container that runs ASP.NET Core and a React player and stores decks in SQLite. Put it behind your TLS proxy, sign in with Google, and connect any MCP client to it.</p>
           <div class="cta left">
             <a class="btn btn-primary btn-lg" href="https://github.com/slide-works/slideworks"><svg><use href="#i-gh"/></svg><span>Star on GitHub</span></a>
             <a class="btn btn-ghost btn-lg" href="https://docs.slideworks.app">Read the docs</a>
