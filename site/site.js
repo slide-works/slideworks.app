@@ -233,7 +233,7 @@
       while (feed.children.length > 3) feed.lastChild.remove();
     }
     const SCRIPT = [
-      L.c(`# brief: "20-minute offsite talk on shipping smaller, in four parts"`),
+      L.c(`# brief: outline.md, lead-times.csv, "20 minutes, four parts, end on one ask"`),
       L.call('list_layouts()'),
       L.ok('31 layouts: title, statement, bullets, compare, chart, flow, bars, stack … poll, word-cloud, qa (each with its slots)'),
       L.call(`create_deck({ title: ${s('"Ship smaller"')}, template: ${s('"talk"')}, palette: ${s('"cobalt"')},\n    parts: [${s('"The cost"')}, ${s('"Slice it"')}, ${s('"Ship it"')}, ${s('"Make it stick"')}] })`),
