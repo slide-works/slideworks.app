@@ -127,6 +127,30 @@
     setPaused(paused);
   }
 
+  /* ---------------------------------------------------------------- hero: the guest phone's reactions float up the deck */
+  {
+    const RX = ['👍', '❤️', '😂', '😮', '👏'];
+    const row = $('#heroRxRow'), layer = $('#heroRx');
+    row.innerHTML = RX.map((e, i) => `<button type="button" data-i="${i}" aria-label="React with ${e}">${e}</button>`).join('');
+    const float = e => {
+      const sp = document.createElement('span');
+      sp.textContent = e;
+      sp.style.right = (4 + Math.random() * 14) + '%';
+      layer.append(sp);
+      setTimeout(() => sp.remove(), 2700);
+    };
+    row.addEventListener('click', ev => { const b = ev.target.closest('button'); if (b) float(RX[+b.dataset.i]); });
+    // The rest of the room reacts now and then while the hero is on screen.
+    let timer = 0, visible = false;
+    const tick = () => {
+      clearTimeout(timer);
+      if (!visible || reduced || document.hidden) return;
+      timer = setTimeout(() => { float(RX[Math.floor(Math.random() * RX.length)]); tick(); }, 1800 + Math.random() * 2600);
+    };
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; tick(); }, { threshold: .25 }).observe(layer.parentElement);
+    document.addEventListener('visibilitychange', tick);
+  }
+
   /* ---------------------------------------------------------------- live-room slides: join and poll */
   // A QR-like pattern (decorative): three finder squares and seeded modules.
   const QR = (() => {
@@ -233,7 +257,7 @@
       while (feed.children.length > 3) feed.lastChild.remove();
     }
     const SCRIPT = [
-      L.c(`# brief: "20-minute offsite talk on shipping smaller, in four parts"`),
+      L.c(`# brief: outline.md, lead-times.csv, "20 minutes, four parts, end on one ask"`),
       L.call('list_layouts()'),
       L.ok('31 layouts: title, statement, bullets, compare, chart, flow, bars, stack … poll, word-cloud, qa (each with its slots)'),
       L.call(`create_deck({ title: ${s('"Ship smaller"')}, template: ${s('"talk"')}, palette: ${s('"cobalt"')},\n    parts: [${s('"The cost"')}, ${s('"Slice it"')}, ${s('"Ship it"')}, ${s('"Make it stick"')}] })`),
@@ -791,7 +815,7 @@
 
   /* ---------------------------------------------------------------- reveal on scroll */
   {
-    const els = $$('.sec-head, .steps3, .session, .pal-picker, .pal-stage, .templates, .app, .feature-row, .tools-more, .present-wrap, .journey4, .screens2, .roadmap, .start-grid, .pillars .cards');
+    const els = $$('.sec-head, .steps3, .session, .pal-picker, .pal-stage, .templates, .app, .feature-row, .tools-more, .attn, .pains-turn, .present-wrap, .journey4, .screens2, .roadmap, .start-grid, .pillars .cards');
     els.forEach(el => el.classList.add('rv'));
     const io = new IntersectionObserver(entries => entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
