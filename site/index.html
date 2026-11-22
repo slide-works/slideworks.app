@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SlideWorks · Web slide decks that agents build</title>
-<meta name="description" content="Ask your agent for a deck and present it from a link. SlideWorks is open source: agents build decks over MCP from 26 layouts and check every slide, you present from a laptop or a phone, and the room joins from a QR code to vote, ask questions and react.">
+<title>SlideWorks · Present from a link, bring the room in</title>
+<meta name="description" content="Present from a link and bring the room in. SlideWorks is open source: run the talk from your phone while guests join from a QR code to vote, fill a word cloud, ask questions and react. Your agent builds the deck over MCP.">
 <meta name="theme-color" content="#f4f5f7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0f1424" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://slideworks.app/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://slideworks.app/">
-<meta property="og:title" content="SlideWorks · Web slide decks that agents build">
-<meta property="og:description" content="Ask your agent for a deck. Present it from a link. The room joins from their phones.">
+<meta property="og:title" content="SlideWorks · Present from a link, bring the room in">
+<meta property="og:description" content="Run the talk from your phone. The room joins from theirs to vote, ask and react.">
 <meta property="og:image" content="https://slideworks.app/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -71,11 +71,11 @@
   <div class="wrap">
     <a class="brand" href="/"><svg class="mark" viewBox="0 0 26 26" aria-hidden="true"><use href="#i-mark"/></svg>SlideWorks</a>
     <nav class="nav-links" aria-label="Sections">
-      <a href="#how">How it works</a>
+      <a href="#present">Presenting</a>
+      <a href="#audience">The room</a>
+      <a href="#how">Your agent</a>
       <a href="#blocks">Layouts</a>
       <a href="#brand">Your brand</a>
-      <a href="#present">Presenting</a>
-      <a href="#audience">Audience</a>
       <a href="#roadmap">Roadmap</a>
       <a href="https://docs.slideworks.app">Docs</a>
     </nav>
@@ -94,11 +94,11 @@
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="wrap">
       <p class="eyebrow"><span class="dot-live"></span>Open source · Self-hosted · MIT</p>
-      <h1>Ask your agent for a deck. <span class="grad">Present it from a link.</span></h1>
-      <p class="lede">Give Claude, Cursor or any MCP agent your notes, your numbers and your point of view. It builds the slides from 26 ready-made layouts and checks each one in a browser before you see it. You present from a laptop or a phone, and the room joins from their phones to vote, ask questions and react.</p>
+      <h1>Present from a link.<br><span class="grad">Bring the whole room in.</span></h1>
+      <p class="lede">Run the talk from your phone while the room joins from theirs, with no app and no account. They vote, fill a word cloud, ask and upvote questions, and react on the big screen. Your agent builds the deck from your notes, polls included.</p>
       <div class="cta">
         <a class="btn btn-primary btn-lg" href="https://github.com/slide-works/slideworks"><svg><use href="#i-gh"/></svg><span>Follow on GitHub</span></a>
-        <a class="btn btn-ghost btn-lg" href="#how">See how it works</a>
+        <a class="btn btn-ghost btn-lg" href="#audience">See the room join</a>
       </div>
       <ul class="works-with" aria-label="Works with">
         <li>Claude Code</li><li>Claude Desktop</li><li>claude.ai</li><li>Cursor</li><li>VS Code</li>
@@ -108,8 +108,8 @@
     <div class="wrap wide">
       <div class="stage" id="heroStage">
         <figure class="browser player" id="heroPlayer" tabindex="0" aria-label="Sample deck player. Use the left and right arrow keys to move through the slides.">
-          <div class="browser-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url"><b>slides.example.com</b>/d/7Kq2/ship-smaller<b class="hash" data-hash>#1</b></span></div>
-          <div class="player-stage stepped"><div class="frame" data-player-frame></div></div>
+          <div class="browser-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url"><b>slides.example.com</b>/d/7Kq2/ship-smaller<b class="hash" data-hash>#1</b></span><span class="bar-live"><i></i>Live · 482 913 · <b id="heroJoined">41</b> joined</span></div>
+          <div class="player-stage stepped"><div class="frame" data-player-frame></div><div class="hero-rx" id="heroRx" aria-hidden="true"></div></div>
           <div class="pctl">
             <button type="button" data-p="prev" aria-label="Previous"><svg><use href="#i-left"/></svg></button>
             <button type="button" data-p="next" aria-label="Next"><svg><use href="#i-right"/></svg></button>
@@ -119,14 +119,17 @@
             <span class="bar"><i data-bar></i></span>
           </div>
         </figure>
-        <div class="phone hero-phone" aria-hidden="true">
-          <div class="phone-screen">
-            <div class="phone-url">slides.example.com/d/7Kq2<span data-hash>#1</span></div>
-            <div class="phone-canvas stepped"><div class="frame" data-player-frame></div></div>
-            <div class="pctl mini"><span class="count" data-count>1 / 16</span><span class="bar"><i data-bar></i></span></div>
+        <div class="phone hero-phone" aria-label="A guest's phone in the room">
+          <div class="phone-screen aud-in">
+            <div class="aud-status">9:41</div>
+            <div class="aud-head"><span class="aud-logo">S</span><div><b>Ship smaller</b><small>Sam Rivera</small></div><span class="pr-chip"><i></i>Live</span></div>
+            <div class="aud-slide stepped"><div class="frame" data-player-frame></div></div>
+            <div class="hp-q"><b>Questions · 4 open</b><ol><li><i>14</i>How do you split a database migration?</li><li><i>9</i>What if a small change still needs a big review?</li><li><i>7</i>How small is too small?</li></ol></div>
+            <div class="rx-row" id="heroRxRow" role="group" aria-label="Reactions"></div>
+            <div class="aud-foot"><span>Guest · no account</span><span>Privacy</span></div>
           </div>
         </div>
-        <p class="stage-cap">This is a live deck built from the same layouts your agent uses. Click it and use the arrow keys.</p>
+        <p class="stage-cap">A live deck with a guest's phone beside it. Click the deck and use the arrow keys, or tap a reaction on the phone.</p>
       </div>
     </div>
   </section>
@@ -135,26 +138,361 @@
   <section class="pillars">
     <div class="wrap">
       <div class="cards">
-        <a class="card" href="#how">
-          <svg><use href="#i-agent"/></svg>
-          <h3>Your agent builds it</h3>
-          <p>It fills layouts with your content and never writes HTML. It renders every slide in a browser and fixes overflow and low contrast before you open the deck.</p>
-        </a>
         <a class="card" href="#present">
-          <svg><use href="#i-link"/></svg>
-          <h3>You present from a link</h3>
-          <p>Every deck has a URL. Present from a laptop with your notes, the next slide and a timer, and use your phone as the remote.</p>
+          <svg><use href="#i-phone"/></svg>
+          <h3>Your phone runs the talk</h3>
+          <p>Scan a QR code and your phone becomes the remote, with the next slide, your notes, and the controls for polls and questions.</p>
         </a>
         <a class="card" href="#audience">
           <svg><use href="#i-people"/></svg>
-          <h3>The room joins in</h3>
-          <p>Guests scan a QR code, with no app and no account. They answer polls, fill a word cloud, ask and upvote questions, and send reactions.</p>
+          <h3>The room joins in ten seconds</h3>
+          <p>Guests point their camera at a QR code. There's no app to install, no account and no name to give.</p>
         </a>
-        <a class="card" href="#brand">
-          <svg><use href="#i-palette"/></svg>
-          <h3>It looks like your brand</h3>
-          <p>Upload your fonts, logos and colours as a template. Every deck made on it matches, and the editor checks contrast before you publish.</p>
+        <a class="card" href="#polls">
+          <svg><use href="#i-globe"/></svg>
+          <h3>Everyone gets a say</h3>
+          <p>Polls, word clouds, open questions, upvoted Q&amp;A and reactions, live on the big screen while you talk.</p>
         </a>
+        <a class="card" href="#how">
+          <svg><use href="#i-agent"/></svg>
+          <h3>Your agent builds the deck</h3>
+          <p>Give it your notes and numbers. It builds the slides with the polls in place and checks every one before you open it.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ PRESENT -->
+  <section id="present" class="night">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kick">Presenting</p>
+        <h2>Run the talk <span class="grad">from your phone</span></h2>
+        <p class="sec-lede">Scan a QR code and your phone becomes the remote. It shows the next slide and your notes, and it runs the polls and the question list, so you can walk the room instead of standing at a laptop. On the laptop, the presenter window gives you the same in a dark view, with a timer that turns amber with five minutes left. Click the window and press the arrow keys or B, or tap Next on the phone.</p>
+      </div>
+
+      <div class="present-wrap">
+        <div class="presenter" id="presenter" tabindex="0" aria-label="Presenter window. Use the left and right arrow keys, and B to black out the screen.">
+          <div class="pr-top">
+            <b>Ship smaller</b><span class="pr-part" data-pr-part>Slice it</span>
+            <span class="sp"></span>
+            <span class="pr-clock"><b data-pr-clock>12:42</b><small><span data-pr-left>17:18</span> left of 30:00</small></span>
+            <span class="pr-chip"><i></i>Audience · Display 2</span>
+            <span class="pr-chip"><i></i>Sam's phone</span>
+          </div>
+          <div class="pr-body">
+            <div class="pr-now">
+              <div class="pr-label"><span>Now</span><span data-pr-count>8 / 16</span></div>
+              <div class="pr-cur"><div class="frame" data-pr-now></div><div class="pr-black" data-pr-black hidden>Screen blacked out · B to bring it back</div></div>
+              <div class="pctl pr-ctl">
+                <button type="button" data-pr="prev" aria-label="Previous slide"><svg><use href="#i-left"/></svg></button>
+                <button type="button" data-pr="next" aria-label="Next slide"><svg><use href="#i-right"/></svg></button>
+                <span class="bar"><i data-pr-bar></i></span>
+              </div>
+            </div>
+            <div class="pr-side">
+              <div class="pr-label"><span>Next</span><span data-pr-next-no>slide 9</span></div>
+              <div class="frame" data-pr-next></div>
+              <div class="pr-label"><span>Notes</span><span>A− A+</span></div>
+              <div class="pr-notes" data-pr-notes></div>
+            </div>
+          </div>
+          <div class="pr-bar">
+            <span class="kbtn"><svg><use href="#i-grid"/></svg>Overview<kbd>O</kbd></span>
+            <span class="kbtn on"><svg><use href="#i-notes"/></svg>Notes<kbd>N</kbd></span>
+            <span class="kbtn"><svg><use href="#i-skip"/></svg>Skip deep dives<kbd>D</kbd></span>
+            <button type="button" class="kbtn" data-pr="black"><svg><use href="#i-black"/></svg>Blackout<kbd>B</kbd></button>
+            <span class="sp"></span>
+            <span class="kbtn hl"><svg><use href="#i-phone"/></svg>Phone connected</span>
+          </div>
+        </div>
+
+        <div class="phone remote" aria-label="Phone remote">
+          <div class="phone-screen">
+            <div class="rm-top"><b>Ship smaller</b><span class="pr-chip"><i></i>Live</span></div>
+            <div class="rm-cur"><div class="frame" data-pr-now></div></div>
+            <div class="rm-next"><span>Next</span><div class="frame" data-pr-next></div></div>
+            <div class="rm-notes" data-pr-notes></div>
+            <div class="rm-ctl">
+              <button type="button" data-pr="prev" aria-label="Previous slide"><svg><use href="#i-left"/></svg></button>
+              <button type="button" class="rm-next-btn" data-pr="next">Next<svg><use href="#i-right"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ AUDIENCE -->
+  <section id="audience" class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kick">Audience join</p>
+        <h2>The room joins in <span class="grad">ten seconds</span></h2>
+        <p class="sec-lede">Guests point their camera at the QR code or type six digits. There's no app to install, no account and no name to give. Their phone shows your current slide and switches to a poll, a word box or the question list when you reach one.</p>
+      </div>
+
+      <ol class="journey4">
+        <li>
+          <div class="phone aud"><div class="phone-screen cam">
+            <div class="cam-view"><div class="cam-slide"><div class="qr" data-qr></div><div class="cam-lines"><i></i><i></i><i></i></div></div><span class="cam-chip"><svg><use href="#i-globe"/></svg>slideworks.live</span></div>
+            <div class="cam-shutter"><span>Photo</span><i></i></div>
+          </div></div>
+          <p class="when">0 s</p><h3>Point the camera</h3><p>The camera reads the QR code on the join slide. Tapping the link is the only tap.</p>
+        </li>
+        <li>
+          <div class="phone aud"><div class="phone-screen aud-in">
+            <div class="aud-status">9:41</div>
+            <div class="in-check"><svg><use href="#i-check"/></svg></div>
+            <b class="in-h">You're in</b>
+            <p class="in-p">Ship smaller<br>with Sam Rivera and <b>23</b> others</p>
+            <p class="in-small">No app, no account.<br>This page follows the slides by itself.</p>
+            <div class="aud-url"><svg><use href="#i-lock"/></svg>slideworks.live/482913</div>
+          </div></div>
+          <p class="when">~2 s</p><h3>You're in</h3><p>The page joins as it loads and shows how many others are here.</p>
+        </li>
+        <li>
+          <div class="phone aud"><div class="phone-screen aud-in">
+            <div class="aud-status">9:41</div>
+            <div class="aud-head"><span class="aud-logo">S</span><div><b>Ship smaller</b><small>Sam Rivera</small></div><span class="pr-chip"><i></i>Live</span></div>
+            <div class="aud-slide"><div class="frame" data-slide="bullets"></div></div>
+            <div class="aud-prog"><span>Slide 3</span><i><b style="width:19%"></b></i><span>16</span></div>
+            <div class="aud-wait"><span class="dots3"><i></i><i></i><i></i></span><b>Nothing to answer yet</b><span>Polls appear here when the presenter gets to them. Keep this page open.</span></div>
+            <div class="aud-foot"><span>Guest · no account</span><span>Privacy</span></div>
+          </div></div>
+          <p class="when">from then</p><h3>Follow along</h3><p>The phone shows the slide on screen, so people at the back can read it.</p>
+        </li>
+        <li>
+          <div class="phone aud"><div class="phone-screen aud-in">
+            <div class="aud-status">9:41</div>
+            <div class="aud-head"><span class="aud-logo">S</span><div><b>Ship smaller</b><small>Sam Rivera</small></div><span class="pr-chip"><i></i>Live</span></div>
+            <div class="poll">
+              <span class="pill later">Poll</span>
+              <b>How big was your last merge request?</b>
+              <div class="poll-opts" id="pollOpts">
+                <button type="button" data-v="38">Under 50 lines</button>
+                <button type="button" data-v="31">50 to 200 lines</button>
+                <button type="button" data-v="19">200 to 1,000 lines</button>
+                <button type="button" data-v="12">Don't ask</button>
+              </div>
+            </div>
+            <div class="aud-foot"><span>Guest · no account</span><span>Privacy</span></div>
+          </div></div>
+          <p class="when">on an interactive slide</p><h3>Something to do</h3><p>A poll appears when you reach it, and the slide comes back after. Tap an answer to try it.</p>
+        </li>
+      </ol>
+
+      <div class="screens2">
+        <figure>
+          <div class="frame" data-live="join"></div>
+          <figcaption><b>The join slide.</b> Your agent adds it like any other slide. The code and the QR code fill in when you go live, and anyone who arrives early waits in a lobby.</figcaption>
+        </figure>
+        <figure>
+          <div class="frame" data-slide="compare" data-joinbar></div>
+          <figcaption><b>The join bar.</b> Turn it on and every slide carries a small QR code and the code while you're live, so latecomers can still join.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ POLLS -->
+  <section id="polls">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kick">Live polls</p>
+        <h2>Ask the room, <span class="grad">and watch the bars move</span></h2>
+        <p class="sec-lede">A poll is a slide your agent writes like any other. When you reach it, phones show the question, and the bars on the big screen grow as answers arrive. Tap an option on the phone, then close the poll, show the answer or start a new round.</p>
+      </div>
+
+      <div class="present-wrap">
+        <div class="presenter livewin" aria-label="Presenter window with the poll panel">
+          <div class="pr-top">
+            <b>Ship smaller</b>
+            <span class="pr-chip live"><i></i>Live <span class="mono">482 913</span> · 41 joined</span>
+            <span class="sp"></span>
+            <span class="pr-clock"><b>12:40</b></span>
+          </div>
+          <div class="pr-body">
+            <div class="pr-now">
+              <div class="pr-label"><span>On the big screen now</span><span>poll</span></div>
+              <div class="pr-cur"><div class="frame" data-live="poll" id="pollScreen"></div></div>
+              <div class="pr-label"><span>Notes</span><span></span></div>
+              <div class="pr-notes"><b>Give it twenty seconds.</b> Read the two biggest bars out loud, then show the answer.</div>
+            </div>
+            <div class="pr-side">
+              <div class="pr-label"><span>Poll</span><span>pick one · results live</span></div>
+              <div class="pp" aria-live="polite">
+                <div class="pp-head"><span class="pp-state" id="ppState">Open</span><span id="ppRound">round 1</span></div>
+                <div class="pp-n"><b id="ppN">0</b><span>answers</span><span class="rate" id="ppRate"></span></div>
+                <ul class="pp-rows" id="ppRows"></ul>
+                <p class="pp-note" id="ppNote"></p>
+                <div class="pp-btns">
+                  <button type="button" class="pbtn danger" data-poll="close">Close poll</button>
+                  <button type="button" class="pbtn primary" data-poll="answer" hidden>Show the answer</button>
+                  <button type="button" class="pbtn" data-poll="round" hidden>New round</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phone aud guest" aria-label="A guest's phone">
+          <div class="phone-screen aud-in">
+            <div class="aud-status">9:41</div>
+            <div class="aud-head"><span class="aud-logo">S</span><div><b>Ship smaller</b><small>Sam Rivera</small></div><span class="pr-chip"><i></i>Live</span></div>
+            <div class="poll gp">
+              <span class="gp-kick">Poll · pick one</span>
+              <b>Which change gets its first review fastest?</b>
+              <div class="gp-opts" id="gpOpts" role="group" aria-label="Options"></div>
+              <div class="gp-msg" id="gpMsg" aria-live="polite"></div>
+            </div>
+            <div class="aud-foot"><span>Private · Sam sees totals only</span><span>Privacy</span></div>
+            <div class="aud-url"><svg><use href="#i-lock"/></svg>slideworks.live/482913</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-row">
+        <div><svg><use href="#i-people"/></svg><h3>One answer or several</h3><p>Up to 8 options, pick one or pick a few. Mark a correct answer and reveal it after you close the poll. Every round is kept.</p></div>
+        <div><svg><use href="#i-lock"/></svg><h3>Honest answers</h3><p>Guests have no name and no account, and nobody can see who picked what. Show results live, once a guest has answered, or after the poll closes.</p></div>
+        <div><svg><use href="#i-agent"/></svg><h3>Your agent reads the results</h3><p>After the talk, <code>get_poll_results</code> gives your agent each round's counts and response rate, ready for the follow-up email.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ WORD CLOUD + OPEN TEXT (SW-8) -->
+  <section id="words" class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kick">Word clouds and open text</p>
+        <h2>Let the room answer <span class="grad">in its own words</span></h2>
+        <p class="sec-lede">Ask an open question and each guest sends up to three words. The words people repeat grow on the big screen as they arrive. For longer replies, an open-text slide shows each answer as a card on a wall. Type a word on the phone and send it to add yours.</p>
+      </div>
+
+      <div class="present-wrap">
+        <div class="presenter livewin" aria-label="Presenter window with the word cloud panel">
+          <div class="pr-top">
+            <b>Ship smaller</b>
+            <span class="pr-chip live"><i></i>Live <span class="mono">482 913</span> · 41 joined</span>
+            <span class="sp"></span>
+            <span class="pr-clock"><b>03:12</b></span>
+          </div>
+          <div class="pr-body">
+            <div class="pr-now">
+              <div class="pr-label"><span>On the big screen now</span><span>word cloud</span></div>
+              <div class="pr-cur"><div class="frame" data-live="cloud" id="cloudScreen"></div></div>
+              <div class="pr-label"><span>Notes</span><span></span></div>
+              <div class="pr-notes"><b>Leave it open for a minute.</b> Read the three biggest words, then ask who sent the smallest one.</div>
+            </div>
+            <div class="pr-side">
+              <div class="pr-label"><span>Word cloud</span><span>results live</span></div>
+              <div class="pp" aria-live="polite">
+                <div class="pp-head"><span class="pp-state" id="wcState">Open</span><span id="wcRound">round 1</span></div>
+                <div class="pp-n"><b id="wcN">0</b><span>guests sent words</span></div>
+                <ul class="wc-rows" id="wcRows"></ul>
+                <p class="pp-note">Hide takes a word off every screen. Bad words never get this far.</p>
+                <div class="pp-btns">
+                  <button type="button" class="pbtn danger" data-wc="close">Close</button>
+                  <button type="button" class="pbtn" data-wc="round" hidden>New round</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phone aud guest" aria-label="A guest's phone">
+          <div class="phone-screen aud-in">
+            <div class="aud-status">9:41</div>
+            <div class="aud-head"><span class="aud-logo">S</span><div><b>Ship smaller</b><small>Sam Rivera</small></div><span class="pr-chip"><i></i>Live</span></div>
+            <div class="poll gp wc-card">
+              <span class="gp-kick">Word cloud · up to 3 words</span>
+              <b>One word for how your last release felt</b>
+              <form class="gq-ask" id="wcAsk"><input type="text" maxlength="25" placeholder="A word" aria-label="Your word"><button type="submit">Send</button></form>
+              <div class="wc-mine" id="wcMine"></div>
+              <div class="gp-msg" id="wcMsg" aria-live="polite"></div>
+            </div>
+            <div class="aud-foot"><span>Guest · no account</span><span>Privacy</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="screens2">
+        <figure>
+          <div class="frame" data-live="wall"></div>
+          <figcaption><b>The open-text wall.</b> Each guest sends one answer of up to 200 characters. Answers keep their number when a guest edits them, so you can say "number 4" out loud.</figcaption>
+        </figure>
+        <div class="feature-col">
+          <div><svg><use href="#i-shield"/></svg><h3>A filter for bad words</h3><p>A profane word is refused before it's stored. Anything else you don't want on screen, you hide with one key.</p></div>
+          <div><svg><use href="#i-people"/></svg><h3>Same word, bigger word</h3><p>"Scary", "scary " and "SCARY" count as one word, so the cloud shows what the room agrees on.</p></div>
+          <div><svg><use href="#i-agent"/></svg><h3>Your agent sets it up</h3><p>Ask for "a word cloud after the intro" and your agent adds the slide. While you're live it can open and close it too.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ Q&A -->
+  <section id="qa">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kick">Q&amp;A and reactions</p>
+        <h2>Questions from the room, <span class="grad">and five reactions</span></h2>
+        <p class="sec-lede">Guests ask and upvote on a Questions tab, so the question most people want answered rises to the top. Five reactions sit under the slide and float up the big screen. Nothing the room writes reaches the big screen until you show it. Upvote or ask on the phone, tap a reaction on its Slide tab, and press Show on screen in the panel.</p>
+      </div>
+
+      <div class="present-wrap">
+        <div class="presenter livewin" aria-label="Presenter window with the Questions panel">
+          <div class="pr-top">
+            <b>Ship smaller</b>
+            <span class="pr-chip live"><i></i>Live <span class="mono">482 913</span> · 41 joined</span>
+            <span class="sp"></span>
+            <span class="pr-clock"><b>31:05</b></span>
+          </div>
+          <div class="pr-body">
+            <div class="pr-now">
+              <div class="pr-label"><span>On the big screen now</span><span>14 / 16</span></div>
+              <div class="pr-cur"><div class="frame" id="qaScreen"></div></div>
+              <div class="pr-label"><span>Notes</span><span></span></div>
+              <div class="pr-notes"><b>These are the only three.</b> Take one question here if the panel shows a clear leader.</div>
+            </div>
+            <div class="pr-side">
+              <div class="pr-label"><span>Questions</span><span>top first</span></div>
+              <div class="pp">
+                <div class="qp-tabs"><span class="on" id="qpOpen">Open 4</span><span id="qpDone">Answered 0</span><span>Hidden 0</span></div>
+                <ul class="qp-list" id="qpList"></ul>
+                <div class="qp-foot"><span>Questions open · names allowed</span><span id="qpRx">No reactions yet</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phone aud guest" aria-label="A guest's phone">
+          <div class="phone-screen aud-in">
+            <div class="aud-status">9:41</div>
+            <div class="aud-head"><span class="aud-logo">S</span><div><b>Ship smaller</b><small>Sam Rivera</small></div><span class="pr-chip"><i></i>Live</span></div>
+            <div class="g-pane" id="gPaneSlide" hidden>
+              <div class="aud-slide"><div class="frame" data-slide="rules"></div></div>
+              <div class="aud-wait"><b>Nothing to answer yet</b><span>Polls appear here when the presenter gets to them.</span></div>
+              <div class="rx-row" id="rxRow" role="group" aria-label="Reactions"></div>
+            </div>
+            <div class="g-pane" id="gPaneQs">
+              <div class="gq-card">
+                <div class="gq-h"><b>Questions</b><span id="gqCount">4 open</span></div>
+                <ul class="gq-list" id="gqList"></ul>
+                <form class="gq-ask" id="gqAsk"><input type="text" maxlength="200" placeholder="Ask a question" aria-label="Your question"><button type="submit">Ask</button></form>
+              </div>
+            </div>
+            <div class="g-tabs" role="tablist" aria-label="Guest page">
+              <button type="button" role="tab" data-qa="tab" data-id="slide" aria-selected="false">Slide</button>
+              <button type="button" role="tab" data-qa="tab" data-id="qs" aria-selected="true">Questions<span class="n" id="gTabN">4</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-row">
+        <div><svg><use href="#i-shield"/></svg><h3>You decide what goes on screen</h3><p>Show on screen puts one question over the slide, and a Q&amp;A slide lists the top five. Hide a question, or have new ones wait for your approval.</p></div>
+        <div><svg><use href="#i-people"/></svg><h3>Anonymous unless they say so</h3><p>Questions have no name by default. A guest can sign a single question, and you can turn names off.</p></div>
+        <div><svg><use href="#i-agent"/></svg><h3>Answer the rest later</h3><p>After the talk, <code>get_questions</code> gives your agent every question with its votes, so it can draft answers to the ones you didn't get to.</p></div>
       </div>
     </div>
   </section>
@@ -163,9 +501,9 @@
   <section id="how" class="band">
     <div class="wrap">
       <div class="sec-head">
-        <p class="kick">How it works</p>
+        <p class="kick">Your agent</p>
         <h2>Spend your time on what to say, <span class="grad">not on moving boxes</span></h2>
-        <p class="sec-lede">You bring the outline, the numbers and the point you want the room to leave with. Your agent picks a layout for each point and fills it in, so you can change the argument without touching alignment or fonts. Then it opens every slide in a browser and measures it, the way your audience will see it. Text that overflows, type that's too small and colours that fail contrast come back as findings, and the agent fixes them before you open the deck.</p>
+        <p class="sec-lede">You bring the outline, the numbers and the point you want the room to leave with. Your agent picks a layout for each point, adds the polls and word clouds you asked for, and checks every slide in a browser before you open the deck. After the talk, it reads back the votes and questions for your follow-up.</p>
       </div>
 
       <ol class="steps3">
@@ -393,341 +731,6 @@
     </div>
   </section>
 
-  <!-- ============================================================ PRESENT -->
-  <section id="present" class="night">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="kick">Presenter view</p>
-        <h2>A presenter view, <span class="grad">and your phone as the remote</span></h2>
-        <p class="sec-lede">Your notes, the next slide and a timer sit in one dark window that won't light up your face at the lectern. The timer turns amber with five minutes left, and running late is one key away from skipping the deep dives. Scan a QR code and your phone drives the same talk. Click the window and press the arrow keys or B, or tap Next on the phone.</p>
-      </div>
-
-      <div class="present-wrap">
-        <div class="presenter" id="presenter" tabindex="0" aria-label="Presenter window. Use the left and right arrow keys, and B to black out the screen.">
-          <div class="pr-top">
-            <b>Ship smaller</b><span class="pr-part" data-pr-part>Slice it</span>
-            <span class="sp"></span>
-            <span class="pr-clock"><b data-pr-clock>12:42</b><small><span data-pr-left>17:18</span> left of 30:00</small></span>
-            <span class="pr-chip"><i></i>Audience · Display 2</span>
-            <span class="pr-chip"><i></i>Sam's phone</span>
-          </div>
-          <div class="pr-body">
-            <div class="pr-now">
-              <div class="pr-label"><span>Now</span><span data-pr-count>8 / 16</span></div>
-              <div class="pr-cur"><div class="frame" data-pr-now></div><div class="pr-black" data-pr-black hidden>Screen blacked out · B to bring it back</div></div>
-              <div class="pctl pr-ctl">
-                <button type="button" data-pr="prev" aria-label="Previous slide"><svg><use href="#i-left"/></svg></button>
-                <button type="button" data-pr="next" aria-label="Next slide"><svg><use href="#i-right"/></svg></button>
-                <span class="bar"><i data-pr-bar></i></span>
-              </div>
-            </div>
-            <div class="pr-side">
-              <div class="pr-label"><span>Next</span><span data-pr-next-no>slide 9</span></div>
-              <div class="frame" data-pr-next></div>
-              <div class="pr-label"><span>Notes</span><span>A− A+</span></div>
-              <div class="pr-notes" data-pr-notes></div>
-            </div>
-          </div>
-          <div class="pr-bar">
-            <span class="kbtn"><svg><use href="#i-grid"/></svg>Overview<kbd>O</kbd></span>
-            <span class="kbtn on"><svg><use href="#i-notes"/></svg>Notes<kbd>N</kbd></span>
-            <span class="kbtn"><svg><use href="#i-skip"/></svg>Skip deep dives<kbd>D</kbd></span>
-            <button type="button" class="kbtn" data-pr="black"><svg><use href="#i-black"/></svg>Blackout<kbd>B</kbd></button>
-            <span class="sp"></span>
-            <span class="kbtn hl"><svg><use href="#i-phone"/></svg>Phone connected</span>
-          </div>
-        </div>
-
-        <div class="phone remote" aria-label="Phone remote">
-          <div class="phone-screen">
-            <div class="rm-top"><b>Ship smaller</b><span class="pr-chip"><i></i>Live</span></div>
-            <div class="rm-cur"><div class="frame" data-pr-now></div></div>
-            <div class="rm-next"><span>Next</span><div class="frame" data-pr-next></div></div>
-            <div class="rm-notes" data-pr-notes></div>
-            <div class="rm-ctl">
-              <button type="button" data-pr="prev" aria-label="Previous slide"><svg><use href="#i-left"/></svg></button>
-              <button type="button" class="rm-next-btn" data-pr="next">Next<svg><use href="#i-right"/></svg></button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ AUDIENCE -->
-  <section id="audience">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="kick">Audience join</p>
-        <h2>The room joins in <span class="grad">ten seconds</span></h2>
-        <p class="sec-lede">Guests point their camera at the QR code or type six digits. There's no app to install, no account and no name to give. Their phone shows your current slide and switches to a poll, a word box or the question list when you reach one.</p>
-      </div>
-
-      <ol class="journey4">
-        <li>
-          <div class="phone aud"><div class="phone-screen cam">
-            <div class="cam-view"><div class="cam-slide"><div class="qr" data-qr></div><div class="cam-lines"><i></i><i></i><i></i></div></div><span class="cam-chip"><svg><use href="#i-globe"/></svg>slideworks.live</span></div>
-            <div class="cam-shutter"><span>Photo</span><i></i></div>
-          </div></div>
-          <p class="when">0 s</p><h3>Point the camera</h3><p>The camera reads the QR code on the join slide. Tapping the link is the only tap.</p>
-        </li>
-        <li>
-          <div class="phone aud"><div class="phone-screen aud-in">
-            <div class="aud-status">9:41</div>
-            <div class="in-check"><svg><use href="#i-check"/></svg></div>
-            <b class="in-h">You're in</b>
-            <p class="in-p">Ship smaller<br>with Sam Rivera and <b>23</b> others</p>
-            <p class="in-small">No app, no account.<br>This page follows the slides by itself.</p>
-            <div class="aud-url"><svg><use href="#i-lock"/></svg>slideworks.live/482913</div>
-          </div></div>
-          <p class="when">~2 s</p><h3>You're in</h3><p>The page joins as it loads and shows how many others are here.</p>
-        </li>
-        <li>
-          <div class="phone aud"><div class="phone-screen aud-in">
-            <div class="aud-status">9:41</div>
-            <div class="aud-head"><span class="aud-logo">S</span><div><b>Ship smaller</b><small>Sam Rivera</small></div><span class="pr-chip"><i></i>Live</span></div>
-            <div class="aud-slide"><div class="frame" data-slide="bullets"></div></div>
-            <div class="aud-prog"><span>Slide 3</span><i><b style="width:19%"></b></i><span>16</span></div>
-            <div class="aud-wait"><span class="dots3"><i></i><i></i><i></i></span><b>Nothing to answer yet</b><span>Polls appear here when the presenter gets to them. Keep this page open.</span></div>
-            <div class="aud-foot"><span>Guest · no account</span><span>Privacy</span></div>
-          </div></div>
-          <p class="when">from then</p><h3>Follow along</h3><p>The phone shows the slide on screen, so people at the back can read it.</p>
-        </li>
-        <li>
-          <div class="phone aud"><div class="phone-screen aud-in">
-            <div class="aud-status">9:41</div>
-            <div class="aud-head"><span class="aud-logo">S</span><div><b>Ship smaller</b><small>Sam Rivera</small></div><span class="pr-chip"><i></i>Live</span></div>
-            <div class="poll">
-              <span class="pill later">Poll</span>
-              <b>How big was your last merge request?</b>
-              <div class="poll-opts" id="pollOpts">
-                <button type="button" data-v="38">Under 50 lines</button>
-                <button type="button" data-v="31">50 to 200 lines</button>
-                <button type="button" data-v="19">200 to 1,000 lines</button>
-                <button type="button" data-v="12">Don't ask</button>
-              </div>
-            </div>
-            <div class="aud-foot"><span>Guest · no account</span><span>Privacy</span></div>
-          </div></div>
-          <p class="when">on an interactive slide</p><h3>Something to do</h3><p>A poll appears when you reach it, and the slide comes back after. Tap an answer to try it.</p>
-        </li>
-      </ol>
-
-      <div class="screens2">
-        <figure>
-          <div class="frame" data-live="join"></div>
-          <figcaption><b>The join slide.</b> Your agent adds it like any other slide. The code and the QR code fill in when you go live, and anyone who arrives early waits in a lobby.</figcaption>
-        </figure>
-        <figure>
-          <div class="frame" data-slide="compare" data-joinbar></div>
-          <figcaption><b>The join bar.</b> Turn it on and every slide carries a small QR code and the code while you're live, so latecomers can still join.</figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ POLLS -->
-  <section id="polls" class="band">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="kick">Live polls</p>
-        <h2>Ask the room, <span class="grad">and watch the bars move</span></h2>
-        <p class="sec-lede">A poll is a slide your agent writes like any other. When you reach it, phones show the question, and the bars on the big screen grow as answers arrive. Tap an option on the phone, then close the poll, show the answer or start a new round.</p>
-      </div>
-
-      <div class="present-wrap">
-        <div class="presenter livewin" aria-label="Presenter window with the poll panel">
-          <div class="pr-top">
-            <b>Ship smaller</b>
-            <span class="pr-chip live"><i></i>Live <span class="mono">482 913</span> · 41 joined</span>
-            <span class="sp"></span>
-            <span class="pr-clock"><b>12:40</b></span>
-          </div>
-          <div class="pr-body">
-            <div class="pr-now">
-              <div class="pr-label"><span>On the big screen now</span><span>poll</span></div>
-              <div class="pr-cur"><div class="frame" data-live="poll" id="pollScreen"></div></div>
-              <div class="pr-label"><span>Notes</span><span></span></div>
-              <div class="pr-notes"><b>Give it twenty seconds.</b> Read the two biggest bars out loud, then show the answer.</div>
-            </div>
-            <div class="pr-side">
-              <div class="pr-label"><span>Poll</span><span>pick one · results live</span></div>
-              <div class="pp" aria-live="polite">
-                <div class="pp-head"><span class="pp-state" id="ppState">Open</span><span id="ppRound">round 1</span></div>
-                <div class="pp-n"><b id="ppN">0</b><span>answers</span><span class="rate" id="ppRate"></span></div>
-                <ul class="pp-rows" id="ppRows"></ul>
-                <p class="pp-note" id="ppNote"></p>
-                <div class="pp-btns">
-                  <button type="button" class="pbtn danger" data-poll="close">Close poll</button>
-                  <button type="button" class="pbtn primary" data-poll="answer" hidden>Show the answer</button>
-                  <button type="button" class="pbtn" data-poll="round" hidden>New round</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="phone aud guest" aria-label="A guest's phone">
-          <div class="phone-screen aud-in">
-            <div class="aud-status">9:41</div>
-            <div class="aud-head"><span class="aud-logo">S</span><div><b>Ship smaller</b><small>Sam Rivera</small></div><span class="pr-chip"><i></i>Live</span></div>
-            <div class="poll gp">
-              <span class="gp-kick">Poll · pick one</span>
-              <b>Which change gets its first review fastest?</b>
-              <div class="gp-opts" id="gpOpts" role="group" aria-label="Options"></div>
-              <div class="gp-msg" id="gpMsg" aria-live="polite"></div>
-            </div>
-            <div class="aud-foot"><span>Private · Sam sees totals only</span><span>Privacy</span></div>
-            <div class="aud-url"><svg><use href="#i-lock"/></svg>slideworks.live/482913</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="feature-row">
-        <div><svg><use href="#i-people"/></svg><h3>One answer or several</h3><p>Up to 8 options, pick one or pick a few. Mark a correct answer and reveal it after you close the poll. Every round is kept.</p></div>
-        <div><svg><use href="#i-lock"/></svg><h3>Honest answers</h3><p>Guests have no name and no account, and nobody can see who picked what. Show results live, once a guest has answered, or after the poll closes.</p></div>
-        <div><svg><use href="#i-agent"/></svg><h3>Your agent reads the results</h3><p>After the talk, <code>get_poll_results</code> gives your agent each round's counts and response rate, ready for the follow-up email.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ WORD CLOUD + OPEN TEXT (SW-8) -->
-  <section id="words">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="kick">Word clouds and open text</p>
-        <h2>Let the room answer <span class="grad">in its own words</span></h2>
-        <p class="sec-lede">Ask an open question and each guest sends up to three words. The words people repeat grow on the big screen as they arrive. For longer replies, an open-text slide shows each answer as a card on a wall. Type a word on the phone and send it to add yours.</p>
-      </div>
-
-      <div class="present-wrap">
-        <div class="presenter livewin" aria-label="Presenter window with the word cloud panel">
-          <div class="pr-top">
-            <b>Ship smaller</b>
-            <span class="pr-chip live"><i></i>Live <span class="mono">482 913</span> · 41 joined</span>
-            <span class="sp"></span>
-            <span class="pr-clock"><b>03:12</b></span>
-          </div>
-          <div class="pr-body">
-            <div class="pr-now">
-              <div class="pr-label"><span>On the big screen now</span><span>word cloud</span></div>
-              <div class="pr-cur"><div class="frame" data-live="cloud" id="cloudScreen"></div></div>
-              <div class="pr-label"><span>Notes</span><span></span></div>
-              <div class="pr-notes"><b>Leave it open for a minute.</b> Read the three biggest words, then ask who sent the smallest one.</div>
-            </div>
-            <div class="pr-side">
-              <div class="pr-label"><span>Word cloud</span><span>results live</span></div>
-              <div class="pp" aria-live="polite">
-                <div class="pp-head"><span class="pp-state" id="wcState">Open</span><span id="wcRound">round 1</span></div>
-                <div class="pp-n"><b id="wcN">0</b><span>guests sent words</span></div>
-                <ul class="wc-rows" id="wcRows"></ul>
-                <p class="pp-note">Hide takes a word off every screen. Bad words never get this far.</p>
-                <div class="pp-btns">
-                  <button type="button" class="pbtn danger" data-wc="close">Close</button>
-                  <button type="button" class="pbtn" data-wc="round" hidden>New round</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="phone aud guest" aria-label="A guest's phone">
-          <div class="phone-screen aud-in">
-            <div class="aud-status">9:41</div>
-            <div class="aud-head"><span class="aud-logo">S</span><div><b>Ship smaller</b><small>Sam Rivera</small></div><span class="pr-chip"><i></i>Live</span></div>
-            <div class="poll gp wc-card">
-              <span class="gp-kick">Word cloud · up to 3 words</span>
-              <b>One word for how your last release felt</b>
-              <form class="gq-ask" id="wcAsk"><input type="text" maxlength="25" placeholder="A word" aria-label="Your word"><button type="submit">Send</button></form>
-              <div class="wc-mine" id="wcMine"></div>
-              <div class="gp-msg" id="wcMsg" aria-live="polite"></div>
-            </div>
-            <div class="aud-foot"><span>Guest · no account</span><span>Privacy</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="screens2">
-        <figure>
-          <div class="frame" data-live="wall"></div>
-          <figcaption><b>The open-text wall.</b> Each guest sends one answer of up to 200 characters. Answers keep their number when a guest edits them, so you can say "number 4" out loud.</figcaption>
-        </figure>
-        <div class="feature-col">
-          <div><svg><use href="#i-shield"/></svg><h3>A filter for bad words</h3><p>A profane word is refused before it's stored. Anything else you don't want on screen, you hide with one key.</p></div>
-          <div><svg><use href="#i-people"/></svg><h3>Same word, bigger word</h3><p>"Scary", "scary " and "SCARY" count as one word, so the cloud shows what the room agrees on.</p></div>
-          <div><svg><use href="#i-agent"/></svg><h3>Your agent sets it up</h3><p>Ask for "a word cloud after the intro" and your agent adds the slide. While you're live it can open and close it too.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ Q&A -->
-  <section id="qa" class="band">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="kick">Q&amp;A and reactions</p>
-        <h2>Questions from the room, <span class="grad">and five reactions</span></h2>
-        <p class="sec-lede">Guests ask and upvote on a Questions tab, so the question most people want answered rises to the top. Five reactions sit under the slide and float up the big screen. Nothing the room writes reaches the big screen until you show it. Upvote or ask on the phone, tap a reaction on its Slide tab, and press Show on screen in the panel.</p>
-      </div>
-
-      <div class="present-wrap">
-        <div class="presenter livewin" aria-label="Presenter window with the Questions panel">
-          <div class="pr-top">
-            <b>Ship smaller</b>
-            <span class="pr-chip live"><i></i>Live <span class="mono">482 913</span> · 41 joined</span>
-            <span class="sp"></span>
-            <span class="pr-clock"><b>31:05</b></span>
-          </div>
-          <div class="pr-body">
-            <div class="pr-now">
-              <div class="pr-label"><span>On the big screen now</span><span>14 / 16</span></div>
-              <div class="pr-cur"><div class="frame" id="qaScreen"></div></div>
-              <div class="pr-label"><span>Notes</span><span></span></div>
-              <div class="pr-notes"><b>These are the only three.</b> Take one question here if the panel shows a clear leader.</div>
-            </div>
-            <div class="pr-side">
-              <div class="pr-label"><span>Questions</span><span>top first</span></div>
-              <div class="pp">
-                <div class="qp-tabs"><span class="on" id="qpOpen">Open 4</span><span id="qpDone">Answered 0</span><span>Hidden 0</span></div>
-                <ul class="qp-list" id="qpList"></ul>
-                <div class="qp-foot"><span>Questions open · names allowed</span><span id="qpRx">No reactions yet</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="phone aud guest" aria-label="A guest's phone">
-          <div class="phone-screen aud-in">
-            <div class="aud-status">9:41</div>
-            <div class="aud-head"><span class="aud-logo">S</span><div><b>Ship smaller</b><small>Sam Rivera</small></div><span class="pr-chip"><i></i>Live</span></div>
-            <div class="g-pane" id="gPaneSlide" hidden>
-              <div class="aud-slide"><div class="frame" data-slide="rules"></div></div>
-              <div class="aud-wait"><b>Nothing to answer yet</b><span>Polls appear here when the presenter gets to them.</span></div>
-              <div class="rx-row" id="rxRow" role="group" aria-label="Reactions"></div>
-            </div>
-            <div class="g-pane" id="gPaneQs">
-              <div class="gq-card">
-                <div class="gq-h"><b>Questions</b><span id="gqCount">4 open</span></div>
-                <ul class="gq-list" id="gqList"></ul>
-                <form class="gq-ask" id="gqAsk"><input type="text" maxlength="200" placeholder="Ask a question" aria-label="Your question"><button type="submit">Ask</button></form>
-              </div>
-            </div>
-            <div class="g-tabs" role="tablist" aria-label="Guest page">
-              <button type="button" role="tab" data-qa="tab" data-id="slide" aria-selected="false">Slide</button>
-              <button type="button" role="tab" data-qa="tab" data-id="qs" aria-selected="true">Questions<span class="n" id="gTabN">4</span></button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="feature-row">
-        <div><svg><use href="#i-shield"/></svg><h3>You decide what goes on screen</h3><p>Show on screen puts one question over the slide, and a Q&amp;A slide lists the top five. Hide a question, or have new ones wait for your approval.</p></div>
-        <div><svg><use href="#i-people"/></svg><h3>Anonymous unless they say so</h3><p>Questions have no name by default. A guest can sign a single question, and you can turn names off.</p></div>
-        <div><svg><use href="#i-agent"/></svg><h3>Answer the rest later</h3><p>After the talk, <code>get_questions</code> gives your agent every question with its votes, so it can draft answers to the ones you didn't get to.</p></div>
-      </div>
-    </div>
-  </section>
-
   <!-- ============================================================ ROADMAP -->
   <section id="roadmap">
     <div class="wrap">
@@ -740,16 +743,16 @@
         <div class="rm-col rm-built">
           <h3><span class="pill ok"><span class="d"></span>Ready to use</span></h3>
           <div class="rm-grid">
-            <article><b>Agent-built decks</b><p>An MCP server with 38 tools, a deck library, sharing, an activity log and the player.</p></article>
-            <article><b>26 layouts</b><p>From title and bullets to flow, bars, stack, levels, loop, links and video.</p></article>
-            <article><b>Visual check</b><p>Your agent renders and measures every slide, and fixes what doesn't fit.</p></article>
-            <article><b>Templates and palettes</b><p>Talk, workshop and update. Cobalt, Ember, Plum and Midnight. Link preview cards.</p></article>
-            <article><b>Custom templates</b><p>Your fonts, logos and palette in an editor, with versions and sharing.</p></article>
             <article><b>Presenter view and phone remote</b><p>Notes, next slide, timer, overview, blackout and skipping deep dives.</p></article>
             <article><b>Audience join</b><p>A QR code or six digits, with no app and no account.</p></article>
             <article><b>Live polls</b><p>Live bars, rounds and an optional correct answer.</p></article>
             <article><b>Word clouds and open text</b><p>The room's own words, with a filter for bad ones.</p></article>
             <article><b>Q&amp;A and reactions</b><p>Ask, upvote, show a question on screen, and five reactions.</p></article>
+            <article><b>Agent-built decks</b><p>An MCP server with 38 tools, a deck library, sharing, an activity log and the player.</p></article>
+            <article><b>26 layouts</b><p>From title and bullets to flow, bars, stack, levels, loop, links and video.</p></article>
+            <article><b>Visual check</b><p>Your agent renders and measures every slide, and fixes what doesn't fit.</p></article>
+            <article><b>Templates and palettes</b><p>Talk, workshop and update. Cobalt, Ember, Plum and Midnight. Link preview cards.</p></article>
+            <article><b>Custom templates</b><p>Your fonts, logos and palette in an editor, with versions and sharing.</p></article>
           </div>
         </div>
         <div class="rm-col">

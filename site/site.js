@@ -127,6 +127,30 @@
     setPaused(paused);
   }
 
+  /* ---------------------------------------------------------------- hero: the guest phone's reactions float up the deck */
+  {
+    const RX = ['👍', '❤️', '😂', '😮', '👏'];
+    const row = $('#heroRxRow'), layer = $('#heroRx');
+    row.innerHTML = RX.map((e, i) => `<button type="button" data-i="${i}" aria-label="React with ${e}">${e}</button>`).join('');
+    const float = e => {
+      const sp = document.createElement('span');
+      sp.textContent = e;
+      sp.style.right = (4 + Math.random() * 14) + '%';
+      layer.append(sp);
+      setTimeout(() => sp.remove(), 2700);
+    };
+    row.addEventListener('click', ev => { const b = ev.target.closest('button'); if (b) float(RX[+b.dataset.i]); });
+    // The rest of the room reacts now and then while the hero is on screen.
+    let timer = 0, visible = false;
+    const tick = () => {
+      clearTimeout(timer);
+      if (!visible || reduced || document.hidden) return;
+      timer = setTimeout(() => { float(RX[Math.floor(Math.random() * RX.length)]); tick(); }, 1800 + Math.random() * 2600);
+    };
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; tick(); }, { threshold: .25 }).observe(layer.parentElement);
+    document.addEventListener('visibilitychange', tick);
+  }
+
   /* ---------------------------------------------------------------- live-room slides: join and poll */
   // A QR-like pattern (decorative): three finder squares and seeded modules.
   const QR = (() => {

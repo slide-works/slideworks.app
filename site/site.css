@@ -716,3 +716,23 @@ button.kbtn:hover { border-color: #3b4a85; }
 .wc-card .gp-msg { margin-top: 2px; }
 .wc-rows li { padding: 4px 8px; }
 .term { max-height: 38rem; }
+
+/* ---------- hero: live chip, floating reactions and the guest phone ---------- */
+.bar-live { flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 999px; background: var(--color-ok-soft); color: var(--color-ok); font: 600 11.5px/1.4 var(--font-sans); white-space: nowrap; }
+.bar-live i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; animation: pulse 2.2s infinite; }
+.bar-live b { color: inherit; font-weight: 700; }
+@media (max-width: 640px) { .bar-live { display: none; } }
+.player-stage { position: relative; }
+.hero-rx { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.hero-rx span { position: absolute; bottom: 6%; font-size: clamp(20px, 2.6vw, 34px); line-height: 1; animation: hero-rx 2.6s ease-out forwards; }
+@keyframes hero-rx { from { transform: translateY(0) scale(.6); opacity: 0; } 15% { transform: translateY(-24px) scale(1); opacity: 1; } 75% { opacity: 1; } to { transform: translateY(-280px); opacity: 0; } }
+.hero-phone { width: clamp(170px, 18vw, 240px); }
+.hero-phone .phone-screen.aud-in { gap: 8px; padding: 10px; }
+.hero-phone .aud-head b { font-size: 11.5px; }
+.hp-q { flex: 1; display: grid; align-content: start; gap: 4px; padding: 10px; border-radius: 12px; background: rgb(255 255 255 / .06); font-size: 10.5px; line-height: 1.4; color: #a3abc6; text-align: left; }
+.hp-q b { color: #fff; font-size: 12px; }
+.hp-q ol { list-style: none; margin: 2px 0 0; padding: 0; display: grid; gap: 6px; }
+.hp-q li { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 7px; align-items: center; color: #e2e8f0; }
+.hp-q li i { display: grid; place-items: center; height: 24px; border-radius: 6px; background: #1b2130; color: #fff; font: 700 10.5px/1 var(--font-mono); font-style: normal; }
+.hero-phone .rx-row { gap: 4px; }
+.hero-phone .rx-row button { height: 32px; line-height: 32px; font-size: 15px; border-radius: 9px; }
