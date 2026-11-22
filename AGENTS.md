@@ -12,7 +12,7 @@ The problem SlideWorks is built around: a room drifts after about seven minutes.
 - `#audience`: every step between a guest and your first question loses people.
 - `#polls`: "hands up" only hears from a few.
 - `#words`: multiple choice only gives back the answers you thought of.
-- `#qa`: most questions never get asked.
+- `#qa`: most questions never get asked, and the ones that are wait until the end.
 
 A new section gets its own problem sentence in the same way.
 
