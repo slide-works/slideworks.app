@@ -40,6 +40,19 @@
     prog.style.width = ((i + 1) / N * 100) + '%';
     s.append(prog);
   });
+  // Layouts added after the sample deck: the same chrome, with no slide number.
+  const more = [...$('#more').content.children].filter(el => el.classList.contains('sw'));
+  more.forEach(s => {
+    const part = +s.dataset.part;
+    const nav = document.createElement('div');
+    nav.className = 'snav';
+    nav.innerHTML = PARTS.map((p, k) => `<span class="${k < part ? 'past' : k === part ? 'on' : ''}">${p}</span>`).join('');
+    s.prepend(nav);
+    const foot = document.createElement('div');
+    foot.className = 'sfoot';
+    foot.innerHTML = `<span>${DECK} · Sam Rivera</span>`;
+    s.append(foot);
+  });
   const byLayout = name => slides.findIndex(s => s.dataset.layout === name);
   const stepsOf = i => slides[i].querySelectorAll('.f').length;
 
@@ -132,6 +145,7 @@
     live[el.dataset.live] = el;
   });
   $$('[data-qr]').forEach(q => q.innerHTML = QR);
+  more.forEach(s => s.querySelectorAll('[data-qr]').forEach(q => q.innerHTML = QR));
   $$('[data-live]').forEach(f => mountEl(f, live[f.dataset.live]));
 
   /* ---------------------------------------------------------------- mounts by layout */
@@ -147,24 +161,28 @@
     const lbFrame = $('#lbFrame');
     const lbCap = $('#lbCap');
     let cur = 0;
+    const all = [...slides, ...more];
     const slotsHtml = s => s.dataset.slots.split(' · ').map(x => `<span class="slot">${x}</span>`).join('');
-    slides.forEach((s, i) => {
+    all.forEach((s, i) => {
       const b = document.createElement('button');
       b.type = 'button';
       b.className = 'g-item rv';
-      b.setAttribute('aria-label', `Slide ${i + 1}, the ${s.dataset.layout} layout. Open it larger.`);
-      b.append(newFrame(i));
+      b.setAttribute('aria-label', `The ${s.dataset.layout} layout. Open it larger.`);
+      const f = document.createElement('div');
+      f.className = 'frame';
+      mountEl(f, s);
+      b.append(f);
       const m = document.createElement('div');
       m.className = 'g-meta';
       m.innerHTML = `<span class="no">${String(i + 1).padStart(2, '0')}</span><code class="layout">${s.dataset.layout}</code>` + slotsHtml(s);
       b.append(m);
       b.addEventListener('click', () => open(i));
-      gallery.append(b);
+      (i < N ? gallery : $('#gallery2')).append(b);
     });
     function show(i) {
-      cur = (i + N) % N;
-      mount(lbFrame, cur);
-      const s = slides[cur];
+      cur = (i + all.length) % all.length;
+      mountEl(lbFrame, all[cur]);
+      const s = all[cur];
       lbCap.innerHTML = `<code class="layout">${s.dataset.layout}</code>${slotsHtml(s)}<span class="notes">Notes: ${s.dataset.notes}</span>`;
     }
     function open(i) { show(i); if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', ''); }
@@ -191,7 +209,7 @@
     const feed = $('#dpFeed');
     const dpFrame = $('#dpFrame');
     const empty = dpFrame.innerHTML;
-    const title = $('#dpTitle'), count = $('#dpCount'), share = $('#dpShare'), reject = $('#dpReject');
+    const title = $('#dpTitle'), count = $('#dpCount'), share = $('#dpShare'), reject = $('#dpReject'), warn = $('#dpWarn');
     const L = {
       c: t => ({ t: `<span class="c">${t}</span>` }),
       call: (t, then) => ({ type: true, t: `<span class="call">→ ${t}</span>`, then }),
@@ -217,7 +235,7 @@
     const SCRIPT = [
       L.c(`# brief: "20-minute offsite talk on shipping smaller, in four parts"`),
       L.call('list_layouts()'),
-      L.ok('18 layouts: title, divider, bullets, big-number, gantt, quote, practice, compare, table, chart … join, poll (each with its slot schema)'),
+      L.ok('31 layouts: title, statement, bullets, compare, chart, flow, bars, stack … poll, word-cloud, qa (each with its slots)'),
       L.call(`create_deck({ title: ${s('"Ship smaller"')}, template: ${s('"talk"')}, palette: ${s('"cobalt"')},\n    parts: [${s('"The cost"')}, ${s('"Slice it"')}, ${s('"Ship it"')}, ${s('"Make it stick"')}] })`),
       L.ok('deck 7Kq2 · private · /d/7Kq2/ship-smaller', () => { title.textContent = DECK; count.textContent = '0 slides'; log('<b>Claude</b> via MCP · created the deck'); }),
       L.call(`add_slide({ layout: ${s('"title"')}, title: ${s('"Ship smaller"')}, stamp: ${s('"draft"')}, … })`),
@@ -225,13 +243,17 @@
       L.call(`add_slide({ layout: ${s('"bullets"')}, part: 1, reveal: ${s('"one-by-one"')}, items: [ … ] })`),
       L.ok('slide 3 · steps 4', add(2)),
       L.call(`add_slide({ layout: ${s('"compare"')}, part: 2,\n    left: { tag: ${s('"Failure mode"')}, title: ${s('"Slice by layer"')}, items: [ … ] } })`),
-      L.err('rejected: compare.right is required { tag, title, items[] }', () => { reject.hidden = false; }),
+      L.err('refused: compare.right is required { tag, title, items[] }', () => { reject.hidden = false; }),
       L.call(`add_slide({ layout: ${s('"compare"')}, part: 2, left: { … },\n    right: { tag: ${s('"Success mode"')}, title: ${s('"Slice by customer action"')}, items: [ … ] } })`),
       L.ok('slide 9', () => { reject.hidden = true; add(8)(); }),
-      L.call(`add_slide({ layout: ${s('"chart"')}, part: 3, chart: { type: ${s('"bar"')}, unit: ${s('"wk"')}, series: [ … ] } })`),
-      L.ok('slide 12', add(11)),
-      L.c('# … 12 more slides, then speaker notes for all 16'),
-      { t: '<span class="ok">← slides 2, 4–8, 10, 11, 13–16 · notes set</span>', then: fillRest },
+      L.call(`add_slides({ deck: ${s('"7Kq2"')}, slides: [ { layout: ${s('"quote"')}, … }, { layout: ${s('"chart"')}, … },\n    … 11 more, each with its notes ] })`),
+      { t: '<span class="ok">← 13 slides stored: 2, 4–8, 10–16</span>', then: fillRest },
+      L.call(`check_deck({ deck: ${s('"7Kq2"')} })`),
+      L.err('1 warning · slide 12 · smallText: axis labels drawn under 20 px', () => { mount(dpFrame, 11); warn.hidden = false; log('Check · slide 12 · small text'); }),
+      L.call(`update_slide({ deck: ${s('"7Kq2"')}, slide: 12, chart: { … } })`),
+      L.ok('slide 12 · revision 2'),
+      L.call(`check_deck({ deck: ${s('"7Kq2"')} })`),
+      L.ok('no findings on 16 slides', () => { warn.hidden = true; log('<b>Claude</b> via MCP · fixed slide 12'); }),
       L.call(`set_sharing({ deck: ${s('"7Kq2"')}, level: ${s('"link"')} })`),
       L.ok('sharing: link · logged to activity', () => { share.hidden = false; log('<b>Claude</b> via MCP · shared with anyone with the link'); }),
       L.call(`get_deck_url({ deck: ${s('"7Kq2"')}, slide: 1 })`),
@@ -246,7 +268,7 @@
         if (!fast) await sleep(110);
       }
       count.textContent = N + ' slides';
-      log('<b>Claude</b> via MCP · added 12 slides and notes');
+      log('<b>Claude</b> via MCP · added 13 slides and notes');
     }
     let run = 0, fast = false;
     function reset() {
@@ -256,7 +278,7 @@
       dpFrame.innerHTML = empty;
       title.textContent = 'Waiting for the agent…';
       count.textContent = '0 slides';
-      share.hidden = true; reject.hidden = true; added = 0;
+      share.hidden = true; reject.hidden = true; warn.hidden = true; added = 0;
     }
     async function play(instant) {
       const me = ++run;
@@ -479,7 +501,7 @@
     new IntersectionObserver(([e]) => { visible = e.isIntersecting; schedule(); }, { threshold: .2 }).observe(slide.parentElement);
   }
 
-  /* ---------------------------------------------------------------- Q&A and reactions (SW-9, designed) */
+  /* ---------------------------------------------------------------- Q&A and reactions (SW-9) */
   {
     const sec = $('#qa');
     const RX = ['👍', '❤️', '😂', '😮', '👏'];
@@ -573,6 +595,188 @@
     new IntersectionObserver(([e]) => { visible = e.isIntersecting; schedule(); }, { threshold: .2 }).observe(slide.parentElement);
   }
 
+  /* ---------------------------------------------------------------- template editor (SW-50) */
+  {
+    const ed = $('#editor');
+    const prev = $('#edPreview');
+    const pairs = $('#edPairs'), check = $('#edCheck'), pub = $('#edPublish');
+    // The made-up Northwind logo goes in the corner of each preview slide. The draft stamp would sit under it.
+    $$('.sw', prev).forEach(sl => {
+      $$('.stamp', sl).forEach(x => x.remove());
+      sl.insertAdjacentHTML('afterbegin', '<div class="nw-mark"><i></i>Northwind</div>');
+    });
+    const ACC = { teal: '#0f766e', forest: '#3f6212', crimson: '#b4233c', sky: '#7dd3fc' };
+    const PAPER = '#f6f8f7', INK = '#0f1f1c', WHITE = '#ffffff', BAR = 4.5;
+    const lum = hex => {
+      const c = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255).map(v => v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4);
+      return .2126 * c[0] + .7152 * c[1] + .0722 * c[2];
+    };
+    const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m); return (x + .05) / (y + .05); };
+    const tabs = $$('.ed-tabs [role="tab"]', ed);
+    tabs.forEach(t => t.addEventListener('click', () => {
+      tabs.forEach(x => x.setAttribute('aria-selected', x === t));
+      $$('.ed-pane', ed).forEach(pn => pn.hidden = pn.dataset.pane !== t.dataset.ed);
+    }));
+    function radios(sel, key, apply) {
+      const bs = $$(sel, ed);
+      bs.forEach(b => b.addEventListener('click', () => {
+        bs.forEach(x => x.setAttribute('aria-checked', x === b));
+        apply(b.dataset[key]);
+      }));
+    }
+    radios('[data-font]', 'font', v => { prev.dataset.font = v; draw(); });
+    radios('[data-acc]', 'acc', v => { prev.dataset.brand = v; draw(); });
+    const TICK = '<svg><use href="#i-check"/></svg>', CROSS = '<svg><use href="#i-x"/></svg>';
+    function draw() {
+      const acc = ACC[prev.dataset.brand];
+      const serif = prev.dataset.font === 'serif';
+      const list = [
+        { name: 'Accent text on paper', fg: acc, bg: PAPER },
+        { name: 'White text on the accent', fg: WHITE, bg: acc },
+        { name: 'Body text on paper', fg: INK, bg: PAPER },
+      ].map(x => ({ ...x, r: ratio(x.fg, x.bg) }));
+      pairs.innerHTML = list.map(x => `<li class="${x.r >= BAR ? 'good' : 'bad'}"><span class="chip2" style="color:${x.fg};background:${x.bg}">Aa</span><span>${x.name}</span><em>${x.r.toFixed(1)}:1 ${x.r >= BAR ? '✓' : '✗'}</em></li>`).join('');
+      const worst = list.reduce((a, b) => (b.r < a.r ? b : a));
+      const contrastOk = worst.r >= BAR;
+      const items = [
+        [true, 'Fonts are yours to serve', serif ? 'You confirmed the licence for Fraunces.' : 'Plus Jakarta Sans is built in.'],
+        [true, 'Fonts fit the layouts', serif ? 'Fraunces measures 0.55 em, inside 0.45 to 0.70.' : 'Built-in fonts always fit.'],
+        [contrastOk, 'Every colour pair passes contrast', contrastOk ? `The lowest is ${worst.r.toFixed(1)}:1.` : `${worst.name} is ${worst.r.toFixed(1)}:1. It needs ${BAR}:1.`],
+        [true, 'Logos for light and dark slides', 'logo.svg and logo-dark.svg'],
+      ];
+      check.innerHTML = items.map(([ok, h, sm]) => `<li class="${ok ? '' : 'bad'}">${ok ? TICK : CROSS}<span>${h}<small>${sm}</small></span></li>`).join('')
+        + (contrastOk ? '<li class="ed-verdict">Ready to publish</li>' : '<li class="ed-verdict bad">Fix 1 item to publish</li>');
+      pub.classList.toggle('off', !contrastOk);
+    }
+    draw();
+  }
+
+  /* ---------------------------------------------------------------- word cloud (SW-8) */
+  {
+    const sec = $('#words');
+    const box = $('#cloudScreen [data-wc-box]');
+    const rows = $('#wcRows'), mineEl = $('#wcMine'), msg = $('#wcMsg'), form = $('#wcAsk'), input = $('input', form);
+    const SEED = { relieved: 9, stressful: 7, slow: 6, scary: 5, fine: 4, late: 4, smooth: 3, chaotic: 3, proud: 2, endless: 2, tired: 2, quick: 1, messy: 1, calm: 1 };
+    const POOL = Object.entries(SEED);
+    const BLOCKED = new Set(['damn', 'crap', 'hell']);
+    const INKS = ['var(--t-acc)', 'var(--t-acc-ink)', 'var(--t-ink)', 'var(--t-dd)', 'var(--t-muted)'];
+    const JOINED = 41;
+    let words, mine, guests, open, round = 1, timer = 0, visible = false;
+    const spans = new Map();
+    const key = w => w.trim().replace(/\s+/g, ' ').toLowerCase();
+
+    function layout() {
+      const W = box.offsetWidth || 1680, H = box.offsetHeight || 560;
+      const shown = [...words.values()].filter(w => !w.hidden && w.count > 0).sort((a, b) => b.count - a.count || a.k.localeCompare(b.k));
+      const max = shown.length ? shown[0].count : 1;
+      const placed = [];
+      const out = new Map();
+      shown.forEach((w, i) => {
+        const size = Math.round(44 + (w.count / max) * 116);
+        const bw = w.text.length * size * .6 + 24, bh = size * 1.05 + 10;
+        for (let t = 0; t < 400; t += .3) {
+          const x = W / 2 + Math.cos(t) * t * 9, y = H / 2 + Math.sin(t) * t * 5;
+          const r = { l: x - bw / 2, r: x + bw / 2, t: y - bh / 2, b: y + bh / 2 };
+          if (r.l < 0 || r.r > W || r.t < 0 || r.b > H) continue;
+          if (placed.some(q => r.l < q.r && r.r > q.l && r.t < q.b && r.b > q.t)) continue;
+          placed.push(r);
+          out.set(w.k, { x, y, size, ink: INKS[i % INKS.length] });
+          break;
+        }
+      });
+      return out;
+    }
+    function draw() {
+      const pos = layout();
+      for (const [k, sp] of spans) if (!pos.has(k)) { sp.remove(); spans.delete(k); }
+      for (const [k, p] of pos) {
+        let sp = spans.get(k);
+        if (!sp) {
+          sp = document.createElement('span');
+          sp.className = 'new';
+          sp.textContent = words.get(k).text;
+          box.append(sp);
+          spans.set(k, sp);
+          setTimeout(() => sp.classList.remove('new'), 600);
+        }
+        Object.assign(sp.style, { left: p.x + 'px', top: p.y + 'px', fontSize: p.size + 'px', color: p.ink });
+      }
+      // the presenter's panel
+      const list = [...words.values()].sort((a, b) => b.count - a.count || a.k.localeCompare(b.k)).slice(0, 5);
+      rows.innerHTML = list.map(w => `<li class="${w.hidden ? 'hid' : ''}"><span>${esc(w.text)}</span><em>${w.count}</em><button type="button" class="pbtn sm" data-wc="${w.hidden ? 'restore' : 'hide'}" data-k="${esc(w.k)}">${w.hidden ? 'Restore' : 'Hide'}</button></li>`).join('')
+        || '<li><span>No words yet.</span></li>';
+      $('#wcN').textContent = guests;
+      const st = $('#wcState');
+      st.textContent = open ? 'Open' : 'Closed';
+      st.classList.toggle('closed', !open);
+      $('#wcRound').textContent = 'round ' + round;
+      $('[data-wc="close"]', sec).hidden = !open;
+      $('[data-wc="round"]', sec).hidden = open;
+      // the guest's phone
+      mineEl.innerHTML = mine.map(m => `<span>${esc(words.get(m) ? words.get(m).text : m)}</span>`).join('');
+      input.disabled = !open || mine.length >= 3;
+      input.placeholder = !open ? 'Closed' : mine.length >= 3 ? 'Three words sent' : 'A word';
+    }
+    function add(text) {
+      const k = key(text);
+      const w = words.get(k);
+      if (w) w.count++; else words.set(k, { k, text: text.trim().replace(/\s+/g, ' '), count: 1, hidden: false });
+      return k;
+    }
+    function start(seeded) {
+      words = new Map();
+      mine = [];
+      guests = 0;
+      open = true;
+      spans.forEach(sp => sp.remove());
+      spans.clear();
+      if (seeded) {
+        for (const [w, n] of POOL) for (let i = 0; i < (reduced ? n : Math.ceil(n / 2)); i++) add(w);
+        guests = reduced ? 31 : 16;
+      }
+      msg.innerHTML = '<span>Send up to three words. Nobody sees who sent which.</span>';
+      draw();
+      schedule();
+    }
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const text = input.value.trim();
+      if (!text || !open || mine.length >= 3) return;
+      if (BLOCKED.has(key(text))) { msg.innerHTML = '<b class="miss">That word isn\'t allowed</b><span>Try another one.</span>'; return; }
+      if (mine.includes(key(text))) { msg.innerHTML = '<span>You already sent that one.</span>'; return; }
+      if (!mine.length) guests++;
+      mine.push(add(text));
+      input.value = '';
+      msg.innerHTML = `<b>✓ Sent</b><span>${mine.length === 3 ? 'That\'s your three.' : 'Send another, or watch the big screen.'}</span>`;
+      draw();
+      if (!input.disabled) input.focus();
+    });
+    sec.addEventListener('click', e => {
+      const b = e.target.closest('[data-wc]');
+      if (!b) return;
+      const a = b.dataset.wc;
+      if (a === 'close') { open = false; clearTimeout(timer); msg.innerHTML = '<b class="plain">Closed</b><span>Thanks for your words.</span>'; draw(); $('[data-wc="round"]', sec).focus(); }
+      else if (a === 'round') { round++; start(false); $('[data-wc="close"]', sec).focus(); }
+      else { const w = words.get(b.dataset.k); if (w) { w.hidden = a === 'hide'; draw(); } }
+    });
+    // The rest of the room sends words while the cloud is open and on screen.
+    function schedule() {
+      clearTimeout(timer);
+      if (!open || !visible || reduced || guests >= JOINED) return;
+      timer = setTimeout(() => {
+        const total = POOL.reduce((a, [, n]) => a + n, 0);
+        let r = Math.random() * total, i = 0;
+        while (r > POOL[i][1]) r -= POOL[i++][1];
+        add(POOL[i][0]);
+        if (Math.random() < .45) guests++;
+        draw();
+        schedule();
+      }, 700 + Math.random() * 900);
+    }
+    start(true);
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) draw(); schedule(); }, { threshold: .2 }).observe(box.closest('.frame'));
+  }
+
   /* ---------------------------------------------------------------- copy buttons */
   $$('[data-copy], [data-copy-from]').forEach(b => b.addEventListener('click', async () => {
     const text = b.dataset.copy || $('#' + b.dataset.copyFrom).textContent.replace(/^#.*\n/m, '');
@@ -587,7 +791,7 @@
 
   /* ---------------------------------------------------------------- reveal on scroll */
   {
-    const els = $$('.sec-head, .steps3, .session, .pal-picker, .pal-stage, .templates, .app, .feature-row, .present-wrap, .journey4, .screens2, .roadmap, .start-grid, .pillars .cards');
+    const els = $$('.sec-head, .steps3, .session, .pal-picker, .pal-stage, .templates, .app, .feature-row, .tools-more, .present-wrap, .journey4, .screens2, .roadmap, .start-grid, .pillars .cards');
     els.forEach(el => el.classList.add('rv'));
     const io = new IntersectionObserver(entries => entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }

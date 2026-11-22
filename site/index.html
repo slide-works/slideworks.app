@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SlideWorks · Web slide decks that agents build</title>
-<meta name="description" content="SlideWorks is an open-source web slide app. Agents build decks over MCP from ready-made building blocks, anyone presents them from a URL, and the room joins from a QR code to answer live polls.">
+<meta name="description" content="Ask your agent for a deck and present it from a link. SlideWorks is open source: agents build decks over MCP from 26 layouts and check every slide, you present from a laptop or a phone, and the room joins from a QR code to vote, ask questions and react.">
 <meta name="theme-color" content="#f4f5f7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0f1424" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://slideworks.app/">
@@ -12,14 +12,14 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://slideworks.app/">
 <meta property="og:title" content="SlideWorks · Web slide decks that agents build">
-<meta property="og:description" content="Agents build decks over MCP. Anyone presents them from a URL.">
+<meta property="og:description" content="Ask your agent for a deck. Present it from a link. The room joins from their phones.">
 <meta property="og:image" content="https://slideworks.app/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap">
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="slides.css">
 <link rel="stylesheet" href="site.css">
@@ -72,8 +72,8 @@
     <a class="brand" href="/"><svg class="mark" viewBox="0 0 26 26" aria-hidden="true"><use href="#i-mark"/></svg>SlideWorks</a>
     <nav class="nav-links" aria-label="Sections">
       <a href="#how">How it works</a>
-      <a href="#blocks">Blocks</a>
-      <a href="#looks">Looks</a>
+      <a href="#blocks">Layouts</a>
+      <a href="#brand">Your brand</a>
       <a href="#present">Presenting</a>
       <a href="#audience">Audience</a>
       <a href="#roadmap">Roadmap</a>
@@ -93,9 +93,9 @@
   <section class="hero">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="wrap">
-      <p class="eyebrow"><span class="dot-live"></span>Open source · In development</p>
-      <h1>Slide decks that <span class="grad">agents build</span> and anyone presents from a link.</h1>
-      <p class="lede">Your agent builds the deck over MCP from ready-made blocks such as titles, comparisons, tables, charts and timelines. It writes no HTML. You open the deck by URL, share it, and present it in the browser on a laptop or a phone. The room joins from a QR code and answers live polls.</p>
+      <p class="eyebrow"><span class="dot-live"></span>Open source · Self-hosted · MIT</p>
+      <h1>Ask your agent for a deck. <span class="grad">Present it from a link.</span></h1>
+      <p class="lede">Tell Claude, Cursor or any MCP agent what your talk is about. It builds the slides from 26 ready-made layouts and checks each one in a browser before you see it. You present from a laptop or a phone, and the room joins from their phones to vote, ask questions and react.</p>
       <div class="cta">
         <a class="btn btn-primary btn-lg" href="https://github.com/slide-works/slideworks"><svg><use href="#i-gh"/></svg><span>Follow on GitHub</span></a>
         <a class="btn btn-ghost btn-lg" href="#how">See how it works</a>
@@ -126,7 +126,7 @@
             <div class="pctl mini"><span class="count" data-count>1 / 16</span><span class="bar"><i data-bar></i></span></div>
           </div>
         </div>
-        <p class="stage-cap">This sample deck is live and uses the same blocks an agent fills. Click it and use the arrow keys.</p>
+        <p class="stage-cap">This is a live deck built from the same layouts your agent uses. Click it and use the arrow keys.</p>
       </div>
     </div>
   </section>
@@ -135,21 +135,26 @@
   <section class="pillars">
     <div class="wrap">
       <div class="cards">
-        <article class="card">
+        <a class="card" href="#how">
           <svg><use href="#i-agent"/></svg>
-          <h3>Agents build the deck</h3>
-          <p>An MCP server gives Claude Code, Cursor and other agents tools to create a deck, add slides from typed building blocks, and fix what the server rejects.</p>
-        </article>
-        <article class="card">
+          <h3>Your agent builds it</h3>
+          <p>It fills layouts with your content and never writes HTML. It renders every slide in a browser and fixes overflow and low contrast before you open the deck.</p>
+        </a>
+        <a class="card" href="#present">
           <svg><use href="#i-link"/></svg>
-          <h3>Present from a URL</h3>
-          <p>Every deck has a link. Open it in a browser and present on a laptop or a phone, with speaker notes and a part tracker that shows where you are in the talk.</p>
-        </article>
-        <article class="card">
+          <h3>You present from a link</h3>
+          <p>Every deck has a URL. Present from a laptop with your notes, the next slide and a timer, and use your phone as the remote.</p>
+        </a>
+        <a class="card" href="#audience">
           <svg><use href="#i-people"/></svg>
-          <h3>Bring the audience in</h3>
-          <p>People join with a QR code or a six-digit code, with no app and no account. Their phones follow the slides and answer live polls. Q&amp;A and reactions are designed and come next.</p>
-        </article>
+          <h3>The room joins in</h3>
+          <p>Guests scan a QR code, with no app and no account. They answer polls, fill a word cloud, ask and upvote questions, and send reactions.</p>
+        </a>
+        <a class="card" href="#brand">
+          <svg><use href="#i-palette"/></svg>
+          <h3>It looks like your brand</h3>
+          <p>Upload your fonts, logos and colours as a template. Every deck made on it matches, and the editor checks contrast before you publish.</p>
+        </a>
       </div>
     </div>
   </section>
@@ -159,14 +164,14 @@
     <div class="wrap">
       <div class="sec-head">
         <p class="kick">How it works</p>
-        <h2>From a brief to a deck, <span class="grad">one tool call at a time</span></h2>
-        <p class="sec-lede">The agent writes no HTML. It reads the layout catalogue, then sends each slide as a layout and its slots. The server checks every slot against the layout's schema. It rejects a slide it can't render and names the field that broke, so the agent can fix the slide and send it again.</p>
+        <h2>One sentence in. <span class="grad">A finished deck out.</span></h2>
+        <p class="sec-lede">Your agent picks a layout for each point and fills in the text. Then it opens every slide in a browser and measures it, the way your audience will see it. Text that overflows, type that's too small and colours that fail contrast come back as findings, and the agent fixes them before you open the deck.</p>
       </div>
 
       <ol class="steps3">
-        <li><span class="n">1</span><div><b>Connect your agent</b><span>Point it at <code>/mcp</code>. It registers itself, and you approve it in the browser.</span></div></li>
-        <li><span class="n">2</span><div><b>Give it a brief</b><span>"A 20-minute offsite talk on shipping smaller." It picks a template and palette and builds the slides.</span></div></li>
-        <li><span class="n">3</span><div><b>Open the link</b><span>Review it on the deck page, tweak the notes, share it, and present.</span></div></li>
+        <li><span class="n">1</span><div><b>Connect your agent</b><span>Add the <code>/mcp</code> URL to Claude Code, Cursor or any MCP client, and approve it in your browser.</span></div></li>
+        <li><span class="n">2</span><div><b>Ask for a deck</b><span>"A 20-minute offsite talk on shipping smaller." It picks a template and palette and builds the slides.</span></div></li>
+        <li><span class="n">3</span><div><b>Open the link</b><span>Look it over on the deck page, change the notes, share it and present.</span></div></li>
       </ol>
 
       <div class="session" id="session">
@@ -181,7 +186,8 @@
               <div class="deckpage-head"><b id="dpTitle">Waiting for the agent…</b><span class="pill grey" id="dpCount">0 slides</span><span class="pill acc" id="dpShare" hidden><svg><use href="#i-link"/></svg>Link</span></div>
               <div class="dp-main">
                 <div class="frame dp-frame" id="dpFrame"><div class="dp-empty">The deck appears here as the agent builds it</div></div>
-                <div class="reject" id="dpReject" hidden><svg><use href="#i-x"/></svg><div><b>Slide rejected</b><span><code>right</code> is required for <code>compare</code>: <code>{ tag, title, items[] }</code></span></div></div>
+                <div class="reject" id="dpReject" hidden><svg><use href="#i-x"/></svg><div><b>Slide refused</b><span><code>compare.right</code> is required, with a tag, a title and items.</span></div></div>
+                <div class="reject warn" id="dpWarn" hidden><svg><use href="#i-shield"/></svg><div><b>Check · slide 12</b><span>Small text. The axis labels are drawn under 20 px.</span></div></div>
               </div>
               <div class="dp-thumbs" id="dpThumbs"></div>
               <ul class="dp-feed" id="dpFeed"></ul>
@@ -190,10 +196,12 @@
         </div>
       </div>
 
-      <div class="tools-cloud">
-        <span class="tools-label">MCP tools</span>
-        <code>create_deck</code><code>list_layouts</code><code>list_blocks</code><code>add_slide</code><code>update_slide</code><code>move_slide</code><code>delete_slide</code><code>set_notes</code><code>upload_image</code><code>set_sharing</code><code>set_look</code><code>list_templates</code><code>list_palettes</code><code>set_talk_length</code><code>update_poll</code><code>add_poll_option</code><code>open_poll</code><code>close_poll</code><code>get_poll_results</code><code>preview_deck</code><code>list_decks</code><code>get_deck</code><code>get_deck_url</code>
+      <div class="feature-row">
+        <div><svg><use href="#i-shield"/></svg><h3>Refused before it's saved</h3><p>The server checks every slot against its layout. A slide the player can't draw never reaches the deck, and the error names the field to fix.</p></div>
+        <div><svg><use href="#i-check"/></svg><h3>Checked the way a viewer sees it</h3><p><code>check_deck</code> renders each slide and reports overflow, text under 20 px, contrast below WCAG AA, broken images and vague alt text. The deck page shows the same list.</p></div>
+        <div><svg><use href="#i-blocks"/></svg><h3>A whole deck in one call</h3><p><code>add_slides</code> sends many slides at once, with their notes and poll settings, so a 40-slide deck doesn't take 40 round trips.</p></div>
       </div>
+      <p class="tools-more"><svg><use href="#i-agent"/></svg>38 MCP tools cover decks, slides, images, sharing, looks, templates and the live room. <a href="https://docs.slideworks.app/agents/tools/">See every tool</a></p>
     </div>
   </section>
 
@@ -201,11 +209,13 @@
   <section id="blocks">
     <div class="wrap">
       <div class="sec-head">
-        <p class="kick">Building blocks</p>
-        <h2>17 blocks an agent fills, <span class="grad">with no HTML</span></h2>
-        <p class="sec-lede">A slide is a layout plus typed slots. The 16-slide deck below uses every block. Each headline is one sentence. Content slides are light, and the title, dividers and close are dark. A part tracker runs across the top. Under each slide are the slots an agent fills. Two more layouts, <code>join</code> and <code>poll</code>, are for a live room, and you can see them <a href="#audience">further down</a>.</p>
+        <p class="kick">Layouts</p>
+        <h2>26 layouts, <span class="grad">from a big number to a flow diagram</span></h2>
+        <p class="sec-lede">Each slide is a layout with named slots, and your agent fills the slots with plain text. Every layout works in every palette, so a slide always looks finished. Click a slide to see it larger, with the slots the agent filled and its speaker notes. Five more layouts run the live room, and you'll see them <a href="#audience">further down</a>.</p>
       </div>
       <div class="gallery" id="gallery"></div>
+      <h3 class="g-h"><span class="pill acc">New</span>Statements, flows, bars, stacks, ladders, loops, links and video</h3>
+      <div class="gallery" id="gallery2"></div>
     </div>
   </section>
 
@@ -214,8 +224,8 @@
     <div class="wrap">
       <div class="sec-head">
         <p class="kick">Templates and palettes</p>
-        <h2>A template and a palette <span class="grad">set the whole look</span></h2>
-        <p class="sec-lede">The template holds the structure, the type and the shape. The palette holds every colour. A slide never stores a colour or a font, so you can change the palette without editing a slide. Every built-in palette passes a contrast check, and the build fails if a colour pair drops below its minimum contrast.</p>
+        <h2>Change the palette. <span class="grad">Every slide follows.</span></h2>
+        <p class="sec-lede">A slide never stores a colour or a font. The palette holds the colours and the template holds the type and shape, so switching either one restyles the whole deck. Every colour pair in a built-in palette passes a contrast check. Pick a palette below to try it.</p>
       </div>
 
       <div class="pal-picker" role="radiogroup" aria-label="Palette">
@@ -236,12 +246,12 @@
       <div class="templates">
         <article class="tpl">
           <header><h3>Talk</h3><code>talk</code><span class="pill grey">default</span></header>
-          <p>A talk to a room, told as a story in parts with one point per slide.</p>
+          <p>A story in parts for a room, with one point per slide.</p>
           <ol><li>Title, with the one-line promise</li><li>3–5 parts, each opening with a divider</li><li>2–4 slides per part, one point each</li><li>Close on the single ask</li></ol>
         </article>
         <article class="tpl">
           <header><h3>Workshop</h3><code>workshop</code><span class="pill grey">deep dives on</span></header>
-          <p>A talk plus exercises the room does. Exercises are deep dives you can skip when you run late.</p>
+          <p>A talk with exercises for the room. Exercises are deep dives you can skip when you run late.</p>
           <ol><li>Title</li><li>Per part: a divider, then one practice slide per idea</li><li>Exercises as deep dives at the end of their part</li><li>Close with the first step for Monday</li></ol>
         </article>
         <article class="tpl">
@@ -250,17 +260,100 @@
           <ol><li>Title, with the headline number</li><li>The 1–3 numbers that moved, each explained</li><li>What is late or blocked, and why</li><li>Next steps with owners</li></ol>
         </article>
       </div>
-      <p class="aside-note"><svg><use href="#i-palette"/></svg>Later, all 348 Sanzo Wada colour combinations will be palettes, and you will be able to upload your own template or import one from an HTML deck.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ BRAND: custom templates (SW-50) -->
+  <section id="brand">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kick">Custom templates</p>
+        <h2>Your fonts, your logo, <span class="grad">your colours</span></h2>
+        <p class="sec-lede">Start from a built-in template and make it yours in the editor. Upload your fonts and logos, set your palette, and the preview updates as you go. The publish checklist stops a template whose colours fail contrast or whose font is too wide for the layouts. Click the tabs and swatches below to try it.</p>
+      </div>
+
+      <div class="browser app editor" id="editor" aria-label="The template editor">
+        <div class="browser-bar"><span class="dots"><i></i><i></i><i></i></span><span class="url"><b>slides.example.com</b>/templates/northwind/edit</span></div>
+        <div class="ed-top">
+          <b>Northwind</b><span class="pill grey">Draft · v2</span>
+          <span class="sp"></span>
+          <span class="abtn primary" id="edPublish">Publish v2</span>
+        </div>
+        <div class="ed-tabs" role="tablist" aria-label="Sections of Northwind">
+          <button type="button" role="tab" data-ed="basics" aria-selected="false">Basics</button>
+          <button type="button" role="tab" data-ed="fonts" aria-selected="false">Fonts</button>
+          <button type="button" role="tab" data-ed="logo" aria-selected="false">Logo and art</button>
+          <button type="button" role="tab" data-ed="palette" aria-selected="true">Palette</button>
+          <button type="button" role="tab" data-ed="layouts" aria-selected="false">Layouts</button>
+        </div>
+        <div class="ed-body">
+          <div class="ed-panel">
+            <div class="ed-pane" data-pane="basics" hidden>
+              <label class="ed-field"><span>Name</span><b>Northwind</b></label>
+              <label class="ed-field"><span>Starts from</span><b>Talk</b></label>
+              <label class="ed-field"><span>Corner radius</span><b>6 px</b></label>
+              <label class="ed-field"><span>Part tracker, footer, progress bar</span><b>On</b></label>
+              <label class="ed-field"><span>Top accent bar</span><b>On</b></label>
+            </div>
+            <div class="ed-pane" data-pane="fonts" hidden>
+              <p class="ed-h">Headings</p>
+              <div class="ed-opts" role="radiogroup" aria-label="Heading font">
+                <button type="button" role="radio" data-font="serif" aria-checked="true"><b class="serif">Aa</b><span>Fraunces<small>fraunces-700.woff2 · 0.55 em</small></span></button>
+                <button type="button" role="radio" data-font="sans" aria-checked="false"><b>Aa</b><span>Plus Jakarta Sans<small>built in · 0.58 em</small></span></button>
+              </div>
+              <p class="ed-note">SlideWorks measures each font's average character width at upload, so text still fits the layouts.</p>
+            </div>
+            <div class="ed-pane" data-pane="logo" hidden>
+              <div class="ed-logos">
+                <div><span class="nw-logo"></span><small>Light slides · logo.svg</small></div>
+                <div class="dark"><span class="nw-logo"></span><small>Dark slides · logo-dark.svg</small></div>
+              </div>
+              <label class="ed-field"><span>Title art</span><b>Ornament dots</b></label>
+              <label class="ed-field"><span>Logo on title, divider and close</span><b>On</b></label>
+            </div>
+            <div class="ed-pane" data-pane="palette">
+              <p class="ed-h">Accent</p>
+              <div class="ed-sw" role="radiogroup" aria-label="Accent colour">
+                <button type="button" role="radio" data-acc="teal" aria-checked="true" aria-label="Teal" style="--c:#0f766e"></button>
+                <button type="button" role="radio" data-acc="forest" aria-checked="false" aria-label="Forest" style="--c:#3f6212"></button>
+                <button type="button" role="radio" data-acc="crimson" aria-checked="false" aria-label="Crimson" style="--c:#b4233c"></button>
+                <button type="button" role="radio" data-acc="sky" aria-checked="false" aria-label="Sky, fails contrast" style="--c:#7dd3fc"></button>
+              </div>
+              <p class="ed-h">Contrast</p>
+              <ul class="ed-pairs" id="edPairs"></ul>
+            </div>
+            <div class="ed-pane" data-pane="layouts" hidden>
+              <p class="ed-h">Layouts this template allows</p>
+              <div class="ed-chips"><span>title</span><span>divider</span><span>statement</span><span>bullets</span><span>compare</span><span>big-number</span><span>chart</span><span>flow</span><span>quote</span><span>close</span><span>join</span><span>poll</span><span>qa</span></div>
+              <p class="ed-note">An agent that builds a deck on Northwind gets only these layouts from <code>list_layouts</code>.</p>
+            </div>
+          </div>
+          <div class="ed-preview" data-brand="teal" data-font="serif" id="edPreview">
+            <div class="frame" data-slide="title"></div>
+            <div class="frame" data-slide="compare"></div>
+          </div>
+          <div class="ed-check" aria-live="polite">
+            <p class="ed-h">Publish checklist</p>
+            <ul id="edCheck"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-row">
+        <div><svg><use href="#i-history"/></svg><h3>Versions that stay put</h3><p>Publishing makes a version that never changes. A deck stays on the version it was made with, and its owner is offered the update.</p></div>
+        <div><svg><use href="#i-lock"/></svg><h3>Share it like a deck</h3><p>Keep a template private, share it by link, or name the people who can use it. A deck always renders, even for viewers the template isn't shared with.</p></div>
+        <div><svg><use href="#i-agent"/></svg><h3>Agents can make one too</h3><p><code>create_template</code>, <code>upload_asset</code> and <code>publish_template</code> give an agent the editor's controls and the same checks.</p></div>
+      </div>
     </div>
   </section>
 
   <!-- ============================================================ LIBRARY -->
-  <section id="library">
+  <section id="library" class="band">
     <div class="wrap">
       <div class="sec-head">
         <p class="kick">The app</p>
         <h2>Every deck in one table, <span class="grad">and who changed it</span></h2>
-        <p class="sec-lede">The library is a table instead of a grid of thumbnails, so you can scan forty decks on one screen. The Last change column says whether an agent or a person made it, and the deck page's activity log shows who changed what, when, and through which tool.</p>
+        <p class="sec-lede">Scan forty decks on one screen. The Last change column shows whether you or an agent touched each deck, and the deck's activity log records every change and the tool that made it.</p>
       </div>
 
       <div class="browser app" aria-label="The decks library">
@@ -293,9 +386,9 @@
       </div>
 
       <div class="feature-row">
-        <div><svg><use href="#i-lock"/></svg><h3>Private until you share</h3><p>Keep a deck private, share it with anyone who has the link, or name the people who can view it. Agents get the same control through <code>set_sharing</code>.</p></div>
-        <div><svg><use href="#i-history"/></svg><h3>An activity log on every deck</h3><p>The log records every change, who made it and through which tool, so you can see what your agent did while you were away.</p></div>
-        <div><svg><use href="#i-shield"/></svg><h3>Checked before it's saved</h3><p>The server validates every slot against its layout's schema. A slide the player can't render never reaches the deck.</p></div>
+        <div><svg><use href="#i-lock"/></svg><h3>Private until you share</h3><p>Keep a deck private, share it with anyone who has the link, or name the people who can view it. Your agent can change it too.</p></div>
+        <div><svg><use href="#i-history"/></svg><h3>See what your agent did</h3><p>The activity log records every change, who made it and which tool they used, so you can check what your agent did while you were away.</p></div>
+        <div><svg><use href="#i-globe"/></svg><h3>Links that preview well</h3><p>Paste a shared deck's link into a chat and it unfurls as a card with the deck's title.</p></div>
       </div>
     </div>
   </section>
@@ -304,9 +397,9 @@
   <section id="present" class="night">
     <div class="wrap">
       <div class="sec-head">
-        <p class="kick"><span class="pill ok"><span class="d"></span>Built</span></p>
+        <p class="kick">Presenter view</p>
         <h2>A presenter view, <span class="grad">and your phone as the remote</span></h2>
-        <p class="sec-lede">The presenter window is dark, so it doesn't light up your face from the lectern. The current slide is largest, the next one sits beside your notes, and the timer turns amber with five minutes left. Scan a QR code and your phone controls the same talk. To try it, click into the window and press the left and right arrow keys or B, or tap Next on the phone.</p>
+        <p class="sec-lede">Your notes, the next slide and a timer sit in one dark window that won't light up your face at the lectern. The timer turns amber with five minutes left, and running late is one key away from skipping the deep dives. Scan a QR code and your phone drives the same talk. Click the window and press the arrow keys or B, or tap Next on the phone.</p>
       </div>
 
       <div class="present-wrap">
@@ -365,9 +458,9 @@
   <section id="audience">
     <div class="wrap">
       <div class="sec-head">
-        <p class="kick"><span class="pill ok"><span class="d"></span>Built</span></p>
+        <p class="kick">Audience join</p>
         <h2>The room joins in <span class="grad">ten seconds</span></h2>
-        <p class="sec-lede">Point the camera at the QR code and tap the link, or type the six-digit code. The page joins as it loads, so there is no app, account, name field or join button. Phones follow the slides by themselves, and a poll appears on the phone when the presenter reaches it.</p>
+        <p class="sec-lede">Guests point their camera at the QR code or type six digits. There's no app to install, no account and no name to give. Their phone shows your current slide and switches to a poll, a word box or the question list when you reach one.</p>
       </div>
 
       <ol class="journey4">
@@ -376,7 +469,7 @@
             <div class="cam-view"><div class="cam-slide"><div class="qr" data-qr></div><div class="cam-lines"><i></i><i></i><i></i></div></div><span class="cam-chip"><svg><use href="#i-globe"/></svg>slideworks.live</span></div>
             <div class="cam-shutter"><span>Photo</span><i></i></div>
           </div></div>
-          <p class="when">0 s</p><h3>Point the camera</h3><p>The phone's camera reads the QR code on the join slide. Tap the chip. That is the only tap.</p>
+          <p class="when">0 s</p><h3>Point the camera</h3><p>The camera reads the QR code on the join slide. Tapping the link is the only tap.</p>
         </li>
         <li>
           <div class="phone aud"><div class="phone-screen aud-in">
@@ -387,7 +480,7 @@
             <p class="in-small">No app, no account.<br>This page follows the slides by itself.</p>
             <div class="aud-url"><svg><use href="#i-lock"/></svg>slideworks.live/482913</div>
           </div></div>
-          <p class="when">~2 s</p><h3>You're in</h3><p>The page joins on load, confirms it with a tick, and says who else is here.</p>
+          <p class="when">~2 s</p><h3>You're in</h3><p>The page joins as it loads and shows how many others are here.</p>
         </li>
         <li>
           <div class="phone aud"><div class="phone-screen aud-in">
@@ -398,7 +491,7 @@
             <div class="aud-wait"><span class="dots3"><i></i><i></i><i></i></span><b>Nothing to answer yet</b><span>Polls appear here when the presenter gets to them. Keep this page open.</span></div>
             <div class="aud-foot"><span>Guest · no account</span><span>Privacy</span></div>
           </div></div>
-          <p class="when">from then</p><h3>Follow along</h3><p>The current slide, kept in step with the presenter. People at the back can read it.</p>
+          <p class="when">from then</p><h3>Follow along</h3><p>The phone shows the slide on screen, so people at the back can read it.</p>
         </li>
         <li>
           <div class="phone aud"><div class="phone-screen aud-in">
@@ -416,18 +509,18 @@
             </div>
             <div class="aud-foot"><span>Guest · no account</span><span>Privacy</span></div>
           </div></div>
-          <p class="when">on an interactive slide</p><h3>Something to do</h3><p>A poll appears when the presenter reaches it, and the slide comes back afterwards. Tap an answer.</p>
+          <p class="when">on an interactive slide</p><h3>Something to do</h3><p>A poll appears when you reach it, and the slide comes back after. Tap an answer to try it.</p>
         </li>
       </ol>
 
       <div class="screens2">
         <figure>
           <div class="frame" data-live="join"></div>
-          <figcaption><b>The join slide.</b> An agent adds it with <code>add_slide</code> and the <code>join</code> layout. The code and the QR code come from the live session, so nobody types them into the deck. People who arrive before you go live wait in a lobby.</figcaption>
+          <figcaption><b>The join slide.</b> Your agent adds it like any other slide. The code and the QR code fill in when you go live, and anyone who arrives early waits in a lobby.</figcaption>
         </figure>
         <figure>
           <div class="frame" data-slide="compare" data-joinbar></div>
-          <figcaption><b>The join bar.</b> A deck setting puts a small QR code and the code on every slide while the deck is live, so latecomers can still join.</figcaption>
+          <figcaption><b>The join bar.</b> Turn it on and every slide carries a small QR code and the code while you're live, so latecomers can still join.</figcaption>
         </figure>
       </div>
     </div>
@@ -437,9 +530,9 @@
   <section id="polls" class="band">
     <div class="wrap">
       <div class="sec-head">
-        <p class="kick"><span class="pill ok"><span class="d"></span>Built</span></p>
+        <p class="kick">Live polls</p>
         <h2>Ask the room, <span class="grad">and watch the bars move</span></h2>
-        <p class="sec-lede">A poll is a slide, and an agent adds it with <code>add_slide</code> like any other. When you reach it, the phones swap the slide for the question, and the bars on the big screen grow as answers arrive. To try it, tap an option on the phone, then close the poll, show the answer or start a new round.</p>
+        <p class="sec-lede">A poll is a slide your agent writes like any other. When you reach it, phones show the question, and the bars on the big screen grow as answers arrive. Tap an option on the phone, then close the poll, show the answer or start a new round.</p>
       </div>
 
       <div class="present-wrap">
@@ -491,20 +584,90 @@
       </div>
 
       <div class="feature-row">
-        <div><svg><use href="#i-people"/></svg><h3>Pick one, or pick up to a few</h3><p>A poll has 2 to 8 options. A tap sends a pick-one answer, and tapping another option changes it. Any poll can mark a correct answer, which you show after closing. There are no scores.</p></div>
-        <div><svg><use href="#i-lock"/></svg><h3>Private answers</h3><p>Guests have no name and no account. You see the totals and never who picked what. Each poll shows its results to the room live, after a guest has answered, or after it closes.</p></div>
-        <div><svg><use href="#i-agent"/></svg><h3>Agents write polls and read the results</h3><p>An agent sets a poll up with <code>update_poll</code> and reads each round back with <code>get_poll_results</code>: answers, guests joined, the response rate and the count per option.</p></div>
+        <div><svg><use href="#i-people"/></svg><h3>One answer or several</h3><p>Up to 8 options, pick one or pick a few. Mark a correct answer and reveal it after you close the poll. Every round is kept.</p></div>
+        <div><svg><use href="#i-lock"/></svg><h3>Honest answers</h3><p>Guests have no name and no account, and nobody can see who picked what. Show results live, once a guest has answered, or after the poll closes.</p></div>
+        <div><svg><use href="#i-agent"/></svg><h3>Your agent reads the results</h3><p>After the talk, <code>get_poll_results</code> gives your agent each round's counts and response rate, ready for the follow-up email.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ WORD CLOUD + OPEN TEXT (SW-8) -->
+  <section id="words">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kick">Word clouds and open text</p>
+        <h2>Let the room answer <span class="grad">in its own words</span></h2>
+        <p class="sec-lede">Ask an open question and each guest sends up to three words. The words people repeat grow on the big screen as they arrive. For longer replies, an open-text slide shows each answer as a card on a wall. Type a word on the phone and send it to add yours.</p>
+      </div>
+
+      <div class="present-wrap">
+        <div class="presenter livewin" aria-label="Presenter window with the word cloud panel">
+          <div class="pr-top">
+            <b>Ship smaller</b>
+            <span class="pr-chip live"><i></i>Live <span class="mono">482 913</span> · 41 joined</span>
+            <span class="sp"></span>
+            <span class="pr-clock"><b>03:12</b></span>
+          </div>
+          <div class="pr-body">
+            <div class="pr-now">
+              <div class="pr-label"><span>On the big screen now</span><span>word cloud</span></div>
+              <div class="pr-cur"><div class="frame" data-live="cloud" id="cloudScreen"></div></div>
+              <div class="pr-label"><span>Notes</span><span></span></div>
+              <div class="pr-notes"><b>Leave it open for a minute.</b> Read the three biggest words, then ask who sent the smallest one.</div>
+            </div>
+            <div class="pr-side">
+              <div class="pr-label"><span>Word cloud</span><span>results live</span></div>
+              <div class="pp" aria-live="polite">
+                <div class="pp-head"><span class="pp-state" id="wcState">Open</span><span id="wcRound">round 1</span></div>
+                <div class="pp-n"><b id="wcN">0</b><span>guests sent words</span></div>
+                <ul class="wc-rows" id="wcRows"></ul>
+                <p class="pp-note">Hide takes a word off every screen. Bad words never get this far.</p>
+                <div class="pp-btns">
+                  <button type="button" class="pbtn danger" data-wc="close">Close</button>
+                  <button type="button" class="pbtn" data-wc="round" hidden>New round</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phone aud guest" aria-label="A guest's phone">
+          <div class="phone-screen aud-in">
+            <div class="aud-status">9:41</div>
+            <div class="aud-head"><span class="aud-logo">S</span><div><b>Ship smaller</b><small>Sam Rivera</small></div><span class="pr-chip"><i></i>Live</span></div>
+            <div class="poll gp wc-card">
+              <span class="gp-kick">Word cloud · up to 3 words</span>
+              <b>One word for how your last release felt</b>
+              <form class="gq-ask" id="wcAsk"><input type="text" maxlength="25" placeholder="A word" aria-label="Your word"><button type="submit">Send</button></form>
+              <div class="wc-mine" id="wcMine"></div>
+              <div class="gp-msg" id="wcMsg" aria-live="polite"></div>
+            </div>
+            <div class="aud-foot"><span>Guest · no account</span><span>Privacy</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="screens2">
+        <figure>
+          <div class="frame" data-live="wall"></div>
+          <figcaption><b>The open-text wall.</b> Each guest sends one answer of up to 200 characters. Answers keep their number when a guest edits them, so you can say "number 4" out loud.</figcaption>
+        </figure>
+        <div class="feature-col">
+          <div><svg><use href="#i-shield"/></svg><h3>A filter for bad words</h3><p>A profane word is refused before it's stored. Anything else you don't want on screen, you hide with one key.</p></div>
+          <div><svg><use href="#i-people"/></svg><h3>Same word, bigger word</h3><p>"Scary", "scary " and "SCARY" count as one word, so the cloud shows what the room agrees on.</p></div>
+          <div><svg><use href="#i-agent"/></svg><h3>Your agent sets it up</h3><p>Ask for "a word cloud after the intro" and your agent adds the slide. While you're live it can open and close it too.</p></div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ============================================================ Q&A -->
-  <section id="qa">
+  <section id="qa" class="band">
     <div class="wrap">
       <div class="sec-head">
-        <p class="kick"><span class="pill later">Designed · next up</span></p>
+        <p class="kick">Q&amp;A and reactions</p>
         <h2>Questions from the room, <span class="grad">and five reactions</span></h2>
-        <p class="sec-lede">The guest page gets a second tab, Questions, where anyone can ask and upvote for the whole session, and a row of five reactions under the slide. A question reaches the big screen only when you show it. To try it, upvote or ask on the phone, tap a reaction on its Slide tab, and press Show on screen in the presenter's panel.</p>
+        <p class="sec-lede">Guests ask and upvote on a Questions tab, so the question most people want answered rises to the top. Five reactions sit under the slide and float up the big screen. Nothing the room writes reaches the big screen until you show it. Upvote or ask on the phone, tap a reaction on its Slide tab, and press Show on screen in the panel.</p>
       </div>
 
       <div class="present-wrap">
@@ -558,41 +721,50 @@
       </div>
 
       <div class="feature-row">
-        <div><svg><use href="#i-shield"/></svg><h3>You decide what goes on screen</h3><p>A question shows on the phones at once, and you can hide it. A deck setting makes new questions wait for your approval first. Show on screen puts one question over the slide, and a Q&amp;A slide lists the top five.</p></div>
-        <div><svg><use href="#i-people"/></svg><h3>Anonymous unless they say so</h3><p>A question has no name by default. A guest can add one to a single question, and a deck setting can turn names off.</p></div>
-        <div><svg><use href="#i-blocks"/></svg><h3>Built on the poll model</h3><p>Q&amp;A is a poll where the room adds the options and an upvote is an answer, so it reuses the live channel, the load test and the results tools that polls already have.</p></div>
+        <div><svg><use href="#i-shield"/></svg><h3>You decide what goes on screen</h3><p>Show on screen puts one question over the slide, and a Q&amp;A slide lists the top five. Hide a question, or have new ones wait for your approval.</p></div>
+        <div><svg><use href="#i-people"/></svg><h3>Anonymous unless they say so</h3><p>Questions have no name by default. A guest can sign a single question, and you can turn names off.</p></div>
+        <div><svg><use href="#i-agent"/></svg><h3>Answer the rest later</h3><p>After the talk, <code>get_questions</code> gives your agent every question with its votes, so it can draft answers to the ones you didn't get to.</p></div>
       </div>
     </div>
   </section>
 
   <!-- ============================================================ ROADMAP -->
-  <section id="roadmap" class="band">
+  <section id="roadmap">
     <div class="wrap">
       <div class="sec-head">
         <p class="kick">Roadmap</p>
         <h2>Built in the open, <span class="grad">in small slices</span></h2>
-        <p class="sec-lede">Every feature starts as reviewed mockups with its design questions answered, then ships in small pieces. The mockups on this page come from those designs.</p>
+        <p class="sec-lede">Each feature starts as reviewed mockups, then ships in small pieces. Here's what you can use today and what comes next.</p>
       </div>
       <div class="roadmap">
-        <div class="rm-col">
-          <h3><span class="pill ok"><span class="d"></span>Built</span></h3>
-          <article><code>SW-1</code><b>Foundation</b><p>Deck library, deck page, sharing, the player, the building blocks and the MCP server.</p></article>
-          <article><code>SW-2</code><b>Templates and palettes</b><p>Talk, workshop and update templates. Cobalt, Ember, Plum and Midnight. Share cards.</p></article>
-          <article><code>SW-4</code><b>Presenter view and phone remote</b><p>Current and next slide, notes, timer, overview, blackout, skipping deep dives, and your phone as the remote.</p></article>
-          <article><code>SW-5</code><b>Audience join</b><p>A QR code and a six-digit code. Guests follow the slides with no app and no account.</p></article>
-          <article><code>SW-6</code><b>Live polls</b><p>A poll slide the room answers from their phones, with live bars, rounds and an optional correct answer.</p></article>
+        <div class="rm-col rm-built">
+          <h3><span class="pill ok"><span class="d"></span>Ready to use</span></h3>
+          <div class="rm-grid">
+            <article><b>Agent-built decks</b><p>An MCP server with 38 tools, a deck library, sharing, an activity log and the player.</p></article>
+            <article><b>26 layouts</b><p>From title and bullets to flow, bars, stack, levels, loop, links and video.</p></article>
+            <article><b>Visual check</b><p>Your agent renders and measures every slide, and fixes what doesn't fit.</p></article>
+            <article><b>Templates and palettes</b><p>Talk, workshop and update. Cobalt, Ember, Plum and Midnight. Link preview cards.</p></article>
+            <article><b>Custom templates</b><p>Your fonts, logos and palette in an editor, with versions and sharing.</p></article>
+            <article><b>Presenter view and phone remote</b><p>Notes, next slide, timer, overview, blackout and skipping deep dives.</p></article>
+            <article><b>Audience join</b><p>A QR code or six digits, with no app and no account.</p></article>
+            <article><b>Live polls</b><p>Live bars, rounds and an optional correct answer.</p></article>
+            <article><b>Word clouds and open text</b><p>The room's own words, with a filter for bad ones.</p></article>
+            <article><b>Q&amp;A and reactions</b><p>Ask, upvote, show a question on screen, and five reactions.</p></article>
+          </div>
         </div>
         <div class="rm-col">
-          <h3><span class="pill later"><span class="d"></span>Designed</span></h3>
-          <article><code>SW-9</code><b>Audience Q&amp;A and reactions</b><p>A Questions tab to ask and upvote, a presenter panel to show a question on screen, and five reactions.</p></article>
+          <h3><span class="pill later"><span class="d"></span>Next</span></h3>
+          <article><b>Custom layouts</b><p>Your own slide layouts inside a template, for the diagrams your brand uses.</p></article>
+          <article><b>Import a deck</b><p>Start a template from an existing HTML deck, and later from PowerPoint.</p></article>
+          <article><b>Sanzo Wada palettes</b><p>All 348 classic colour combinations as palettes, with contrast fixes.</p></article>
         </div>
         <div class="rm-col">
           <h3><span class="pill grey"><span class="d"></span>Planned</span></h3>
-          <article><code>SW-8</code><b>Word clouds and open text</b><p>Free-text answers from the room, with a profanity filter.</p></article>
-          <article><code>SW-10</code><b>Scales and ranking</b><p>Scales, ranking and 100 points, on the same poll model.</p></article>
-          <article><code>SW-11</code><b>Quizzes</b><p>Nicknames, scores and leaderboards.</p></article>
-          <article><code>SW-15</code><b>Sanzo Wada palettes</b><p>All 348 classic colour combinations, mapped to roles with contrast fixes.</p></article>
-          <article><code>SW-50</code><b>Your own templates</b><p>Upload a template, or import one from an existing HTML deck.</p></article>
+          <article><b>Quick polls</b><p>Ask the room from the presenter window or your phone, with no slide.</p></article>
+          <article><b>More question types</b><p>Scales, ranking, 100 points, 2×2 and guess the number.</p></article>
+          <article><b>Quizzes</b><p>Nicknames, scores, teams and a leaderboard.</p></article>
+          <article><b>Spin the wheel</b><p>Pick a name or a topic from the room.</p></article>
+          <article><b>Agent co-host</b><p>Your agent runs the polls and questions alongside you.</p></article>
         </div>
       </div>
     </div>
@@ -605,7 +777,7 @@
         <div>
           <p class="kick">Self-hosted and MIT licensed</p>
           <h2>Run it yourself. <span class="grad">Your decks stay on your server.</span></h2>
-          <p class="sec-lede">SlideWorks is one container that runs ASP.NET Core and a React player and stores decks in SQLite. Put it behind your TLS proxy, sign in with Google, and connect any MCP client to it.</p>
+          <p class="sec-lede">SlideWorks is one container with a SQLite database inside. Put it behind your TLS proxy, sign in with Google, and point any MCP client at it. Your decks, polls and questions never leave your server.</p>
           <div class="cta left">
             <a class="btn btn-primary btn-lg" href="https://github.com/slide-works/slideworks"><svg><use href="#i-gh"/></svg><span>Star on GitHub</span></a>
             <a class="btn btn-ghost btn-lg" href="https://docs.slideworks.app">Read the docs</a>
@@ -833,6 +1005,139 @@ docker compose up -d</pre>
 </template>
 
 <!-- Live-room slides: the join and poll layouts, from the SW-5 and SW-6 mockups. site.js fills the QR code and the poll rows. -->
+<!-- Layouts added after the sample deck (SW-50 layout gaps and the video layout), shown in the second gallery.
+     site.js adds the same chrome as the deck's slides, with no slide number. -->
+<template id="more">
+  <div class="sw statement" data-layout="statement" data-part="2" data-slots="kicker · statement · emphasis · sub · reveal" data-notes="Say it, then stop talking for three seconds.">
+    <div class="kicker">The one rule</div>
+    <h2 class="st-h">Ship it <em>on Friday.</em></h2>
+    <p class="st-sub">Whatever is done by then goes out behind a flag.</p>
+  </div>
+
+  <div class="sw" data-layout="flow" data-part="2" data-slots="kicker · headline · emphasis · nodes[label, title, text, tone] · caption · chips" data-notes="Walk it left to right. Each arrow is a hand-off, and each hand-off is where a day goes missing.">
+    <div class="kicker">Ship it</div>
+    <h2 class="h">One change goes from branch to customer <em>in a day</em></h2>
+    <div class="bd">
+      <div class="flow">
+        <div class="fnode"><span class="fl">Hour 0</span><b>Branch</b><p>One customer action, behind a flag.</p></div>
+        <span class="farr"><svg viewBox="0 0 64 40"><path d="M4 20h50M40 8l14 12-14 12"/></svg></span>
+        <div class="fnode"><span class="fl">Hour 2</span><b>Review</b><p>Under 200 lines, read in one sitting.</p></div>
+        <span class="farr"><svg viewBox="0 0 64 40"><path d="M4 20h50M40 8l14 12-14 12"/></svg></span>
+        <div class="fnode"><span class="fl">Hour 4</span><b>Main</b><p>Merged and deployed with the flag off.</p></div>
+        <span class="farr"><svg viewBox="0 0 64 40"><path d="M4 20h50M40 8l14 12-14 12"/></svg></span>
+        <div class="fnode fill"><span class="fl">Day 1</span><b>Customer</b><p>The flag goes on for 5% of accounts.</p></div>
+      </div>
+      <p class="fcap">The same path for every change, so nobody has to ask what happens next.</p>
+      <div class="chips"><span class="chip">trunk</span><span class="chip">flags</span><span class="chip">small reviews</span></div>
+    </div>
+  </div>
+
+  <div class="sw" data-layout="bars" data-part="2" data-slots="kicker · headline · bars[label, sub, value, was] · unit · wasLabel · caption" data-notes="The dashed outline is last year. The smallest changes gained the most.">
+    <div class="kicker">Ship it</div>
+    <h2 class="h">Small changes now wait <em>a fifth as long</em> for review</h2>
+    <div class="bd">
+      <div class="blegend"><i></i>Last year</div>
+      <div class="bars">
+        <div class="brow"><div><b>Under 200 lines</b><small>62% of changes</small></div><div class="btrack"><span class="bwas" style="width:32%"></span><span class="bfill" style="width:7%"></span><span class="bend" style="left:calc(32% + 18px)"><b>4 h</b><small>was 18 h</small></span></div></div>
+        <div class="brow"><div><b>200 to 500</b><small>24% of changes</small></div><div class="btrack"><span class="bwas" style="width:54%"></span><span class="bfill" style="width:16%"></span><span class="bend" style="left:calc(54% + 18px)"><b>9 h</b><small>was 30 h</small></span></div></div>
+        <div class="brow"><div><b>500 to 1,000</b><small>10% of changes</small></div><div class="btrack"><span class="bwas" style="width:71%"></span><span class="bfill" style="width:36%"></span><span class="bend" style="left:calc(71% + 18px)"><b>20 h</b><small>was 40 h</small></span></div></div>
+        <div class="brow"><div><b>Over 1,000</b><small>4% of changes</small></div><div class="btrack"><span class="bwas" style="width:82%"></span><span class="bfill warn" style="width:76%"></span><span class="bend" style="left:calc(82% + 18px)"><b>42 h</b><small>was 46 h</small></span></div></div>
+      </div>
+      <p class="src">Median hours from opening a pull request to its first review, Jul to Oct.</p>
+    </div>
+  </div>
+
+  <div class="sw" data-layout="stack" data-part="0" data-slots="kicker · headline · segments[label, value, note, tone] · total · points[lead, text] · side" data-notes="Most of the week is waiting. Nobody is slow, the work is.">
+    <div class="kicker">The cost</div>
+    <h2 class="h">Three quarters of a change's week is <em>spent waiting</em></h2>
+    <div class="bd stack">
+      <ul class="spoints">
+        <li><b>76%</b><span>of the week, the change sits in a queue</span></li>
+        <li><b>1 in 3</b><span>changes waits for QA twice</span></li>
+        <li><b>2 days</b><span>is the longest single wait, for review</span></li>
+      </ul>
+      <div class="sfig">
+        <div class="sstack">
+          <div style="flex-grow:10"><span class="sblk">10%</span><span>Deploying</span></div>
+          <div style="flex-grow:14"><span class="sblk">14%</span><span>Building and testing</span></div>
+          <div style="flex-grow:30" class="w"><span class="sblk">30%</span><span>Waiting for QA</span></div>
+          <div style="flex-grow:46" class="w"><span class="sblk">46%</span><span>Waiting for review</span></div>
+        </div>
+        <p class="stot">5 working days, median</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sw" data-layout="levels" data-part="3" data-slots="kicker · headline · levels{title, items[text, state]} · main{title, items[lead, text]} · facts[label, value]" data-notes="Ask each team to put a dot on the ladder. Most are on monthly.">
+    <div class="kicker">Make it stick</div>
+    <h2 class="h">Most teams here are <em>one step</em> from weekly releases</h2>
+    <div class="bd lv">
+      <div class="lv-main">
+        <h3>What the next step takes</h3>
+        <ul class="bl">
+          <li><b>Flags</b> for anything that isn't ready</li>
+          <li><b>One reviewer</b> on call each day</li>
+          <li><b>A Friday demo,</b> even when it's small</li>
+        </ul>
+        <div class="lv-facts"><div><span>Teams on monthly</span><b>7 of 12</b></div><div><span>Teams on weekly</span><b>3 of 12</b></div></div>
+      </div>
+      <div class="lv-ladder">
+        <p>Release cadence</p>
+        <ol>
+          <li>Daily</li>
+          <li class="next">Weekly<small>next step</small></li>
+          <li class="on">Monthly<small>you are here</small></li>
+          <li class="past">Quarterly</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="sw" data-layout="loop" data-part="3" data-slots="kicker · headline · steps[label, text] (3–6)" data-notes="Point out that the loop starts again every week.">
+    <div class="kicker">Make it stick</div>
+    <h2 class="h">The loop <em>every week</em> runs on</h2>
+    <div class="bd loop">
+      <svg viewBox="0 0 1680 640" aria-hidden="true">
+        <defs><marker id="lp-a" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 10 5 0 10z" class="lp-head"/></marker></defs>
+        <path class="lp-ring" d="M640 92 A360 230 0 0 1 1150 230" marker-end="url(#lp-a)"/>
+        <path class="lp-ring" d="M1150 410 A360 230 0 0 1 900 548" marker-end="url(#lp-a)"/>
+        <path class="lp-ring" d="M780 548 A360 230 0 0 1 530 410" marker-end="url(#lp-a)"/>
+        <path class="lp-ring" d="M530 230 A360 230 0 0 1 700 92" marker-end="url(#lp-a)"/>
+      </svg>
+      <div class="lp" style="left:50%;top:13%"><b>1 · Slice</b><span>Pick the thinnest change a customer would notice</span></div>
+      <div class="lp" style="left:83%;top:50%"><b>2 · Ship</b><span>Merge it behind a flag by Friday</span></div>
+      <div class="lp" style="left:50%;top:87%"><b>3 · Measure</b><span>Watch what customers do with it</span></div>
+      <div class="lp" style="left:17%;top:50%"><b>4 · Learn</b><span>Decide what the next slice is</span></div>
+    </div>
+  </div>
+
+  <div class="sw" data-layout="links" data-part="3" data-slots="kicker · headline · links[kind, title, source, url] · qr{url, caption}" data-notes="Leave this up during questions so people can scan it.">
+    <div class="kicker">Make it stick</div>
+    <h2 class="h">Read these <em>before Monday</em></h2>
+    <div class="bd lkx">
+      <div class="lk-list">
+        <div class="lk"><span class="lk-k">Guide</span><b>Feature flags in ten minutes</b><small>wiki.example.com/flags</small></div>
+        <div class="lk"><span class="lk-k">Template</span><b>The story map we used for checkout</b><small>wiki.example.com/story-map</small></div>
+        <div class="lk"><span class="lk-k">Video</span><b>Splitting a migration into five safe changes</b><small>videos.example.com/migrations</small></div>
+      </div>
+      <div class="lk-qr"><div class="jbq" data-qr></div><span>Scan for all three</span></div>
+    </div>
+  </div>
+
+  <div class="sw" data-layout="video" data-part="2" data-slots="kicker · headline · url · start · play · caption" data-notes="Play from 1:10. Stop it when the flag turns on.">
+    <div class="kicker">Ship it</div>
+    <h2 class="h">Watch a flag go on <em>for 5% of accounts</em></h2>
+    <div class="bd vd">
+      <div class="vd-frame">
+        <div class="vd-bar"></div>
+        <span class="vd-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="vd-time">1:10 / 3:42</span>
+      </div>
+      <p class="src">A YouTube link, played in the slide from 1:10.</p>
+    </div>
+  </div>
+</template>
+
 <template id="live">
   <div class="sw dark join" data-live="join">
     <div class="jqr" data-qr></div>
@@ -850,6 +1155,25 @@ docker compose up -d</pre>
     <div class="bd">
       <div class="prows" data-poll-rows></div>
       <div class="pfoot"><span class="pstate" data-poll-state>Open</span><span><b data-poll-n>0</b> answers</span></div>
+    </div>
+  </div>
+  <div class="sw wc-slide" data-live="cloud">
+    <div class="joinpill">slideworks.live · <b>482 913</b></div>
+    <div class="kicker">Word cloud</div>
+    <h2 class="h">One word for how your last release felt</h2>
+    <div class="bd"><div class="wc-box" data-wc-box></div></div>
+  </div>
+  <div class="sw ot-slide" data-live="wall">
+    <div class="joinpill">slideworks.live · <b>482 913</b></div>
+    <div class="kicker">Open question</div>
+    <h2 class="h">What would you ship this Friday if nothing could go wrong?</h2>
+    <div class="bd">
+      <ol class="ot-wall">
+        <li><b>1</b><p>The new invoice PDF. It's been done for three weeks.</p></li>
+        <li><b>2</b><p>Saved cards, for the 20% of people who pay twice a month</p></li>
+        <li><b>4</b><p>Dark mode for the dashboard</p></li>
+        <li><b>7</b><p>Deleting the old export job nobody uses</p></li>
+      </ol>
     </div>
   </div>
 </template>
