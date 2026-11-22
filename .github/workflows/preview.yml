@@ -1,0 +1,113 @@
+name: Preview site
+
+# For every pull request that touches the site, publish site/ as a Cloudflare
+# Pages preview (branch pr-<number> of the `slideworks` project; production is
+# only ever main), upload site/ as a workflow artifact, and keep one comment on
+# the pull request with both links. The comment is updated on every push.
+on:
+  pull_request:
+    paths:
+      - "site/**"
+      - ".github/workflows/preview.yml"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    environment:
+      name: preview
+      url: ${{ steps.deploy.outputs.url }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Upload the site as an artifact
+        id: artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-pr-${{ github.event.pull_request.number }}
+          path: site/
+          retention-days: 14
+
+      # Pull requests from forks get no secrets, so they get the artifact only.
+      - name: Check Cloudflare secrets
+        id: secrets
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::CLOUDFLARE_API_TOKEN or CLOUDFLARE_ACCOUNT_ID is not set; skipping the preview deploy."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-node@v5
+        if: steps.secrets.outputs.ready == 'true'
+        with:
+          node-version: 22
+
+      - name: Deploy the preview to Cloudflare Pages
+        id: deploy
+        if: steps.secrets.outputs.ready == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          BRANCH: pr-${{ github.event.pull_request.number }}
+          SHA: ${{ github.event.pull_request.head.sha }}
+          TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          set -o pipefail
+          npx --yes wrangler@4.147.0 pages deploy site \
+            --project-name slideworks \
+            --branch "$BRANCH" \
+            --commit-hash "$SHA" \
+            --commit-message "$TITLE" | tee deploy.log
+          # The deployment's own URL (https://<hash>.slideworks.pages.dev) shows this commit.
+          url=$(grep -oE 'https://[a-z0-9]+\.slideworks\.pages\.dev' deploy.log | head -1)
+          if [ -z "$url" ]; then
+            echo "::error::No preview URL in the wrangler output."
+            exit 1
+          fi
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "alias=https://$BRANCH.slideworks.pages.dev" >> "$GITHUB_OUTPUT"
+
+      - name: Comment the links on the pull request
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          SHA: ${{ github.event.pull_request.head.sha }}
+          URL: ${{ steps.deploy.outputs.url }}
+          ALIAS: ${{ steps.deploy.outputs.alias }}
+          ARTIFACT: ${{ steps.artifact.outputs.artifact-url }}
+        run: |
+          marker='<!-- site-preview -->'
+          {
+            echo "$marker"
+            echo "### Site preview"
+            echo
+            if [ -n "$URL" ]; then
+              echo "**[Open the preview of ${SHA:0:7}]($URL)**"
+              echo
+              echo "The newest commit on this pull request is always at $ALIAS"
+            else
+              echo "No live preview for this run: the Cloudflare secrets aren't available to it."
+            fi
+            echo
+            echo "Site files: [download the artifact]($ARTIFACT) (a zip, kept for 14 days)."
+          } > comment.md
+          id=$(gh api "repos/$GITHUB_REPOSITORY/issues/$PR/comments" --paginate \
+            --jq ".[] | select(.body | startswith(\"$marker\")) | .id" | head -1)
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/$GITHUB_REPOSITORY/issues/comments/$id" -F body=@comment.md > /dev/null
+          else
+            gh pr comment "$PR" --repo "$GITHUB_REPOSITORY" --body-file comment.md
+          fi

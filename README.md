@@ -23,6 +23,8 @@ Merging to `main` publishes the site. [`.github/workflows/deploy.yml`](.github/w
 
 The workflow needs two secrets, set on the repository or on the `slide-works` organisation: `CLOUDFLARE_API_TOKEN`, a token with **Account → Cloudflare Pages: Edit**, and `CLOUDFLARE_ACCOUNT_ID`. Until both exist, the deploy step is skipped with a notice rather than failing.
 
+Every pull request that touches `site/` gets a preview. [`.github/workflows/preview.yml`](.github/workflows/preview.yml) publishes `site/` to the same Pages project on the branch `pr-<number>`, so it never touches production, and uploads `site/` as a workflow artifact. It then keeps one comment on the pull request with a link to that commit's preview, the stable `https://pr-<number>.slideworks.pages.dev` address and the artifact. Pull requests from forks get no secrets, so they get the artifact only.
+
 To deploy by hand with the same token in your environment:
 
 ```sh
