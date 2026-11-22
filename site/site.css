@@ -736,3 +736,30 @@ button.kbtn:hover { border-color: #3b4a85; }
 .hp-q li i { display: grid; place-items: center; height: 24px; border-radius: 6px; background: #1b2130; color: #fff; font: 700 10.5px/1 var(--font-mono); font-style: normal; }
 .hero-phone .rx-row { gap: 4px; }
 .hero-phone .rx-row button { height: 32px; line-height: 32px; font-size: 15px; border-radius: 9px; }
+
+/* ---------- the problem: the seven-minute drift ---------- */
+.problem + .pillars { padding-top: clamp(3rem, 6vw, 4.5rem); }
+.attn { margin: 0; padding: clamp(12px, 2vw, 22px); border-radius: var(--radius); background: var(--color-bg); border: 1px solid var(--color-border); }
+.attn svg { display: block; width: 100%; height: auto; }
+.attn .ax { stroke: var(--color-border); stroke-width: 2; }
+.attn .seven { stroke: var(--color-later); stroke-width: 2; stroke-dasharray: 6 8; }
+.attn .lab { fill: var(--color-muted); font: 500 15px var(--font-sans); }
+.attn .lec, .attn .room { fill: none; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.attn .lec { stroke: var(--color-muted); opacity: .55; }
+.attn .room { stroke: var(--color-accent); }
+.attn .dot { fill: var(--color-accent); stroke: var(--color-bg); stroke-width: 3; }
+.attn .mk { fill: var(--color-text); font: 700 16px var(--font-sans); }
+.attn figcaption { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem 1rem; margin-top: .6rem; font-size: .88rem; color: var(--color-text); }
+.attn .leg { display: inline-flex; align-items: center; gap: .45rem; white-space: nowrap; }
+.attn .key { display: inline-block; width: 22px; height: 5px; border-radius: 3px; }
+.attn .key.lec { background: var(--color-muted); opacity: .55; }
+.attn .key.room { background: var(--color-accent); }
+.attn .note { margin-left: auto; color: var(--color-muted); font-size: .82rem; }
+.pains h3 { font-size: 1.05rem; }
+.pains-turn { margin: 2.5rem 0 0; font: 800 clamp(1.3rem, 2.6vw, 1.75rem)/1.25 var(--font-display); letter-spacing: -.02em; max-width: 40rem; }
+@media (max-width: 600px) {
+  .attn .lab { font-size: 28px; }
+  .attn .mk { font-size: 30px; }
+  .attn .note { margin-left: 0; }
+  .attn .yl { display: none; }
+}

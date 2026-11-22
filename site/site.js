@@ -815,7 +815,7 @@
 
   /* ---------------------------------------------------------------- reveal on scroll */
   {
-    const els = $$('.sec-head, .steps3, .session, .pal-picker, .pal-stage, .templates, .app, .feature-row, .tools-more, .present-wrap, .journey4, .screens2, .roadmap, .start-grid, .pillars .cards');
+    const els = $$('.sec-head, .steps3, .session, .pal-picker, .pal-stage, .templates, .app, .feature-row, .tools-more, .attn, .pains-turn, .present-wrap, .journey4, .screens2, .roadmap, .start-grid, .pillars .cards');
     els.forEach(el => el.classList.add('rv'));
     const io = new IntersectionObserver(entries => entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
