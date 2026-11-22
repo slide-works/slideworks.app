@@ -8,7 +8,7 @@ Every section opens with the presenter's problem, then shows the feature that so
 
 The problem SlideWorks is built around: a room drifts after about seven minutes. People reach for their phones, and "hands up if you've…" only wakes the few who are happy to be seen. SlideWorks turns the phone they drift to into the way they take part. The `#problem` section near the top states this, and the live-room sections each open with their own slice of it:
 
-- `#present`: a laptop on a lectern pins you behind it.
+- `#present`: speaker notes on a laptop keep you at the podium looking down, and a clicker only moves the slides.
 - `#audience`: every step between a guest and your first question loses people.
 - `#polls`: "hands up" only hears from a few.
 - `#words`: multiple choice only gives back the answers you thought of.
