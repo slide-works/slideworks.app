@@ -863,23 +863,39 @@
       { from: 'en', en: 'And design draws the thin version, not only the final one.', th: 'และดีไซน์ก็วาดเวอร์ชันบาง ไม่ใช่แค่เวอร์ชันสุดท้าย', ja: 'そしてデザインは、最終版だけでなく薄い版も描きます。', es: 'Y diseño dibuja la versión mínima, no solo la final.' },
       { from: 'en', en: 'Pick yours before you leave today.', th: 'เลือกของคุณก่อนกลับวันนี้', ja: '今日帰る前に、自分のものを選んでください。', es: 'Elige el tuyo antes de irte hoy.' },
     ];
-    const words = (text, lang) => lang === 'th' || lang === 'ja' ? [...text.matchAll(/.{1,4}/gu)].map(m => m[0]) : text.split(' ').map((w, k) => (k ? ' ' : '') + w);
+    // Words as a speech model emits them. Thai and Japanese have no spaces, so split them with the browser's word segmenter.
+    const seg = {};
+    function words(text, lang) {
+      if (lang === 'en' || lang === 'es') return text.split(' ').map((w, k) => (k ? ' ' : '') + w);
+      if (!('Segmenter' in Intl)) return [...text.matchAll(/\S+\s*/gu)].map(m => m[0]);
+      seg[lang] ??= new Intl.Segmenter(lang, { granularity: 'word' });
+      const out = [];
+      for (const { segment } of seg[lang].segment(text)) { if (out.length && out[out.length - 1].length < 3) out[out.length - 1] += segment; else out.push(segment); }
+      return out;
+    }
+    const ENGLISH_NAME = { en: 'English', th: 'Thai', ja: 'Japanese', es: 'Spanish' };
 
-    const [lvSlides, lvSubs, lvListen] = $$('.lv', sec);
+    const [lvSlides, lvSubs, lvListen] = $$('.lg-lv', sec);
     const state = { slides: 'en', subs: 'th', listen: 'th' };
     let heard = [];      // finals so far: indexes into LINES
-    let partial = null;  // { i, text } while Sam is mid-sentence
+    let partial = null;  // { from, text } while Sam is mid-sentence
+    let skipTimer = 0;
 
     function drawSubs() {
       const lang = state.subs;
       const live = partial && partial.from === lang;
       const finals = heard.slice(live ? -1 : -2).map(i => LINES[i][lang]);
-      const html = finals.map(t => `<p class="old">${esc(t)}</p>`);
+      // Only a line that wasn't on screen before fades in; redrawing every word must not restart it.
+      const box = $('[data-sub-lines]', lvSubs);
+      const before = new Set($$('p[data-t]', box).map(p => p.dataset.t));
+      const line = (t, cls) => `<p data-t="${esc(t)}" class="${cls}${before.has(t) ? '' : ' fresh'}">${esc(t)}</p>`;
+      const html = finals.map((t, k) => line(t, live || k < finals.length - 1 ? 'old' : ''));
       if (live) html.push(`<p>${esc(partial.text)}<span class="part"> …</span></p>`);
-      else if (html.length) html[html.length - 1] = html[html.length - 1].replace(' class="old"', '');
-      $('[data-sub-lines]', lvSubs).innerHTML = html.join('');
+      box.innerHTML = html.join('');
       const from = live ? lang : heard.length ? LINES[heard[heard.length - 1]].from : 'en';
       $('[data-sub-head]', lvSubs).textContent = from === lang ? 'Subtitles · live' : `Subtitles · translated from ${NAME[from]}`;
+      // Listen is offered to guests reading a language other than Sam's (SW-885 D11).
+      $('[data-sub-listen]', lvSubs).hidden = lang === 'en';
     }
     function drawListen() {
       const lang = state.listen;
@@ -891,9 +907,18 @@
       $('[data-listen-head]', lvListen).textContent = `Listening · ${CHIP[lang]}`;
     }
     function drawTicker() {
-      const src = partial || (heard.length ? { from: LINES[heard[heard.length - 1]].from, text: LINES[heard[heard.length - 1]][LINES[heard[heard.length - 1]].from] } : null);
-      $('[data-sp-words]', lvSubs).textContent = src ? src.text : '…';
+      const last = heard.length ? LINES[heard[heard.length - 1]] : null;
+      const src = partial || (last ? { from: last.from, text: last[last.from] } : null);
+      // The ticker keeps the newest words in view (direction: rtl); the mark keeps end punctuation on the right.
+      $('[data-sp-words]', lvSubs).textContent = src ? src.text + '‎' : '…';
       $('[data-sp-tag]', lvSubs).textContent = src ? CHIP[src.from] : 'EN';
+    }
+    // Sam runs ahead after the last line: listening jumps to the newest and says so for 6 seconds (SW-885 D9, D24).
+    function showSkip() {
+      const note = $('[data-listen-skip]', lvListen), rail = $('[data-rail-skip]', lvListen);
+      note.hidden = rail.hidden = false;
+      clearTimeout(skipTimer);
+      skipTimer = setTimeout(() => { note.hidden = rail.hidden = true; }, 6000);
     }
     const drawAll = () => { drawSubs(); drawListen(); drawTicker(); };
 
@@ -902,7 +927,7 @@
       group.addEventListener('click', e => {
         const b = e.target.closest('button');
         if (!b) return;
-        $$('button', group).forEach(x => x.setAttribute('aria-checked', String(x === b)));
+        $$('button', group).forEach(x => x.setAttribute('aria-pressed', String(x === b)));
         state[key] = b.dataset.lang;
         setGuest(scope, state[key]);
         drawAll();
@@ -930,11 +955,12 @@
         text += w;
         partial = { from: line.from, text };
         drawSubs(); drawTicker();
-        await sleep(line.from === 'en' ? 170 : 120);
+        await sleep(line.from === 'en' ? 170 : 140);
       }
       partial = null;
       heard.push(next);
       if (heard.length > 6) heard = heard.slice(-6);
+      if (next === LINES.length - 1) showSkip();
       next = (next + 1) % LINES.length;
       drawAll();
     }
@@ -957,26 +983,33 @@
     document.addEventListener('visibilitychange', () => { if (!document.hidden && visible) loop(); });
 
     // Hear it: the browser's own voice reads the line being read, as the guest's phone would.
+    // Voices load ahead of the click, so speak() runs inside the tap, which iOS Safari requires.
     const hearBtn = $('[data-hear]', lvListen), hearMsg = $('[data-hear-msg]', lvListen);
-    const voices = () => new Promise(res => {
-      const v = speechSynthesis.getVoices();
-      if (v.length) return res(v);
-      const t = setTimeout(() => res(speechSynthesis.getVoices()), 1200);
-      speechSynthesis.addEventListener('voiceschanged', () => { clearTimeout(t); res(speechSynthesis.getVoices()); }, { once: true });
-    });
-    hearBtn.addEventListener('click', async () => {
+    const canSpeak = 'speechSynthesis' in window;
+    let voiceList = [];
+    if (canSpeak) {
+      const load = () => { voiceList = speechSynthesis.getVoices(); };
+      load();
+      speechSynthesis.addEventListener('voiceschanged', load);
+    }
+    function voiceFor(lang) {
+      const want = VOICE[lang].toLowerCase();
+      const norm = v => v.lang.replace('_', '-').toLowerCase();
+      return voiceList.find(v => norm(v) === want) || voiceList.find(v => norm(v).startsWith(want.slice(0, 2)));
+    }
+    hearBtn.addEventListener('click', () => {
       const lang = state.listen;
+      if (!canSpeak) { hearMsg.textContent = 'This browser can\'t read text aloud.'; return; }
+      if (!voiceList.length) voiceList = speechSynthesis.getVoices();
+      const voice = voiceFor(lang);
+      if (!voice) { hearMsg.textContent = `This browser has no ${ENGLISH_NAME[lang]} voice. A phone without one shows how to add it, and the subtitles carry on.`; return; }
       const line = $('[data-listen-lines] p.reading', lvListen);
-      if (!('speechSynthesis' in window)) { hearMsg.textContent = 'This browser can\'t read text aloud.'; return; }
-      const want = VOICE[lang];
-      const voice = (await voices()).find(v => v.lang.replace('_', '-').toLowerCase().startsWith(want.slice(0, 2)));
-      if (!voice) { hearMsg.textContent = `This browser has no ${NAME[lang]} voice. A phone with none shows how to add one, and the subtitles carry on.`; return; }
       speechSynthesis.cancel();
       const u = new SpeechSynthesisUtterance(line ? line.textContent : LINES[0][lang]);
-      u.lang = want;
+      u.lang = VOICE[lang];
       u.voice = voice;
       speechSynthesis.speak(u);
-      hearMsg.textContent = `Reading in ${NAME[lang]} with "${voice.name}".`;
+      hearMsg.textContent = `Reading in ${ENGLISH_NAME[lang]} with the voice "${voice.name}".`;
     });
   }
 
@@ -994,7 +1027,7 @@
 
   /* ---------------------------------------------------------------- reveal on scroll */
   {
-    const els = $$('.sec-head, .lv, .vs, .steps3, .session, .pal-picker, .pal-stage, .templates, .app, .feature-row, .tools-more, .attn, .pains-turn, .present-wrap, .journey4, .screens2, .roadmap, .start-grid, .pillars .cards');
+    const els = $$('.sec-head, #languages .lg-lv, #languages .vs, .steps3, .session, .pal-picker, .pal-stage, .templates, .app, .feature-row, .tools-more, .attn, .pains-turn, .present-wrap, .journey4, .screens2, .roadmap, .start-grid, .pillars .cards');
     els.forEach(el => el.classList.add('rv'));
     const io = new IntersectionObserver(entries => entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
