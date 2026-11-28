@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SlideWorks · Present from a link, bring the room in</title>
-<meta name="description" content="Present from a link and bring the room in. SlideWorks is open source: run the talk from your phone while guests join from a QR code to vote, fill a word cloud, ask questions and react. Your agent builds the deck over MCP.">
+<meta name="description" content="Present from a link and bring the room in. SlideWorks is open source: run the talk from your phone while guests join from a QR code to vote, fill a word cloud, ask questions and react, with the slides and live subtitles in each guest's language. Your agent builds the deck over MCP.">
 <meta name="theme-color" content="#f4f5f7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0f1424" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://slideworks.app/">
@@ -19,7 +19,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Noto+Sans+Thai:wght@400;600;700&family=Noto+Sans+JP:wght@400;700&display=swap">
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="slides.css">
 <link rel="stylesheet" href="site.css">
@@ -61,6 +61,10 @@
     <symbol id="i-history" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12a8.5 8.5 0 1 0 2.5-6"/><path d="M3.5 4v4h4M12 7.5V12l3 2"/></g></symbol>
     <symbol id="i-pause" viewBox="0 0 24 24"><g fill="currentColor"><rect x="6.5" y="5" width="4" height="14" rx="1"/><rect x="13.5" y="5" width="4" height="14" rx="1"/></g></symbol>
     <symbol id="i-replay" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4.5h4.5"/></g></symbol>
+    <symbol id="i-cc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M10.5 10.2a2.4 2.4 0 1 0 0 3.6M17 10.2a2.4 2.4 0 1 0 0 3.6"/></g></symbol>
+    <symbol id="i-head" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3.5" y="14" width="4.5" height="6.5" rx="1.6"/><rect x="16" y="14" width="4.5" height="6.5" rx="1.6"/></g></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></g></symbol>
+    <symbol id="i-speak" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></g></symbol>
     <symbol id="i-server" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3.5" y="4" width="17" height="7" rx="2"/><rect x="3.5" y="13" width="17" height="7" rx="2"/><path d="M7.5 7.5h.01M7.5 16.5h.01"/></g></symbol>
   </defs>
 </svg>
@@ -73,6 +77,7 @@
     <nav class="nav-links" aria-label="Sections">
       <a href="#present">Presenting</a>
       <a href="#audience">The room</a>
+      <a href="#languages">Languages</a>
       <a href="#how">Your agent</a>
       <a href="#blocks">Layouts</a>
       <a href="#brand">Your brand</a>
@@ -95,7 +100,7 @@
     <div class="wrap">
       <p class="eyebrow"><span class="dot-live"></span>Open source · Self-hosted · MIT</p>
       <h1>Present from a link.<br><span class="grad">Bring the whole room in.</span></h1>
-      <p class="lede">Run the talk from your phone while the room joins from theirs, with no app and no account. They vote, fill a word cloud, ask and upvote questions, and react on the big screen. Your agent builds the deck from your notes, polls included.</p>
+      <p class="lede">Run the talk from your phone while the room joins from theirs, with no app and no account. They vote, fill a word cloud, ask and upvote questions, and react on the big screen. Each guest can read the slides and your words in their own language. Your agent builds the deck from your notes, polls included.</p>
       <div class="cta">
         <a class="btn btn-primary btn-lg" href="https://github.com/slide-works/slideworks"><svg><use href="#i-gh"/></svg><span>Follow on GitHub</span></a>
         <a class="btn btn-ghost btn-lg" href="#audience">See the room join</a>
@@ -535,6 +540,189 @@
     </div>
   </section>
 
+  <!-- ============================================================ LANGUAGES (SW-942: SW-883, SW-886, SW-943, SW-884, SW-885) -->
+  <section id="languages" class="night">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kick">Every language in the room</p>
+        <h2>Your slides and your words, <span class="grad">in each guest's own language</span></h2>
+        <p class="sec-lede">You give the talk in one language, but the room often speaks several. People following in their second language take in less, and they rarely tell you. SlideWorks helps them in three ways. The slides are already in their language when they join. Your words show as live subtitles while you talk. And they can listen to the translation in their headphones. Each guest picks from 16 languages on their own phone, including Thai, Japanese, Korean, Vietnamese, Malay, Indonesian, Mandarin and Cantonese.</p>
+      </div>
+
+      <!-- Level 1: slide translations (SW-883, SW-886) -->
+      <div class="lv">
+        <div class="lv-text">
+          <p class="lv-n"><span>1</span>Before the talk</p>
+          <h3>The slides, in their language</h3>
+          <p>Ask your agent to translate the deck, all of it or only part of it. A guest's phone opens in its own language when the deck has it, and the language chip in the header switches it with one tap. The big screen stays in your language. Pick a language on the phone to try it.</p>
+          <ul class="lv-list">
+            <li><b>Partly translated is fine.</b> A line with no translation shows in your language, and the phone says how many lines on that slide are untranslated.</li>
+            <li><b>Polls are translated too.</b> Every language's answers count toward the same bars.</li>
+            <li><b>See what's missing.</b> The deck page lists each language's coverage and which slides need work. Preview in opens the deck in any language.</li>
+            <li><b>Turn the phone sideways</b> and the slide fills the screen, so people at the back can read it.</li>
+          </ul>
+        </div>
+        <div class="lv-vis">
+          <div class="phone aud lg-phone" aria-label="A guest's phone, reading the slides in the language picked below">
+            <div class="phone-screen aud-in">
+              <div class="aud-status">9:41</div>
+              <div class="aud-head"><span class="aud-logo">S</span><div><b data-lg-title>Ship smaller</b><small>Sam Rivera</small></div><span class="lg-chip"><svg><use href="#i-globe"/></svg><b data-lg-chip>EN</b></span><span class="pr-chip"><i></i>Live</span></div>
+              <div class="aud-slide"><div class="frame" data-lg-slide></div></div>
+              <div class="aud-prog"><span>Slide 15</span><i><b style="width:94%"></b></i><span>16</span></div>
+              <p class="lg-fall" data-lg-fall hidden><i></i>1 line on this slide is in English</p>
+              <div class="aud-wait"><span class="dots3"><i></i><i></i><i></i></span><b data-lg-wait>Nothing to answer yet</b></div>
+              <div class="aud-url"><svg><use href="#i-lock"/></svg>slideworks.live/482913</div>
+            </div>
+          </div>
+          <div class="lv-side">
+            <div class="lg-pick" role="radiogroup" aria-label="The guest's language" data-lg-pick="slides">
+              <button type="button" role="radio" data-lang="en" aria-checked="true">English</button>
+              <button type="button" role="radio" data-lang="th" aria-checked="false">ไทย</button>
+              <button type="button" role="radio" data-lang="ja" aria-checked="false">日本語</button>
+              <button type="button" role="radio" data-lang="es" aria-checked="false">Español</button>
+            </div>
+            <div class="tcard" aria-label="The Translations card on the deck page">
+              <div class="tcard-h"><b>Translations</b><span class="tsw" aria-hidden="true"><i></i></span></div>
+              <p class="tcard-p">Primary language <b>English</b>. Every other language falls back to it.</p>
+              <ul class="tcard-rows">
+                <li><div><b>ไทย</b><small>Thai</small></div><span class="tm"><i style="width:100%"></i></span><span class="tn">24 of 24</span><span class="tp ok">complete</span></li>
+                <li><div><b>日本語</b><small>Japanese</small></div><span class="tm"><i style="width:96%"></i></span><span class="tn">23 of 24</span><span class="tp warn">1 missing · slide 15</span></li>
+                <li><div><b>Español</b><small>Spanish</small></div><span class="tm"><i style="width:96%"></i></span><span class="tn">23 of 24</span><span class="tp late">1 out of date · slide 3</span></li>
+              </ul>
+              <div class="tcard-f"><span class="abtn-d">Preview in ▾</span><span>Add a language…</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Level 2: live subtitles (SW-884, translation engine SW-943) -->
+      <div class="lv">
+        <div class="lv-text">
+          <p class="lv-n"><span>2</span>While you talk</p>
+          <h3>Live subtitles, translated as you speak</h3>
+          <p>Tap Subtitles in the SlideWorks app. Your phone turns your voice into text, and the server translates each line into every language the room is reading. Guests see it under the slide within about three seconds of the end of your sentence. Switch the guest's language below and watch the same talk arrive in it.</p>
+          <ul class="lv-list">
+            <li><b>English, Thai, or both.</b> Mix them in one talk and each line is translated from the language you spoke it in.</li>
+            <li><b>Your terms stay your terms.</b> The translation reads the current slide and its translations, so product names come out the same as on the slide.</li>
+            <li><b>No audio leaves your phone.</b> Speech becomes text on the phone, nothing is recorded, and Pause takes you off the record at once.</li>
+            <li><b>Captions on the big screen</b> are one switch away, in the language you're speaking.</li>
+          </ul>
+        </div>
+        <div class="lv-vis">
+          <div class="lv-bar" aria-label="The presenter window's live chips">
+            <span class="pr-chip live"><i></i>Live <span class="mono">482 913</span></span>
+            <span class="rd-chip">Reading in <b>EN 31</b> <b>ไทย 9</b> <b>日本語 5</b> <b>ES 2</b></span>
+            <span class="cc-chip"><svg><use href="#i-cc"/></svg>Subtitles · EN + ไทย</span>
+          </div>
+          <div class="phone remote sp-phone" aria-label="The speaker's phone in the SlideWorks app">
+            <div class="phone-screen">
+              <div class="rm-top"><b>Ship smaller</b><span class="pr-chip"><i></i>Live</span></div>
+              <div class="rm-cur"><div class="frame" data-slide="cards"></div></div>
+              <div class="rm-notes"><b>Ask each role to pick theirs.</b> Then the close.</div>
+              <div class="sp-tick" aria-live="off"><span class="sp-lvl"><i></i><i></i><i></i></span><span class="sp-words" data-sp-words>…</span><span class="sp-tag" data-sp-tag>EN</span></div>
+              <div class="rm-ctl">
+                <button type="button" aria-label="Previous slide" tabindex="-1"><svg><use href="#i-left"/></svg></button>
+                <button type="button" class="rm-next-btn" tabindex="-1">Next<svg><use href="#i-right"/></svg></button>
+              </div>
+              <div class="sp-acts" aria-hidden="true"><span><svg><use href="#i-grid"/></svg>Slides</span><span><svg><use href="#i-skip"/></svg>Skip</span><span><svg><use href="#i-black"/></svg>Blackout</span><span>#<br>Join</span><span class="on"><svg><use href="#i-cc"/></svg>Live</span></div>
+            </div>
+          </div>
+          <div class="phone aud lg-phone" aria-label="A guest's phone with the subtitle strip">
+            <div class="phone-screen aud-in">
+              <div class="aud-status">9:41</div>
+              <div class="aud-head"><span class="aud-logo">S</span><div><b data-lg-title>Ship smaller</b><small>Sam Rivera</small></div><span class="lg-chip"><svg><use href="#i-globe"/></svg><b data-lg-chip>EN</b></span><span class="pr-chip"><i></i>Live</span></div>
+              <div class="aud-slide"><div class="frame" data-lg-slide></div></div>
+              <div class="sub" aria-live="polite">
+                <div class="sub-h"><svg><use href="#i-cc"/></svg><span data-sub-head>Subtitles · live</span><span class="sub-hide">Hide</span></div>
+                <div class="sub-lines" data-sub-lines></div>
+              </div>
+              <div class="rx-row mini" aria-hidden="true"><span>👍</span><span>❤️</span><span>😂</span><span>😮</span><span>👏</span></div>
+              <div class="aud-url"><svg><use href="#i-lock"/></svg>slideworks.live/482913</div>
+            </div>
+          </div>
+          <div class="lg-pick wide" role="radiogroup" aria-label="The guest's language" data-lg-pick="subs">
+            <button type="button" role="radio" data-lang="en" aria-checked="false">English</button>
+            <button type="button" role="radio" data-lang="th" aria-checked="true">ไทย</button>
+            <button type="button" role="radio" data-lang="ja" aria-checked="false">日本語</button>
+            <button type="button" role="radio" data-lang="es" aria-checked="false">Español</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Level 3: listening (SW-885) -->
+      <div class="lv">
+        <div class="lv-text">
+          <p class="lv-n"><span>3</span>In their ears</p>
+          <h3>Listen to the talk in your own language</h3>
+          <p>A guest taps Listen in the subtitle strip, puts on headphones, and hears each translated line read by their phone's own voice. Turn the phone sideways and the slide fills the screen with the lines over it, like a film. Press Hear it to try a line in your browser.</p>
+          <ul class="lv-list">
+            <li><b>Always close to live.</b> If listening falls more than three lines behind, it jumps to the newest and says how many it skipped.</li>
+            <li><b>Keeps going with the screen off</b> in the SlideWorks app, with Pause and Jump to live on the lock screen.</li>
+            <li><b>In the app, it pauses when the headphones come out,</b> so a phone never starts talking in the middle of the room.</li>
+            <li><b>Choose the voice and speed.</b> Traditional Chinese readers choose Cantonese or Mandarin.</li>
+          </ul>
+          <div class="hear">
+            <button type="button" class="btn btn-primary" data-hear><svg><use href="#i-speak"/></svg><span>Hear it</span></button>
+            <span class="hear-msg" data-hear-msg aria-live="polite"></span>
+          </div>
+        </div>
+        <div class="lv-vis">
+          <div class="phone aud lg-phone" aria-label="A guest's phone, listening">
+            <div class="phone-screen aud-in">
+              <div class="aud-status">9:41</div>
+              <div class="aud-head"><span class="aud-logo">S</span><div><b data-lg-title>Ship smaller</b><small>Sam Rivera</small></div><span class="lg-chip"><svg><use href="#i-globe"/></svg><b data-lg-chip>ไทย</b></span><span class="pr-chip"><i></i>Live</span></div>
+              <div class="aud-slide"><div class="frame" data-lg-slide></div></div>
+              <div class="sub listening">
+                <div class="sub-h"><svg><use href="#i-cc"/></svg><span class="sp-lvl"><i></i><i></i><i></i></span><span data-listen-head>Listening · ไทย</span><span class="sub-stop">Stop</span></div>
+                <div class="sub-lines" data-listen-lines></div>
+              </div>
+              <div class="rx-row mini" aria-hidden="true"><span>👍</span><span>❤️</span><span>😂</span><span>😮</span><span>👏</span></div>
+              <div class="aud-url"><svg><use href="#i-lock"/></svg>slideworks.live/482913</div>
+            </div>
+          </div>
+          <div class="land" aria-label="The same guest with the phone turned sideways">
+            <div class="land-screen">
+              <div class="land-slide"><div class="frame" data-lg-slide></div><div class="land-cap" data-land-cap></div></div>
+              <div class="land-rail"><svg><use href="#i-head"/></svg><span class="sp-lvl"><i></i><i></i><i></i></span><b data-lg-chip>ไทย</b></div>
+            </div>
+          </div>
+          <div class="lg-pick wide" role="radiogroup" aria-label="The guest's language" data-lg-pick="listen">
+            <button type="button" role="radio" data-lang="th" aria-checked="true">ไทย</button>
+            <button type="button" role="radio" data-lang="ja" aria-checked="false">日本語</button>
+            <button type="button" role="radio" data-lang="es" aria-checked="false">Español</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- "Can't AirPods do this now?" -->
+      <div class="vs">
+        <div class="vs-head">
+          <h3>"Can't AirPods do this now?"</h3>
+          <p>Phones can now translate a conversation in your ears, and it works well one to one. A talk is a different job. The translator has to hear the speaker clearly, serve a room with several languages at once, and cover the slides as well as the speech. Phone translation does none of that, and on iPhone and AirPods the language list stops short of much of Asia.</p>
+        </div>
+        <div class="vs-wrap">
+          <table class="vs-table">
+            <thead><tr><th></th><th>AirPods Live Translation</th><th>A translate app in headphones</th><th class="us">SlideWorks</th></tr></thead>
+            <tbody>
+              <tr><th>Languages</th><td>About nine. No Thai, Vietnamese, Malay, Indonesian or Cantonese.</td><td>Many, depending on the app and the phone</td><td class="us">16, with Thai, Vietnamese, Malay, Indonesian, Japanese, Korean, Mandarin and Cantonese</td></tr>
+              <tr><th>What each guest needs</th><td>Recent AirPods and an iPhone 15 Pro or later with Apple Intelligence. Not offered to EU accounts in the EU.</td><td>The app installed, set up for the right pair of languages</td><td class="us">Any phone with a browser. Headphones only to listen.</td></tr>
+              <tr><th>What it hears</th><td colspan="2">Your voice from their seat, through the room's speakers, the echo and the person next to them</td><td class="us">Your voice at your own phone or lapel mic</td></tr>
+              <tr><th>A room in several languages</th><td colspan="2">Each guest sets up one language pair on their own phone</td><td class="us">Every language the room reads, at once. Each line is translated once per language.</td></tr>
+              <tr><th>Your slides, polls and questions</th><td colspan="2">Not translated</td><td class="us">Translated, and the slide's translations keep your terms consistent in the subtitles</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="vs-note">AirPods details are from Apple's <a href="https://support.apple.com/en-us/123185">Live Translation with AirPods</a> page in November 2026. Check it for your region and model.</p>
+      </div>
+
+      <div class="feature-row">
+        <div><svg><use href="#i-server"/></svg><h3>Translated on your server</h3><p>Open translation models run on your own server's CPU, with no cloud service. An admin page picks the model for each pair of languages and lets you try them side by side.</p></div>
+        <div><svg><use href="#i-mic"/></svg><h3>Speech stays on the speaker's phone</h3><p>The speech model runs on the phone. No audio is uploaded or stored, and the transcript is kept only if you turn that on.</p></div>
+        <div><svg><use href="#i-agent"/></svg><h3>Your agent translates the slides</h3><p><code>translate_slides</code> writes a language and checks that every line still fits, in that language's font. <code>check_deck</code> then renders each language and reports what doesn't fit.</p></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============================================================ HOW -->
   <section id="how" class="band">
     <div class="wrap">
@@ -577,7 +765,7 @@
         <div><svg><use href="#i-check"/></svg><h3>Checked the way a viewer sees it</h3><p><code>check_deck</code> renders each slide and reports overflow, text under 20 px, contrast below WCAG AA, broken images and vague alt text. The deck page shows the same list.</p></div>
         <div><svg><use href="#i-blocks"/></svg><h3>A whole deck in one call</h3><p><code>add_slides</code> sends many slides at once, with their notes and poll settings, so a 40-slide deck doesn't take 40 round trips.</p></div>
       </div>
-      <p class="tools-more"><svg><use href="#i-agent"/></svg>38 MCP tools cover decks, slides, images, sharing, looks, templates and the live room. <a href="https://docs.slideworks.app/agents/tools/">See every tool</a></p>
+      <p class="tools-more"><svg><use href="#i-agent"/></svg>42 MCP tools cover decks, slides, images, sharing, looks, templates, translations and the live room. <a href="https://docs.slideworks.app/agents/tools/">See every tool</a></p>
     </div>
   </section>
 
@@ -786,21 +974,28 @@
             <article><b>Live polls</b><p>Live bars, rounds and an optional correct answer.</p></article>
             <article><b>Word clouds and open text</b><p>The room's own words, with a filter for bad ones.</p></article>
             <article><b>Q&amp;A and reactions</b><p>Ask, upvote, show a question on screen, and five reactions.</p></article>
-            <article><b>Agent-built decks</b><p>An MCP server with 38 tools, a deck library, sharing, an activity log and the player.</p></article>
+            <article><b>Agent-built decks</b><p>An MCP server with 42 tools, a deck library, sharing, an activity log and the player.</p></article>
             <article><b>26 layouts</b><p>From title and bullets to flow, bars, stack, levels, loop, links and video.</p></article>
             <article><b>Visual check</b><p>Your agent renders and measures every slide, and fixes what doesn't fit.</p></article>
             <article><b>Templates and palettes</b><p>Talk, workshop and update. Cobalt, Ember, Plum and Midnight. Link preview cards.</p></article>
             <article><b>Custom templates</b><p>Your fonts, logos and palette in an editor, with versions and sharing.</p></article>
+            <article><b>Slide translations</b><p>Guests read the slides in their language, with coverage on the deck page and checks in every language.</p></article>
+            <article><b>Live subtitles</b><p>Your words as subtitles on every phone, translated into each guest's language as you speak.</p></article>
+            <article><b>Listen in your language</b><p>Translated lines read aloud in the guest's headphones, and film-style captions in landscape.</p></article>
+            <article><b>The SlideWorks app</b><p>Present and follow talks on iPhone and Android, with listening that keeps going when the screen locks.</p></article>
+            <article><b>Translation on your server</b><p>Open models on your own CPU, picked per pair of languages in the admin page.</p></article>
           </div>
         </div>
         <div class="rm-col">
           <h3><span class="pill later"><span class="d"></span>Next</span></h3>
+          <article><b>Questions in any language</b><p>Guests type questions in their own language, and you read them all in yours.</p></article>
           <article><b>Custom layouts</b><p>Your own slide layouts inside a template, for the diagrams your brand uses.</p></article>
           <article><b>Import a deck</b><p>Start a template from an existing HTML deck, and later from PowerPoint.</p></article>
           <article><b>Sanzo Wada palettes</b><p>All 348 classic colour combinations as palettes, with contrast fixes.</p></article>
         </div>
         <div class="rm-col">
           <h3><span class="pill grey"><span class="d"></span>Planned</span></h3>
+          <article><b>More voices</b><p>A voice for guests whose phone has none for their language.</p></article>
           <article><b>Quick polls</b><p>Ask the room from the presenter window or your phone, with no slide.</p></article>
           <article><b>More question types</b><p>Scales, ranking, 100 points, 2×2 and guess the number.</p></article>
           <article><b>Quizzes</b><p>Nicknames, scores, teams and a leaderboard.</p></article>
@@ -818,7 +1013,7 @@
         <div>
           <p class="kick">Self-hosted and MIT licensed</p>
           <h2>Run it yourself. <span class="grad">Your decks stay on your server.</span></h2>
-          <p class="sec-lede">SlideWorks is one container with a SQLite database inside. Put it behind your TLS proxy, sign in with Google, and point any MCP client at it. Your decks, polls and questions never leave your server.</p>
+          <p class="sec-lede">SlideWorks is one container with a SQLite database inside. Put it behind your TLS proxy, sign in with Google, and point any MCP client at it. Your decks, polls, questions and translations never leave your server.</p>
           <div class="cta left">
             <a class="btn btn-primary btn-lg" href="https://github.com/slide-works/slideworks"><svg><use href="#i-gh"/></svg><span>Star on GitHub</span></a>
             <a class="btn btn-ghost btn-lg" href="https://docs.slideworks.app">Read the docs</a>

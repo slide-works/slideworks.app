@@ -39,6 +39,7 @@ npx wrangler pages deploy site --project-name slideworks --branch main
 - How the page pitches (problem first, the live room before the agent, shipped features only) is in [`AGENTS.md`](AGENTS.md). Read it before changing any copy.
 - The custom-template section uses a made-up brand, Northwind, through the `data-brand` and `data-font` overrides at the end of `slides.css`. The contrast figures in its checklist are computed in `site.js`.
 - The live poll, the word cloud and the Q&A are simulations in `site.js`: the rest of the room answers, sends words, upvotes and reacts on a timer while the section is on screen, and not at all with reduced motion.
+- The languages section (`#languages`) shows slide translations, live subtitles and listening. Its translated slide is built in `site.js` from the deck's `cards` slide, and the talk's lines are the `LINES` list there. Hear it reads a line with the visitor's own browser voice, and says so when the browser has none for that language. The AirPods comparison quotes Apple's support page, so re-check it when Apple adds languages.
 - If you add a screenshot instead of live HTML, it needs a light and a dark version.
 - The social card is `design/social/og-card.html`. Screenshot it at 1200×630 into `site/og-image.png` after changing it.
 - Keep the site free of organisation-specific names: SlideWorks is open source and generic.
