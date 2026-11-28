@@ -801,6 +801,218 @@
     new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) draw(); schedule(); }, { threshold: .2 }).observe(box.closest('.frame'));
   }
 
+  /* ---------------------------------------------------------------- languages: slides, subtitles and listening (SW-942) */
+  {
+    const sec = $('#languages');
+    const NAME = { en: 'English', th: 'ไทย', ja: '日本語', es: 'Español' };
+    const CHIP = { en: 'EN', th: 'ไทย', ja: '日本語', es: 'ES' };
+    const VOICE = { th: 'th-TH', ja: 'ja-JP', es: 'es-ES', en: 'en-GB' };
+    // The "cards" slide (slide 15) as an agent's translate_slides would leave it. Japanese is missing one line,
+    // which falls back to English, as a partly translated deck does.
+    const DECKS = { en: 'Ship smaller', th: 'ส่งงานให้เล็กลง', ja: '小さく出荷する', es: 'Entregar en pequeño' };
+    const PARTS_IN = {
+      th: ['ต้นทุน', 'หั่นงาน', 'ส่งงาน', 'ทำให้ยั่งยืน'],
+      ja: ['コスト', '小さく切る', '出荷する', '定着させる'],
+      es: ['El coste', 'Divídelo', 'Entrégalo', 'Que se quede'],
+    };
+    const CARDS = {
+      th: { kicker: 'ใครทำอะไร', h: 'ทุกคนเปลี่ยนนิสัยหนึ่งอย่าง', cards: [
+        ['โปรดักต์', 'เขียนประโยคเดโมก่อน', 'ทุกสตอรีเริ่มด้วย "ตอนนี้ลูกค้าสามารถ …"'],
+        ['วิศวกรรม', 'เมิร์จทุกวัน หลังแฟล็ก', 'พูลรีเควสต์เล็ก ๆ ที่รีวิวจบได้ในครั้งเดียว'],
+        ['ดีไซน์', 'ออกแบบเวอร์ชันบางด้วย', 'รีลีส 1 ต้องมีดีไซน์ ไม่ใช่แค่ภาพสุดท้าย']] },
+      ja: { kicker: '誰が何をするか', h: '全員が習慣をひとつ変える', cards: [
+        ['プロダクト', 'デモの一文を先に書く', 'どのストーリーも「これでお客様は…できる」から始める。'],
+        ['エンジニアリング', '毎日マージ、フラグの裏で', '一度で読み切れる小さなプルリクエスト。'],
+        ['デザイン', '薄い版もデザインする', null]] },
+      es: { kicker: 'Quién hace qué', h: 'Cada persona cambia un hábito', cards: [
+        ['Producto', 'Escribe primero la frase de la demo', 'Cada historia empieza con «Ahora un cliente puede…».'],
+        ['Ingeniería', 'Integra cada día, tras un flag', 'Pull requests pequeñas que se revisan de una sentada.'],
+        ['Diseño', 'Diseña también la versión mínima', 'La versión 1 necesita un diseño, no solo la visión final.']] },
+    };
+    const cardsAt = byLayout('cards');
+    function slideIn(lang) {
+      const s = slides[cardsAt].cloneNode(true);
+      const t = CARDS[lang];
+      if (!t) return s;
+      $('.kicker', s).textContent = t.kicker;
+      $('h2.h', s).textContent = t.h;
+      $$('.rcard', s).forEach((c, k) => {
+        const [badge, h, p] = t.cards[k];
+        $('.badge', c).textContent = badge;
+        $('h4', c).textContent = h;
+        if (p) $('p', c).textContent = p;
+      });
+      $$('.snav span', s).forEach((sp, k) => sp.textContent = PARTS_IN[lang][k]);
+      const foot = $('.sfoot span', s);
+      if (foot) foot.innerHTML = `<b>${cardsAt + 1}</b> / ${N} · ${DECKS[lang]} · Sam Rivera`;
+      return s;
+    }
+    function setGuest(scope, lang) {
+      $$('[data-lg-slide]', scope).forEach(f => mountEl(f, slideIn(lang)));
+      $$('[data-lg-chip]', scope).forEach(c => c.textContent = CHIP[lang]);
+      $$('[data-lg-title]', scope).forEach(c => c.textContent = DECKS[lang]);
+      const fall = $('[data-lg-fall]', scope);
+      if (fall) fall.hidden = lang !== 'ja';
+    }
+
+    // What Sam says over slide 15. Line 3 is spoken in Thai: a mixed talk, translated from the language heard.
+    const LINES = [
+      { from: 'en', en: 'Everyone in this room changes one habit.', th: 'ทุกคนในห้องนี้เปลี่ยนนิสัยหนึ่งอย่าง', ja: 'この部屋の全員が、習慣をひとつ変えます。', es: 'Cada persona en esta sala cambia un hábito.' },
+      { from: 'en', en: 'Product writes the demo sentence before the story.', th: 'โปรดักต์เขียนประโยคเดโมก่อนเขียนสตอรี', ja: 'プロダクトは、ストーリーの前にデモの一文を書きます。', es: 'Producto escribe la frase de la demo antes que la historia.' },
+      { from: 'th', th: 'วิศวกรเมิร์จทุกวัน โดยซ่อนไว้หลังแฟล็ก', en: 'Engineers merge every day, hidden behind a flag.', ja: 'エンジニアは毎日マージし、フラグの裏に隠します。', es: 'Los ingenieros integran cada día, ocultos tras un flag.' },
+      { from: 'en', en: 'And design draws the thin version, not only the final one.', th: 'และดีไซน์ก็วาดเวอร์ชันบาง ไม่ใช่แค่เวอร์ชันสุดท้าย', ja: 'そしてデザインは、最終版だけでなく薄い版も描きます。', es: 'Y diseño dibuja la versión mínima, no solo la final.' },
+      { from: 'en', en: 'Pick yours before you leave today.', th: 'เลือกของคุณก่อนกลับวันนี้', ja: '今日帰る前に、自分のものを選んでください。', es: 'Elige el tuyo antes de irte hoy.' },
+    ];
+    // Words as a speech model emits them. Thai and Japanese have no spaces, so split them with the browser's word segmenter.
+    const seg = {};
+    function words(text, lang) {
+      if (lang === 'en' || lang === 'es') return text.split(' ').map((w, k) => (k ? ' ' : '') + w);
+      if (!('Segmenter' in Intl)) return [...text.matchAll(/\S+\s*/gu)].map(m => m[0]);
+      seg[lang] ??= new Intl.Segmenter(lang, { granularity: 'word' });
+      const out = [];
+      for (const { segment } of seg[lang].segment(text)) { if (out.length && out[out.length - 1].length < 3) out[out.length - 1] += segment; else out.push(segment); }
+      return out;
+    }
+    const ENGLISH_NAME = { en: 'English', th: 'Thai', ja: 'Japanese', es: 'Spanish' };
+
+    const [lvSlides, lvSubs, lvListen] = $$('.lg-lv', sec);
+    const state = { slides: 'en', subs: 'th', listen: 'th' };
+    let heard = [];      // finals so far: indexes into LINES
+    let partial = null;  // { from, text } while Sam is mid-sentence
+    let skipTimer = 0;
+
+    function drawSubs() {
+      const lang = state.subs;
+      const live = partial && partial.from === lang;
+      const finals = heard.slice(live ? -1 : -2).map(i => LINES[i][lang]);
+      // Only a line that wasn't on screen before fades in; redrawing every word must not restart it.
+      const box = $('[data-sub-lines]', lvSubs);
+      const before = new Set($$('p[data-t]', box).map(p => p.dataset.t));
+      const line = (t, cls) => `<p data-t="${esc(t)}" class="${cls}${before.has(t) ? '' : ' fresh'}">${esc(t)}</p>`;
+      const html = finals.map((t, k) => line(t, live || k < finals.length - 1 ? 'old' : ''));
+      if (live) html.push(`<p>${esc(partial.text)}<span class="part"> …</span></p>`);
+      box.innerHTML = html.join('');
+      const from = live ? lang : heard.length ? LINES[heard[heard.length - 1]].from : 'en';
+      $('[data-sub-head]', lvSubs).textContent = from === lang ? 'Subtitles · live' : `Subtitles · translated from ${NAME[from]}`;
+      // Listen is offered to guests reading a language other than Sam's (SW-885 D11).
+      $('[data-sub-listen]', lvSubs).hidden = lang === 'en';
+    }
+    function drawListen() {
+      const lang = state.listen;
+      const read = heard.filter(i => LINES[i].from !== lang).slice(-2);
+      const [a, b] = read.length === 2 ? read : [read[0], undefined];
+      const lines = [a !== undefined && ['reading', LINES[a][lang]], b !== undefined && ['next', LINES[b][lang]]].filter(Boolean);
+      $('[data-listen-lines]', lvListen).innerHTML = lines.map(([c, t]) => `<p class="${c}">${esc(t)}</p>`).join('');
+      $('[data-land-cap]', lvListen).innerHTML = lines.map(([c, t]) => `<span class="${c}">${esc(t)}</span>`).join('');
+      $('[data-listen-head]', lvListen).textContent = `Listening · ${CHIP[lang]}`;
+    }
+    function drawTicker() {
+      const last = heard.length ? LINES[heard[heard.length - 1]] : null;
+      const src = partial || (last ? { from: last.from, text: last[last.from] } : null);
+      // The ticker keeps the newest words in view (direction: rtl); the mark keeps end punctuation on the right.
+      $('[data-sp-words]', lvSubs).textContent = src ? src.text + '‎' : '…';
+      $('[data-sp-tag]', lvSubs).textContent = src ? CHIP[src.from] : 'EN';
+    }
+    // Sam runs ahead after the last line: listening jumps to the newest and says so for 6 seconds (SW-885 D9, D24).
+    function showSkip() {
+      const note = $('[data-listen-skip]', lvListen), rail = $('[data-rail-skip]', lvListen);
+      note.hidden = rail.hidden = false;
+      clearTimeout(skipTimer);
+      skipTimer = setTimeout(() => { note.hidden = rail.hidden = true; }, 6000);
+    }
+    const drawAll = () => { drawSubs(); drawListen(); drawTicker(); };
+
+    function pick(scope, key) {
+      const group = $(`[data-lg-pick="${key}"]`, scope);
+      group.addEventListener('click', e => {
+        const b = e.target.closest('button');
+        if (!b) return;
+        $$('button', group).forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+        state[key] = b.dataset.lang;
+        setGuest(scope, state[key]);
+        drawAll();
+      });
+      setGuest(scope, state[key]);
+    }
+    pick(lvSlides, 'slides');
+    pick(lvSubs, 'subs');
+    pick(lvListen, 'listen');
+
+    // Sam talks: each line's words arrive one by one, then the line is final and every language gets it.
+    let next = 0, timer = 0, visible = false, running = false;
+    if (reduced) { heard = [0, 1, 2]; drawAll(); }
+    else {
+      heard = [0];
+      drawAll();
+      next = 1;
+    }
+    async function speakLine() {
+      const line = LINES[next];
+      const ws = words(line[line.from], line.from);
+      let text = '';
+      for (const w of ws) {
+        if (!visible) return;
+        text += w;
+        partial = { from: line.from, text };
+        drawSubs(); drawTicker();
+        await sleep(line.from === 'en' ? 170 : 140);
+      }
+      partial = null;
+      heard.push(next);
+      if (heard.length > 6) heard = heard.slice(-6);
+      if (next === LINES.length - 1) showSkip();
+      next = (next + 1) % LINES.length;
+      drawAll();
+    }
+    async function loop() {
+      clearTimeout(timer);
+      if (running || !visible || reduced || document.hidden) return;
+      running = true;
+      await speakLine();
+      running = false;
+      if (visible) timer = setTimeout(loop, 2200);
+    }
+    const seen = new Set();
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => e.isIntersecting ? seen.add(e.target) : seen.delete(e.target));
+      const was = visible;
+      visible = seen.size > 0;
+      if (visible && !was) loop();
+    }, { threshold: .1 });
+    io.observe(lvSubs); io.observe(lvListen);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden && visible) loop(); });
+
+    // Hear it: the browser's own voice reads the line being read, as the guest's phone would.
+    // Voices load ahead of the click, so speak() runs inside the tap, which iOS Safari requires.
+    const hearBtn = $('[data-hear]', lvListen), hearMsg = $('[data-hear-msg]', lvListen);
+    const canSpeak = 'speechSynthesis' in window;
+    let voiceList = [];
+    if (canSpeak) {
+      const load = () => { voiceList = speechSynthesis.getVoices(); };
+      load();
+      speechSynthesis.addEventListener('voiceschanged', load);
+    }
+    function voiceFor(lang) {
+      const want = VOICE[lang].toLowerCase();
+      const norm = v => v.lang.replace('_', '-').toLowerCase();
+      return voiceList.find(v => norm(v) === want) || voiceList.find(v => norm(v).startsWith(want.slice(0, 2)));
+    }
+    hearBtn.addEventListener('click', () => {
+      const lang = state.listen;
+      if (!canSpeak) { hearMsg.textContent = 'This browser can\'t read text aloud.'; return; }
+      if (!voiceList.length) voiceList = speechSynthesis.getVoices();
+      const voice = voiceFor(lang);
+      if (!voice) { hearMsg.textContent = `This browser has no ${ENGLISH_NAME[lang]} voice. A phone without one shows how to add it, and the subtitles carry on.`; return; }
+      const line = $('[data-listen-lines] p.reading', lvListen);
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(line ? line.textContent : LINES[0][lang]);
+      u.lang = VOICE[lang];
+      u.voice = voice;
+      speechSynthesis.speak(u);
+      hearMsg.textContent = `Reading in ${ENGLISH_NAME[lang]} with the voice "${voice.name}".`;
+    });
+  }
+
   /* ---------------------------------------------------------------- copy buttons */
   $$('[data-copy], [data-copy-from]').forEach(b => b.addEventListener('click', async () => {
     const text = b.dataset.copy || $('#' + b.dataset.copyFrom).textContent.replace(/^#.*\n/m, '');
@@ -815,7 +1027,7 @@
 
   /* ---------------------------------------------------------------- reveal on scroll */
   {
-    const els = $$('.sec-head, .steps3, .session, .pal-picker, .pal-stage, .templates, .app, .feature-row, .tools-more, .attn, .pains-turn, .present-wrap, .journey4, .screens2, .roadmap, .start-grid, .pillars .cards');
+    const els = $$('.sec-head, #languages .lg-lv, #languages .vs, .steps3, .session, .pal-picker, .pal-stage, .templates, .app, .feature-row, .tools-more, .attn, .pains-turn, .present-wrap, .journey4, .screens2, .roadmap, .start-grid, .pillars .cards');
     els.forEach(el => el.classList.add('rv'));
     const io = new IntersectionObserver(entries => entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }

@@ -13,6 +13,7 @@ The problem SlideWorks is built around: a room drifts after about seven minutes.
 - `#polls`: "hands up" only hears from a few.
 - `#words`: multiple choice only gives back the answers you thought of.
 - `#qa`: most questions never get asked, and the ones that are wait until the end.
+- `#languages`: the talk is in one language but the room isn't, and people following in their second language take in less without saying so. It also answers "can't AirPods do this now?" with what phone translation can't do in a room. Keep that comparison factual and dated, with its source linked.
 
 A new section gets its own problem sentence in the same way.
 
